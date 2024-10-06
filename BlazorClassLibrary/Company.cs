@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 
 namespace BlazorClassLibrary
 {
-	internal class Company
+	public class Company
 	{
 
-		private string _name { get; set; }
-		private string _catchPhrase { get; set; }
-		private string _bs { get; set; }
+		private string _name { get; set; } = "1234";
+		private string _catchPhrase { get; set; } = "1234";
+		private string _bs { get; set; } = "1234";
 
 		public Company(string name, string catchPhrase, string bs)
 		{

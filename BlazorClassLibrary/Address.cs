@@ -6,14 +6,14 @@ using System.Threading.Tasks;
 
 namespace BlazorClassLibrary
 {
-	internal class Address
+	public class Address
 	{
 
-		private string _street { get; set; }
-		private string _suite { get; set; }
-		private string _city { get; set; }
-		private string _zipcode { get; set; }
-		private Geo Geo { get; set; }
+		private string _street { get; set; } = "1234";
+		private string _suite { get; set; } = "1234";
+		private string _city { get; set; } = "1234";
+		private string _zipcode { get; set; } = "1234";
+		private Geo Geo { get; set; } = new Geo();
 
 		public Address(string street, string suite, string city, string zipcode, Geo geo)
 		{

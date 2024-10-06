@@ -7,16 +7,16 @@ using System.Threading.Tasks;
 
 namespace BlazorClassLibrary
 {
-	internal class User
+	public class User
 	{
-		private int _id { get; set; }
-		private string _name { get; set; }
-		private string _userName { get; set; }
-		private string _email { get; set; }
-		private string _phone { get; set; }
-		private string _website { get; set; }
-		private Address Address { get; set; }
-		private Company Company { get; set; }
+		private int _id { get; set; } = 0;
+		private string _name { get; set; } = "1234";
+		private string _userName { get; set; } = "1234";
+		private string _email { get; set; } = "1234";
+		private string _phone { get; set; } = "1234";
+		private string _website { get; set; } = "1234";
+		private Address Address { get; set; } = new Address();
+		private Company Company { get; set; } = new Company();
 
 		public User(int id, string name, string userName, string email, string phone, string website, Address address, Company company)
 		{
