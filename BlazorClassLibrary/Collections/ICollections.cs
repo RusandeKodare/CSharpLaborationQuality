@@ -10,7 +10,7 @@ namespace BlazorClassLibrary.Collections
 	{
 		public List<User> Users { get; set; }
 
-		public List<User> GetUser();
+		public List<User> GetUser(string user);
 
 		public List<User> GetAllUsers();
 

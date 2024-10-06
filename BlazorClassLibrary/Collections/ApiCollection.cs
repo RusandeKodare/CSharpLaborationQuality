@@ -29,7 +29,7 @@ namespace BlazorClassLibrary.Collections
 			throw new NotImplementedException();
 		}
 
-		List<User> ICollections.GetUser()
+		List<User> ICollections.GetUser(string user)
 		{
 			throw new NotImplementedException();
 		}
