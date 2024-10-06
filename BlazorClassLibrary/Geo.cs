@@ -9,13 +9,13 @@ namespace BlazorClassLibrary
 	public class Geo
 	{
 
-		private string _lat { get; set; } = "1234";
-		private string _lng { get; set; } = "1234";
+		public string Lat { get; set; } = "1234";
+		public string Lng { get; set; } = "1234";
 
 		public Geo(string lat, string lng)
 		{
-			_lat = lat;
-			_lng = lng;
+			Lat = lat;
+			Lng = lng;
 		}
 
 		public Geo()

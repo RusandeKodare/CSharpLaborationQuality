@@ -11,16 +11,15 @@ namespace BlazorClassLibrary.Collections
 	public class ApiCollection : ICollections
 	{
 		public List<User> Users { get; set; } = new List<User>();
-		readonly private HttpClient _httpClient = new HttpClient();
+		public HttpClient _httpClient = new HttpClient();
 
-		public async Task<List<User>> GetUser()
+		public async Task<List<User>> GetUsers()
 		{
-			if (_httpClient.GetFromJsonAsync<List<User>>("https://jsonplaceholder.typicode.com/users").Result != null)
+			Users = await _httpClient.GetFromJsonAsync<List<User>>("https://jsonplaceholder.typicode.com/users");
+			if (Users != null)
 			{
-				return await _httpClient.GetFromJsonAsync<List<User>>("https://jsonplaceholder.typicode.com/users");
+				return Users;
 			}
-
-
 			return [];
 		}
 

@@ -9,18 +9,18 @@ namespace BlazorClassLibrary
 	public class Address
 	{
 
-		private string _street { get; set; } = "1234";
-		private string _suite { get; set; } = "1234";
-		private string _city { get; set; } = "1234";
-		private string _zipcode { get; set; } = "1234";
-		private Geo Geo { get; set; } = new Geo();
+		public string Street { get; set; } = "1234";
+		public string Suite { get; set; } = "1234";
+		public string City { get; set; } = "1234";
+		public string ZipCode { get; set; } = "1234";
+		public Geo Geo { get; set; } = new Geo();
 
 		public Address(string street, string suite, string city, string zipcode, Geo geo)
 		{
-			_street = street;
-			_suite = suite;
-			_city = city;
-			_zipcode = zipcode;
+			Street = street;
+			Suite = suite;
+			City = city;
+			ZipCode = zipcode;
 			Geo = geo;
 		}
 

@@ -9,23 +9,23 @@ namespace BlazorClassLibrary
 {
 	public class User
 	{
-		private int _id { get; set; } = 0;
-		private string _name { get; set; } = "1234";
-		private string _userName { get; set; } = "1234";
-		private string _email { get; set; } = "1234";
-		private string _phone { get; set; } = "1234";
-		private string _website { get; set; } = "1234";
-		private Address Address { get; set; } = new Address();
-		private Company Company { get; set; } = new Company();
+		public int Id { get; set; } = 0;
+		public string Name { get; set; } = "1234";
+		public string UserName { get; set; } = "1234";
+		public string Email { get; set; } = "1234";
+		public string Phone { get; set; } = "1234";
+		public string Website { get; set; } = "1234";
+		public Address Address { get; set; } = new Address();
+		public Company Company { get; set; } = new Company();
 
 		public User(int id, string name, string userName, string email, string phone, string website, Address address, Company company)
 		{
-			_id = id;
-			_name = name;
-			_userName = userName;
-			_email = email;
-			_phone = phone;
-			_website = website;
+			Id = id;
+			Name = name;
+			UserName = userName;
+			Email = email;
+			Phone = phone;
+			Website = website;
 			Address = address;
 			Company = company;
 		}

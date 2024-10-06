@@ -1,0 +1,90 @@
+﻿@using BlazorClassLibrary
+@using BlazorClassLibrary.Collections
+@rendermode InteractiveServer
+
+<h1 style="  ">All users from API</h1>
+
+<div style="background-color: thistle; font-weight: 900;">
+	<table class="table table-hover">
+		<thead class="thead-dark">
+			<tr>
+
+				<th>
+					<button type="button" @onclick="SortById">ID</button>
+				</th>
+
+				<th>
+					<button type="button" @onclick="SortByName">Name</button>
+				</th>
+				<th>Username</th>
+				<th>Email</th>
+				<th>Phone</th>
+				<th>Website</th>
+				<th>City</th>
+				<th>Suite</th>
+				<th>Street</th>
+				<th>ZipCode</th>
+				<th>Latitude</th>
+				<th>Longitude</th>
+				<th>Company name</th>
+				<th>Company catchphrase</th>
+				<th>Company BS</th>
+
+
+			</tr>
+		</thead>
+		<tbody>
+			@foreach (var user in users)
+			{
+				<tr>
+					<td>@user.Id</td>
+					<td>@user.Name</td>
+					<td>@user.UserName</td>
+					<td>@user.Email</td>
+					<td>@user.Phone</td>
+					<td>@user.Website</td>
+					<td>@user.Address.City</td>
+					<td>@user.Address.Suite</td>
+					<td>@user.Address.Street</td>
+					<td>@user.Address.ZipCode</td>
+					<td>@user.Address.Geo.Lat</td>
+					<td>@user.Address.Geo.Lng</td>
+					<td>@user.Company.Name</td>
+					<td>@user.Company.CatchPhrase</td>
+					<td>@user.Company.BS</td>
+				</tr>
+			}
+		</tbody>
+       
+	</table>
+</div>
+
+<input placeholder="Search for user" />
+<input type="button" value="Search" @onclick="Search" />
+@code {
+	
+	private List<User> users = new();
+	ApiCollection api = new ApiCollection();
+	public string SearchTerm { get; set; }
+
+	protected override async Task OnInitializedAsync()
+	{
+		users = await api.GetUsers();
+	}
+	public void Search()
+	{
+		users = users.Where(b => b.Name.Contains(SearchTerm)).ToList();
+		StateHasChanged();
+	}
+	public void SortById()
+	{
+		users = users.OrderBy(b => b.Id).ToList();
+		StateHasChanged();
+	}
+
+	public void SortByName()
+	{
+		users = users.OrderBy(b => b.Name).ToList();
+		StateHasChanged();
+	}
+}
