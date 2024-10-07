@@ -4,29 +4,50 @@
 
 <h1 style="  ">All users from API</h1>
 
-<div style="background-color: thistle; font-weight: 900;">
+<div>
 	<table class="table table-hover">
 		<thead class="thead-dark">
 			<tr>
-				<th>
-					<button type="button" @onclick="SortByID">ID</button>
+				<th style="cursor: pointer; transition: background-color 0.3s ease; font-weight: 900;background-color:thistle; " @onclick="SortByID">
+					<span style="display: flex; align-items: center;">
+						ID <img style="width: 20px; height: 20px; margin-left: 10px;" src="Images\ArrowUpAndDown.png" />
+					</span>
 				</th>
-				<th>
-					<button type="button" @onclick="SortByName">Name</button>
+				<th style="cursor: pointer; transition: background-color 0.3s ease; font-weight: 900;background-color:thistle; " @onclick="SortByName">
+					<span style="display: flex; align-items: center;">
+						NAME <img style="width: 20px; height: 20px; margin-left: 50px;" src="Images\ArrowUpAndDown.png" />
+					</span>
 				</th>
-				<th @>Username</th>
-				<th>Email</th>
-				<th>Phone</th>
-				<th>Website</th>
-				<th>City</th>
-				<th>Suite</th>
+				
+				<th style="cursor: pointer; transition: background-color 0.3s ease; font-weight: 900;background-color:thistle; " @onclick="SortByName">
+					<span style="display: flex; align-items: center;">
+						USERNAME <img style="width: 20px; height: 20px; margin-left: 50px;" src="Images\ArrowUpAndDown.png" />
+					</span>
+				</th>
+				<th style="cursor: pointer; transition: background-color 0.3s ease; font-weight: 900;background-color:thistle; " @onclick="SortByName">
+					<span style="display: flex; align-items: center;">
+						EMAIL <img style="width: 20px; height: 20px; margin-left: 50px;" src="Images\ArrowUpAndDown.png" />
+					</span>
+				</th>
+				@* <th>Phone</th>
+				<th>Website</th>> *@
+				<th style="cursor: pointer; transition: background-color 0.3s ease; font-weight: 900;background-color:thistle; " @onclick="SortByName">
+					<span style="display: flex; align-items: center;">
+						CITY <img style="width: 20px; height: 20px; margin-left: 50px;" src="Images\ArrowUpAndDown.png" />
+					</span>
+				</th>
+				@* <th>Suite</th>
 				<th>Street</th>
 				<th>ZipCode</th>
 				<th>Latitude</th>
-				<th>Longitude</th>
-				<th>Company name</th>
-				<th>Company catchphrase</th>
-				<th>Company BS</th>
+				<th>Longitude</th *@
+				<th style="cursor: pointer; transition: background-color 0.3s ease; font-weight: 900;background-color:thistle; " @onclick="SortByName">
+					<span style="display: flex; align-items: center;">
+						COMPANY NAME <img style="width: 20px; height: 20px; margin-left: 50px;" src="Images\ArrowUpAndDown.png" />
+					</span>
+				</th>
+				@* <th>Company catchphrase</th>
+				<th>Company BS</th> *@
 			</tr>
 		</thead>
 		<tbody>
@@ -37,17 +58,17 @@
 					<td>@user.Name</td>
 					<td>@user.UserName</td>
 					<td>@user.Email</td>
-					<td>@user.Phone</td>
-					<td>@user.Website</td>
+					@* <td>@user.Phone</td>
+					<td>@user.Website</td> *@
 					<td>@user.Address.City</td>
-					<td>@user.Address.Suite</td>
+					@* <td>@user.Address.Suite</td>
 					<td>@user.Address.Street</td>
 					<td>@user.Address.ZipCode</td>
 					<td>@user.Address.Geo.Lat</td>
-					<td>@user.Address.Geo.Lng</td>
+					<td>@user.Address.Geo.Lng</td> *@
 					<td>@user.Company.Name</td>
-					<td>@user.Company.CatchPhrase</td>
-					<td>@user.Company.BS</td>
+					@* <td>@user.Company.CatchPhrase</td>
+					<td>@user.Company.BS</td> *@
 				</tr>
 			}
 		</tbody>
@@ -75,19 +96,15 @@
 
 	public void Search()
 	{
-
-
-
-
 		if (!users.Any())
 		{
 			TextMessage = "Nothing found!";
 		}
 		else
 		{
-			List<User> originalUsers = [];
+			List<User> originalUsers = users;
 
-			users = originalUsers.Where(item => item.Name.Contains(SearchTerm, StringComparison.OrdinalIgnoreCase)).ToList();
+			users = users.Where(item => item.Name.Contains(SearchTerm, StringComparison.OrdinalIgnoreCase)).ToList();
 
 			if (users.Count > 0)
 			{
