@@ -1,23 +1,6 @@
 ﻿@using BlazorClassLibrary
 @using BlazorClassLibrary.Collections
 
-<TableLab/>
-
-@* @foreach (var person in users)
-{
-
-    <table>
-
-        <tr>
-			<td>@person.Name</td>
-			<td>@person.UserName</td>
-		</tr>
-    </table>
-    
-
-    
-} *@
-
 
 
 @code {
@@ -35,7 +18,4 @@
         ApiCollection api = new ApiCollection();
         users = await api.GetUsers();
     }
-
-
-
 }

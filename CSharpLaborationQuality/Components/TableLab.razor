@@ -8,15 +8,13 @@
 	<table class="table table-hover">
 		<thead class="thead-dark">
 			<tr>
-
 				<th>
-					<button type="button" @onclick="SortById">ID</button>
+					<button type="button" @onclick="SortByID">ID</button>
 				</th>
-
 				<th>
 					<button type="button" @onclick="SortByName">Name</button>
 				</th>
-				<th>Username</th>
+				<th @>Username</th>
 				<th>Email</th>
 				<th>Phone</th>
 				<th>Website</th>
@@ -29,8 +27,6 @@
 				<th>Company name</th>
 				<th>Company catchphrase</th>
 				<th>Company BS</th>
-
-
 			</tr>
 		</thead>
 		<tbody>
@@ -55,36 +51,59 @@
 				</tr>
 			}
 		</tbody>
-       
 	</table>
 </div>
+<input @bind="SearchTerm" placeholder="Search for user" />
+<button type="button" @onclick="Search">Search now</button>
+@TextMessage
 
-<input placeholder="Search for user" />
-<input type="button" value="Search" @onclick="Search" />
 @code {
-	
-	private List<User> users = new();
-	ApiCollection api = new ApiCollection();
-	public string SearchTerm { get; set; }
-
 	protected override async Task OnInitializedAsync()
 	{
+		ApiCollection api = new ApiCollection();
 		users = await api.GetUsers();
 	}
+
+	SortingCollection sortingCollection = new SortingCollection();
+	private string TextMessage = String.Empty;
+	private List<User> users = new();
+	public string SearchTerm = String.Empty;
+
+	private void SortByName() => users = sortingCollection.SortByName(users);
+	private void SortByID() => users = sortingCollection.SortByID(users);
+
+
 	public void Search()
 	{
-		users = users.Where(b => b.Name.Contains(SearchTerm)).ToList();
-		StateHasChanged();
-	}
-	public void SortById()
-	{
-		users = users.OrderBy(b => b.Id).ToList();
-		StateHasChanged();
-	}
 
-	public void SortByName()
-	{
-		users = users.OrderBy(b => b.Name).ToList();
-		StateHasChanged();
+
+
+
+		if (!users.Any())
+		{
+			TextMessage = "Nothing found!";
+		}
+		else
+		{
+			List<User> originalUsers = [];
+
+			users = originalUsers.Where(item => item.Name.Contains(SearchTerm, StringComparison.OrdinalIgnoreCase)).ToList();
+
+			if (users.Count > 0)
+			{
+				TextMessage = $"Following users found with the term '{SearchTerm}'";
+			}
+
+			else
+			{
+				TextMessage = $"No users found with the term '{SearchTerm}'";
+			}
+
+			
+			foreach (var item in users)
+			{
+				Console.WriteLine(item.Name);
+			}
+		}
 	}
 }
