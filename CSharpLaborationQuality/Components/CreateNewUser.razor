@@ -2,7 +2,7 @@
 @using BlazorClassLibrary.Collections
 
 
-<EditForm Model="@user" OnValidSubmit="@HandleValidSubmit" FormName="createUserForm">
+<EditForm Model="@user"  OnValidSubmit="@HandleValidSubmit" FormName="createUserForm">
     
     <DataAnnotationsValidator />
     <ValidationSummary />
@@ -17,32 +17,31 @@
         <InputText id="username" @bind-Value="@user.UserName" class="form-control" />
         <ValidationMessage For="@(() => user.UserName)" />
     </div>
-  
-
     <div class="mb-3">
         <label for="email" class="form-label">Email</label>
         <InputText id="email" @bind-Value="@user.Email" class="form-control" />
         <ValidationMessage For="@(() => user.Email)" />
     </div>
+    <div class="mb-3">
+        <label for="age" class="form-label">Age</label>
+        <InputNumber id="age" @bind-Value="@user.Age" class="form-control" />
+        <ValidationMessage For="@(() => user.Age)" />
+    </div>
 
     <button type="submit" class="btn btn-primary">Submit</button>
 </EditForm>
 
-@if (submitMessage != null)
-{
+
     <p>@submitMessage</p>
-}
+
+
 
 @code {
-
-
-
     private User user = new User();
-    private string? submitMessage;
-
+    private MarkupString submitMessage;    
     private void HandleValidSubmit()
     {
-        submitMessage = $"User {user.Name} with email {user.Email} submitted successfully!";
-        user = new User(); 
+        submitMessage = (MarkupString)$"User {user.Name} was created with the following information:<br>Age: {user.Age}<br>Username: {user.UserName}<br>Email: {user.Email}";
+        user = new User();  
     }
 }
