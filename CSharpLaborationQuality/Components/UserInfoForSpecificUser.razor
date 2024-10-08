@@ -2,7 +2,6 @@
 @using BlazorClassLibrary.Collections
 @if (SpecificUser != null)
 {
-	@* <h3>Details for @SpecificUser.Name</h3> *@
 <p><strong>Name:</strong> @SpecificUser.Name</p>
 <p><strong>Username:</strong> @SpecificUser.UserName</p>
 <p><strong>Email:</strong> @SpecificUser.Email</p>
@@ -20,7 +19,7 @@
 }
 else
 {
-	<h5 style="font-family: Georgia;">Click the arrow to the left of the users name to show more information</h5>
+	<h5 style="font-family: Georgia;">Click the plus sign to the left of the users name to show more information</h5>
 }
 @code {
 	[Parameter]

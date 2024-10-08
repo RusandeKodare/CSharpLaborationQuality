@@ -68,7 +68,7 @@
 	protected override async Task OnInitializedAsync()
 	{
 		ApiCollection api = new ApiCollection();
-		Users = await api.GetUsers();
+		Users = await api.GetUsersFromApi();
 		FilteredUsers = Users;
 	}
 

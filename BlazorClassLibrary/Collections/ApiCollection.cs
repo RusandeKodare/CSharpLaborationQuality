@@ -13,7 +13,7 @@ namespace BlazorClassLibrary.Collections
 		public List<User> Users { get; set; } = new List<User>();
 		public HttpClient _httpClient = new HttpClient();
 
-		public async Task<List<User>> GetUsers()
+		public async Task<List<User>> GetUsersFromApi()
 		{
 			Users = await _httpClient.GetFromJsonAsync<List<User>>("https://jsonplaceholder.typicode.com/users");
 			if (Users != null)
@@ -28,7 +28,7 @@ namespace BlazorClassLibrary.Collections
 			throw new NotImplementedException();
 		}
 
-		List<User> ICollections.GetUser(string user)
+		public List<User> GetUser(string user)
 		{
 			throw new NotImplementedException();
 		}
