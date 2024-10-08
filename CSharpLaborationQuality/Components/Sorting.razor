@@ -1,0 +1,59 @@
+﻿@* @using BlazorClassLibrary
+@using BlazorClassLibrary.Collections
+@rendermode InteractiveServer
+
+<input @bind="SearchTerm" @oninput="Search" placeholder="Search for user" class=" accordion-button" />
+
+@code {
+
+	
+
+	[Parameter]
+	public List<User>? FilteredUsers { get; set; }
+	[Parameter]
+	public List<User>? Users { get; set; } 
+	[Parameter]
+	public string? SearchTerm {get; set;}
+	[Parameter]
+	public string TextMessage { get; set; }
+	[Parameter]
+	public EventCallback<List<User>> FilteredUsersChanged { get; set; }
+	[Parameter]
+	public EventCallback<string> TextMessageChanged { get; set; }
+	public void Search(ChangeEventArgs e)
+	{
+		SearchTerm = e.Value?.ToString();
+		if (!Users.Any())
+		{
+			TextMessage = "Nothing found!";
+
+		}
+		else
+		{
+			FilteredUsers = Users.Where(item => item.Name.Contains(SearchTerm, StringComparison.OrdinalIgnoreCase)).ToList();
+
+			if (Users.Count > 0)
+			{
+				if (SearchTerm == String.Empty)
+				{
+					TextMessage = "";
+				}
+				else
+				{
+					TextMessage = $"Following users found with the term '{SearchTerm}'";
+				}
+			}
+			else
+			{
+				TextMessage = $"No users found with the term '{SearchTerm}'";
+			}
+			foreach (var item in Users)
+			{
+				Console.WriteLine(item.Name);
+			}
+		}
+		FilteredUsersChanged.InvokeAsync(FilteredUsers);
+		TextMessageChanged.InvokeAsync(TextMessage);
+	}
+}
+ *@

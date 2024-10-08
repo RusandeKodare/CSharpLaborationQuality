@@ -1,0 +1,22 @@
+﻿@* @using BlazorClassLibrary
+@using BlazorClassLibrary.Collections
+
+<TableLab />
+
+@code {
+    ApiCollection api = new ApiCollection();
+    List<User> users = new List<User>();
+
+
+    protected override async Task OnInitializedAsync()
+    {
+        await FetchUsers();
+    }
+
+    public async Task FetchUsers()
+    {
+        ApiCollection api = new ApiCollection();
+        users = await api.GetUsers();
+    }
+}
+ *@

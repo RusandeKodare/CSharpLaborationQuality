@@ -1,0 +1,19 @@
+﻿.clickable-header {
+    font-weight: 900;
+    background-color: lightpink; 
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+    cursor: pointer; 
+    transition: background-color 0.3s ease; 
+    padding: 10px;
+}
+
+    .clickable-header:hover {
+        background-color: #ffb3d9; 
+        box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.5); 
+    }
+
+.icon {
+    width: 20px; 
+    height: 20px; 
+    margin-left: 10px; 
+}
