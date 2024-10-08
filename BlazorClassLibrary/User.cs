@@ -17,7 +17,6 @@ namespace BlazorClassLibrary
 		public string Website { get; set; } = "1234";
 		public Address Address { get; set; } = new Address();
 		public Company Company { get; set; } = new Company();
-
 		public User(int id, string name, string userName, string email, string phone, string website, Address address, Company company)
 		{
 			Id = id;
@@ -29,13 +28,9 @@ namespace BlazorClassLibrary
 			Address = address;
 			Company = company;
 		}
-
 		public User()
 		{
 
 		}
-		
-			
-		
 	}
 }

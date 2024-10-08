@@ -32,7 +32,8 @@
 				<td>@user.Id</td>
 				<td style=" transition: background-color 0.3s ease; font-weight: 500;background-color:aliceblue; ">
 					<span style="display: flex; align-items: center;">
-						<img @onclick="() => SpecificUser = user" style=" cursor: pointer; block-size: 20px; display: flex; align-items: center; " src="https://media.lordicon.com/icons/wired/lineal/2755-arrow-big-down.svg" />@user.Name
+						<img @onclick="() => SpecificUser = (SpecificUser == user ? null : user)" style="cursor: pointer; block-size: 20px; display: flex; align-items: center;" src="Images/PlusSign.png" />
+						@user.Name
 					</span>
 				</td>
 				<td>@user.UserName</td>
@@ -40,6 +41,16 @@
 				<td>@user.Address.City</td>
 				<td>@user.Company.Name</td>
 			</tr>
+			@if (SpecificUser == user)
+			{
+				<tr>
+					<td colspan="6">
+						<div style="background-color: #f8f9fa; padding: 10px; border: 1px solid #ddd;">
+							<UserInfoForSpecificUser SpecificUser="@SpecificUser" />
+						</div>
+					</td>
+				</tr>
+			}
 		}
 	</tbody>
 </table>
