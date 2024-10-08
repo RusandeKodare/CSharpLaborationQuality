@@ -1,0 +1,72 @@
+﻿@using BlazorClassLibrary
+@using BlazorClassLibrary.Collections
+
+<input style="font-family: Georgia;" @bind-value="SearchTerm" @oninput="SearchForUser" placeholder="Search for users name" class=" accordion-button" />
+<p style="font-family: Georgia; font-weight: 500;">@TextMessage</p>
+
+@code {
+	[Parameter]
+	public string? SearchTerm { get; set; }
+	[Parameter]
+	public EventCallback<string> SearchTermChanged { get; set; }
+	[Parameter]
+	public string TextMessage { get; set; }
+	[Parameter]
+	public EventCallback<string> TextMessageChanged { get; set; }
+	[Parameter]
+	public List<User> Users { get; set; }
+	[Parameter]
+	public List<User> FilteredUsers { get; set; }
+	[Parameter]
+	public EventCallback<List<User>> FilteredUsersChanged { get; set; }
+
+	private void SearchForUser(ChangeEventArgs e)
+	{
+		SearchTerm = e.Value?.ToString();
+		SearchTermChanged.InvokeAsync(SearchTerm);
+		if (!Users.Any())
+		{
+			TextMessage = "Nothing found!";
+			TextMessageChanged.InvokeAsync(TextMessage);
+		}
+		else
+		{
+			FoundUser();
+		}
+	}
+
+	public void FoundUser()
+	{
+		FilteredUsers = Users.Where(item => item.Name.Contains(SearchTerm, StringComparison.OrdinalIgnoreCase)).ToList();
+		FilteredUsersChanged.InvokeAsync(FilteredUsers);
+
+		if (Users.Count > 0)
+		{
+			ListBiggerThanZero();
+		}
+		else
+		{
+			TextMessage = $"No users found with the term '{SearchTerm}'";
+			TextMessageChanged.InvokeAsync(TextMessage);
+		}
+
+	}
+
+	public void ListBiggerThanZero()
+	{
+		if (SearchTerm == String.Empty)
+		{
+			TextMessage = "";
+			TextMessageChanged.InvokeAsync(TextMessage);
+		}
+		else
+		{
+			TextMessage = $"Following users found with the term '{SearchTerm}'";
+			TextMessageChanged.InvokeAsync(TextMessage);
+		}
+		foreach (var item in Users)
+		{
+			Console.WriteLine(item.Name);
+		}
+	}
+}

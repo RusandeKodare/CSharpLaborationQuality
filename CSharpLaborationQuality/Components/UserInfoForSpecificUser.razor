@@ -1,0 +1,28 @@
+﻿@using BlazorClassLibrary
+@using BlazorClassLibrary.Collections
+@if (SpecificUser != null)
+{
+	<h3>Details for @SpecificUser.Name</h3>
+<p><strong>Name:</strong> @SpecificUser.Name</p>
+<p><strong>Username:</strong> @SpecificUser.UserName</p>
+<p><strong>Email:</strong> @SpecificUser.Email</p>
+<p><strong>Phone:</strong> @SpecificUser.Phone</p>
+<p><strong>Website:</strong> @SpecificUser.Website</p>
+<p><strong>City:</strong> @SpecificUser.Address.Street, @SpecificUser.Address.City</p>
+<p><strong>Street:</strong> @SpecificUser.Address.Street, @SpecificUser.Address.Street</p>
+<p><strong>Suite:</strong> @SpecificUser.Address.Street, @SpecificUser.Address.Suite</p>
+<p><strong>ZipCode:</strong> @SpecificUser.Address.Street, @SpecificUser.Address.ZipCode</p>
+<p><strong>Latitude:</strong> @SpecificUser.Address.Street, @SpecificUser.Address.Geo.Lat</p>
+<p><strong>Longitude:</strong> @SpecificUser.Address.Street, @SpecificUser.Address.Geo.Lng</p>
+<p><strong>Company Name:</strong> @SpecificUser.Company.Name - @SpecificUser.Company.Name</p>
+<p><strong>Companys Catchphrase:</strong> @SpecificUser.Company.Name - @SpecificUser.Company.CatchPhrase</p>
+<p><strong>Company BS:</strong> @SpecificUser.Company.Name - @SpecificUser.Company.BS</p>
+}
+else
+{
+	<h5 style="font-family: Georgia;">Click the arrow to the left of the users name to show more information</h5>
+}
+@code {
+	[Parameter]
+	public User SpecificUser { get; set; }
+}

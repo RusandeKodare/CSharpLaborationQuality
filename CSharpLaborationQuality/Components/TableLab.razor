@@ -1,85 +1,57 @@
 ﻿@using BlazorClassLibrary
 @using BlazorClassLibrary.Collections
 @rendermode InteractiveServer
-<div>
-	<table class="table table-hover">
-		<thead class="thead-dark">
-			<tr>
-				<th style="cursor: pointer; font-weight: 500;background-color:aliceblue; " @onclick="SortByID">
-					<span style="display: flex; align-items: center;">
-						Id <img style="width: 20px; height: 20px; margin-left: 10px;" src="Images\ArrowUpAndDown.png" />
-					</span>
-				</th>
-				<th style="cursor: pointer; transition: background-color 0.3s ease; font-weight: 500;background-color: aliceblue; " @onclick="SortByName">
-					<span style="display: flex; align-items: center;">
-						Name <img style="width: 20px; height: 20px; margin-left: 50px;" src="Images\ArrowUpAndDown.png" />
-					</span>
-				</th>
-				
-				<th style="cursor: pointer; transition: background-color 0.3s ease; font-weight: 500;background-color:aliceblue; " @onclick="SortByName">
-					<span style="display: flex; align-items: center;">
-						Username <img style="width: 20px; height: 20px; margin-left: 50px;" src="Images\ArrowUpAndDown.png" />
-					</span>
-				</th>
-				<th style="cursor: pointer; transition: background-color 0.3s ease; font-weight: 500;background-color:aliceblue; " @onclick="SortByName">
-					<span style="display: flex; align-items: center;">
-						Email <img style="width: 20px; height: 20px; margin-left: 50px;" src="Images\ArrowUpAndDown.png" />
-					</span>
-				</th>
-				@* <th>Phone</th>
-				<th>Website</th>> *@
-				<th style="cursor: pointer; transition: background-color 0.3s ease; font-weight: 500;background-color:aliceblue; " @onclick="SortByName">
-					<span style="display: flex; align-items: center;">
-						City <img style="width: 20px; height: 20px; margin-left: 50px;" src="Images\ArrowUpAndDown.png" />
-					</span>
-				</th>
-				@* <th>Suite</th>
-				<th>Street</th>
-				<th>ZipCode</th>
-				<th>Latitude</th>
-				<th>Longitude</th *@
-				<th style="cursor: pointer; transition: background-color 0.3s ease; font-weight: 500;background-color:aliceblue; " @onclick="SortByName">
-					<span style="display: flex; align-items: center;">
-						Company Name <img style="width: 20px; height: 20px; margin-left: 50px;" src="Images\ArrowUpAndDown.png" />
-					</span>
-				</th>
-				@* <th>Company catchphrase</th>
-				<th>Company BS</th> *@
-			</tr>
-		</thead>
-		<tbody>
-			@foreach (var user in FilteredUsers)
-			{
-				<tr>
-					<td>@user.Id</td>
-					<td style ="cursor: pointer; transition: background-color 0.3s ease; font-weight: 500;background-color:aliceblue; ">
-						<span style="display: flex; align-items: center;">
-							<img style="block-size: 20px; margin-right: 50px; display: flex; align-items: center; " src="https://media.lordicon.com/icons/wired/lineal/2755-arrow-big-down.svg" />@user.Name
-						</span>
-						
-						
-					</td> 
-					<td>@user.UserName</td>
-					<td>@user.Email</td>
-					@* <td>@user.Phone</td>
-					<td>@user.Website</td> *@
-					<td>@user.Address.City</td>
-					@* <td>@user.Address.Suite</td>
-					<td>@user.Address.Street</td>
-					<td>@user.Address.ZipCode</td>
-					<td>@user.Address.Geo.Lat</td>
-					<td>@user.Address.Geo.Lng</td> *@
-					<td>@user.Company.Name</td>
-					@* <td>@user.Company.CatchPhrase</td>
-					<td>@user.Company.BS</td> *@
-				</tr>
-			}
-		</tbody>
-	</table>
-</div>
 
-<input @bind="SearchTerm" @oninput="SearchForUser" placeholder="Search for users name" class=" accordion-button" />
-<p style="font-family: Georgia; font-weight: 500;">@TextMessage</p>
+<table class="table table-hover">
+	<thead class="thead-dark">
+		<tr>
+			<th style="cursor: pointer; font-weight: 500;background-color:aliceblue; " @onclick="() => FilteredUsers = sortingCollection.SortByID(FilteredUsers)">
+				Id <img style="width: 20px; height: 20px; margin-left: 10px;" src="Images\ArrowUpAndDown.png" />
+			</th>
+			<th style="cursor: pointer; transition: background-color 0.3s ease; font-weight: 500;background-color: aliceblue; " @onclick="()=> FilteredUsers = sortingCollection.SortByName(FilteredUsers)">
+				Name <img style="width: 20px; height: 20px; margin-left: 50px;" src="Images\ArrowUpAndDown.png" />
+			</th>
+			<th style="cursor: pointer; transition: background-color 0.3s ease; font-weight: 500;background-color:aliceblue; " @onclick="()=> FilteredUsers = sortingCollection.SortByUserName(FilteredUsers)">
+				Username <img style="width: 20px; height: 20px; margin-left: 50px;" src="Images\ArrowUpAndDown.png" />
+			</th>
+			<th style="cursor: pointer; transition: background-color 0.3s ease; font-weight: 500;background-color:aliceblue; " @onclick="()=> FilteredUsers = sortingCollection.SortByEmail(FilteredUsers)">
+				Email <img style="width: 20px; height: 20px; margin-left: 50px;" src="Images\ArrowUpAndDown.png" />
+			</th>
+			<th style="cursor: pointer; transition: background-color 0.3s ease; font-weight: 500;background-color:aliceblue; " @onclick="()=> FilteredUsers = sortingCollection.SortByCity(FilteredUsers)">
+				City <img style="width: 20px; height: 20px; margin-left: 50px;" src="Images\ArrowUpAndDown.png" />
+			</th>
+			<th style="cursor: pointer; transition: background-color 0.3s ease; font-weight: 500;background-color:aliceblue; " @onclick="()=> FilteredUsers = sortingCollection.SortByCompanyName(FilteredUsers)">
+				Company Name <img style="width: 20px; height: 20px; margin-left: 50px;" src="Images\ArrowUpAndDown.png" />
+			</th>
+		</tr>
+	</thead>
+	<tbody>
+		@foreach (var user in FilteredUsers)
+		{
+			<tr>
+				<td>@user.Id</td>
+				<td style=" transition: background-color 0.3s ease; font-weight: 500;background-color:aliceblue; ">
+					<span style="display: flex; align-items: center;">
+						<img @onclick="() => SpecificUser = user" style=" cursor: pointer; block-size: 20px; display: flex; align-items: center; " src="https://media.lordicon.com/icons/wired/lineal/2755-arrow-big-down.svg" />@user.Name
+					</span>
+				</td>
+				<td>@user.UserName</td>
+				<td>@user.Email</td>
+				<td>@user.Address.City</td>
+				<td>@user.Company.Name</td>
+			</tr>
+		}
+	</tbody>
+</table>
+
+<SearchInputAndMessage SearchTerm="@SearchTerm"
+					   SearchTermChanged="(term) => SearchTerm = term"
+					   TextMessage="@TextMessage"
+					   TextMessageChanged="(message) => TextMessage = message"
+					   Users="@Users"
+					   FilteredUsers="@FilteredUsers"
+					   FilteredUsersChanged="(users) => FilteredUsers = users" />
+<UserInfoForSpecificUser SpecificUser="@SpecificUser" />
 
 @code {
 	protected override async Task OnInitializedAsync()
@@ -89,58 +61,14 @@
 		FilteredUsers = Users;
 	}
 
-	public List<User> FilteredUsers = new List<User>();
+	private List<User> FilteredUsers = new List<User>();
 	SortingCollection sortingCollection = new SortingCollection();
-	private string? TextMessage = String.Empty;
+	private string? TextMessage { get; set; } = String.Empty;
 	private List<User> Users = new();
-	public string? SearchTerm = String.Empty;
+	private string? SearchTerm = String.Empty;
+	private User SpecificUser { get; set; }
 
-	private void SortByName() => FilteredUsers = sortingCollection.SortByName(FilteredUsers);
-	private void SortByID() => FilteredUsers = sortingCollection.SortByID(FilteredUsers);
 
-	private void SearchForUser(ChangeEventArgs e)
-	{
-		SearchTerm = e.Value?.ToString();
-		if (!Users.Any())
-		{
-			TextMessage = "Nothing found!";
-		}
-		else
-		{
-			FoundUser();
-		}
-	}
-
-	public void FoundUser()
-	{
-		FilteredUsers = Users.Where(item => item.Name.Contains(SearchTerm, StringComparison.OrdinalIgnoreCase)).ToList();
-
-		if (Users.Count > 0)
-		{
-			ListBiggerThanZero();
-		}
-		else
-		{
-			TextMessage = $"No users found with the term '{SearchTerm}'";
-		}
-		
-	}
-
-	public void ListBiggerThanZero()
-	{
-		if (SearchTerm == String.Empty)
-		{
-			TextMessage = "";
-		}
-		else
-		{
-			TextMessage = $"Following users found with the term '{SearchTerm}'";
-		}
-		foreach (var item in Users)
-		{
-			Console.WriteLine(item.Name);
-		}
-	}
 
 
 }
