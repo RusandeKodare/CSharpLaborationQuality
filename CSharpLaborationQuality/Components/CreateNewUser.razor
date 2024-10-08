@@ -1,47 +1,79 @@
 ﻿@using BlazorClassLibrary
 @using BlazorClassLibrary.Collections
+@rendermode InteractiveServer
+
+@if(_showFields)
+{
+	<EditForm Model="@_user" OnValidSubmit="@HandleValidSubmit" FormName="createUserForm">
+		<DataAnnotationsValidator />
 
 
-<EditForm Model="@user"  OnValidSubmit="@HandleValidSubmit" FormName="createUserForm">
-    
-    <DataAnnotationsValidator />
-    <ValidationSummary />
-
-    <div class="mb-3">
-        <label for="name" class="form-label">Name</label>
-        <InputText id="name" @bind-Value="@user.Name" class="form-control" />
-        <ValidationMessage For="@(() => user.Name)" />
-    </div>
-     <div class="mb-3">
-        <label for="username" class="form-label">UserName</label>
-        <InputText id="username" @bind-Value="@user.UserName" class="form-control" />
-        <ValidationMessage For="@(() => user.UserName)" />
-    </div>
-    <div class="mb-3">
-        <label for="email" class="form-label">Email</label>
-        <InputText id="email" @bind-Value="@user.Email" class="form-control" />
-        <ValidationMessage For="@(() => user.Email)" />
-    </div>
-    <div class="mb-3">
-        <label for="age" class="form-label">Age</label>
-        <InputNumber id="age" @bind-Value="@user.Age" class="form-control" />
-        <ValidationMessage For="@(() => user.Age)" />
-    </div>
-
-    <button type="submit" class="btn btn-primary">Submit</button>
-</EditForm>
-
-
-    <p>@submitMessage</p>
-
+		<div class=" accordion-flush">
+			Name
+			<InputText id="name" @bind-Value="@_user.Name" class="form-control" />
+			<ValidationMessage For="@(() => _user.Name)" />
+		</div>
+		<div class="accordion-flush">
+			UserName
+			<InputText id="username" @bind-Value="@_user.UserName" class="form-control" />
+			<ValidationMessage For="@(() => _user.UserName)" />
+		</div>
+		<div class="accordion-flush">
+			Email
+			<InputText id="email" @bind-Value="@_user.Email" class="form-control" />
+			<ValidationMessage For="@(() => _user.Email)" />
+		</div>
+		<div class="accordion-flush">
+			Age
+			<InputNumber id="age" @bind-Value="@_user.Age" class="form-control" />
+			<ValidationMessage For="@(() => _user.Age)" />
+		</div>
+		<br />
+		<button type="submit" class="border-success">Submit</button>
+	</EditForm>
+}
+else
+{
+<p style="font-family: Georgia"> @_submitMessage</p>
+@_counter
+}
 
 
 @code {
-    private User user = new User();
-    private MarkupString submitMessage;    
-    private void HandleValidSubmit()
-    {
-        submitMessage = (MarkupString)$"User {user.Name} was created with the following information:<br>Age: {user.Age}<br>Username: {user.UserName}<br>Email: {user.Email}";
-        user = new User();  
-    }
+	private User _user = new User();
+	private MarkupString _submitMessage;
+	private List<User> _users = new List<User>();
+	private bool _showFields = true;
+	UserManager userManager = new UserManager();
+	private int _id = 0;
+	private string _counter = "";
+
+	protected override async Task OnInitializedAsync()
+	{
+		_users = userManager.GetUsersFromFile();
+	}
+
+
+	private async Task HandleValidSubmit()
+	{
+		_user.Id = _users.Count + 1;
+		_showFields = false;
+		_users.Add(_user);
+		_submitMessage = (MarkupString)$"User {_user.Name} was created with the following information:<br><br> ID: {_user.Id}<br> Age: {_user.Age}<br>Username: {_user.UserName}<br>Email: {_user.Email}";
+		_user = new User();
+		userManager.SaveUserToFile();
+
+		for (int i = 6; i > 0; i--)
+		{
+			_counter = $"Coming back to start in: {i-1}";
+			await Task.Delay(800);
+			StateHasChanged();
+		}
+
+		
+
+		_showFields = true;
+
+		
+	}
 }

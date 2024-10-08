@@ -9,9 +9,9 @@ namespace BlazorClassLibrary
 	public class Company
 	{
 
-		public string Name { get; set; } = "1234";
-		public string CatchPhrase { get; set; } = "1234";
-		public string BS { get; set; } = "1234";
+		public string Name { get; set; } = "";
+		public string CatchPhrase { get; set; } = "";
+		public string BS { get; set; } = "";
 
 		public Company(string name, string catchPhrase, string bs)
 		{

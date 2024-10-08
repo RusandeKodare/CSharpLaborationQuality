@@ -9,10 +9,10 @@ namespace BlazorClassLibrary
 	public class Address
 	{
 
-		public string Street { get; set; } = "1234";
-		public string Suite { get; set; } = "1234";
-		public string City { get; set; } = "1234";
-		public string ZipCode { get; set; } = "1234";
+		public string Street { get; set; } = "";
+		public string Suite { get; set; } = "";
+		public string City { get; set; } = "";
+		public string ZipCode { get; set; } = "";
 		public Geo Geo { get; set; } = new Geo();
 
 		public Address(string street, string suite, string city, string zipcode, Geo geo)

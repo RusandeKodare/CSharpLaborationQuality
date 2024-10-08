@@ -8,12 +8,12 @@ namespace BlazorClassLibrary.Collections
 {
 	public class InternalDataBase : ICollections
 	{
-		public List<User> Users { get; set; } = new List<User>();
+		public List<User> Users { get; set; } = [];
 		public List<User> GetUser(string user)
 		{
 			throw new NotImplementedException();
 		}
-		public List<User> GetAllUsers()
+		public List<User> GetUsers()
 		{
 			throw new NotImplementedException();
 		}

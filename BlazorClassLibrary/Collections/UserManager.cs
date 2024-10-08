@@ -2,32 +2,47 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.Json;
 using System.Threading.Tasks;
 
 namespace BlazorClassLibrary.Collections
 {
-    class UserManager : ICollections
+	public class UserManager : ICollections
     {
-        public List<User> Users { get; set; }
+		public List<User> Users { get; set; } = [];
 
-        public void AddUser(User user)
+		public void AddUser(User user)
         {
             Users.Add(user);
         }
 
         public void SaveUserToFile()
         {
+			string? groupJson = JsonSerializer.Serialize(Users, new JsonSerializerOptions { WriteIndented = true });
+			File.WriteAllText("List_Of_People_Save.json", groupJson);
+		}
 
-        }
-
-        public void LoadUserFromFile()
+        public List<User> GetUsersFromFile()
         {
+			if (File.Exists("List_Of_People_Save.json"))
+			{
 
-        }
-        public List<User> GetAllUsers()
-        {
-            return Users;
-        }
+				var loadedJson = File.ReadAllText("List_Of_People_Save.json");
+				Users = JsonSerializer.Deserialize<List<User>>(loadedJson) ?? [];
 
-    }
+
+				return Users ?? [];
+			}
+
+
+            return Users = new List<User>();
+			
+			
+		}
+
+		public List<User> GetUsers()
+		{
+			throw new NotImplementedException();
+		}
+	}
 }

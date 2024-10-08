@@ -10,12 +10,12 @@ namespace BlazorClassLibrary.Collections
 {
 	public class ApiCollection : ICollections
 	{
-		public List<User> Users { get; set; } = new List<User>();
-		public HttpClient _httpClient = new HttpClient();
+		public List<User> Users { get; set; } = [];
+		public HttpClient _httpClient = new();
 
 		public async Task<List<User>> GetUsersFromApi()
 		{
-			Users = await _httpClient.GetFromJsonAsync<List<User>>("https://jsonplaceholder.typicode.com/users");
+			Users = await _httpClient.GetFromJsonAsync<List<User>>("https://jsonplaceholder.typicode.com/users")?? [];
 			if (Users != null)
 			{
 				return Users;
@@ -23,7 +23,7 @@ namespace BlazorClassLibrary.Collections
 			return [];
 		}
 
-		public List<User> GetAllUsers()
+		public List<User> GetUsers()
 		{
 			throw new NotImplementedException();
 		}
