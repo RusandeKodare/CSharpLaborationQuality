@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace BlazorClassLibrary.Collections
 {
-	public class UserManager : ICollections
+	public class UserCollection : ICollections
     {
 		public List<User> Users { get; set; } = [];
         public void AddUser(User user)

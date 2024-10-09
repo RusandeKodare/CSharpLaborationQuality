@@ -23,12 +23,12 @@ namespace BlazorClassLibrary.Collections
 			return [];
 		}
 
-		public List<User> GetUsers()
+		public void AddUser(User user)
 		{
-			throw new NotImplementedException();
+
 		}
 
-		public List<User> GetUser(string user)
+		public List<User> GetUsers()
 		{
 			throw new NotImplementedException();
 		}

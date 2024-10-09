@@ -11,6 +11,7 @@ namespace BlazorClassLibrary.Collections
 		public List<User> Users { get; set; }
 
 		public List<User> GetUsers();
+		public void AddUser(User user);
 
 
 

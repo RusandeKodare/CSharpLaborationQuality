@@ -1,7 +1,87 @@
 ﻿@page "/showusers"
+@rendermode InteractiveServer
 
-<TableLab/>
+@if (_loading)
+{
+    <h1 style="font-family: Georgia;">@_loadingMessage</h1> 
+}
+else
+{
+    <TableLab /> 
+}
 
 @code {
+    private string _loadingMessage = "";
+    private bool _loading = true;
 
+    protected override async Task OnInitializedAsync()
+    {
+        LoadData();
+    }
+
+    private async Task LoadData()
+    {
+        _loading = true; 
+        StateHasChanged(); 
+        for (int i = 0; i < 7; i++)
+        {
+            StateHasChanged();
+            if (i==0)
+            {
+                _loadingMessage = "Loading.";
+                
+                await Task.Delay(500);
+
+            }
+
+            else if (i==1)
+            {
+
+                _loadingMessage = "Loading. .";
+               
+                await Task.Delay(500);
+                
+            }
+            else if (i==2)
+            {
+                _loadingMessage = "Loading. . .";
+               
+                await Task.Delay(500);
+                
+            }
+            else if (i==3)
+            {
+                _loadingMessage = "Loading. . . .";
+               
+                await Task.Delay(500);
+                
+            }
+            else if (i==4)
+            {
+                _loadingMessage = "Loading. . . .";
+               
+                await Task.Delay(500);
+                
+            }
+            else if (i == 5)
+            {
+                _loadingMessage = "Loading. . . . .";
+              
+                await Task.Delay(500);
+              
+            }
+            else if (i == 6)
+            {
+                _loadingMessage = "Loading. . . . . .";
+               
+                await Task.Delay(500);
+                
+            }
+
+        }
+        
+
+        _loading = false; 
+        StateHasChanged();
+    }
 }

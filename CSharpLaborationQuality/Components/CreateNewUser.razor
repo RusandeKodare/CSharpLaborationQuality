@@ -44,7 +44,7 @@ else
 	private MarkupString _submitMessage;
 	private List<User> _users = new List<User>();
 	private bool _showFields = true;
-	UserManager userManager = new UserManager();
+	UserCollection userManager = new UserCollection();
 	private int _id = 0;
 	private string _counter = "";
 
@@ -61,7 +61,7 @@ else
 		_users.Add(_user);
 		_submitMessage = (MarkupString)$"User {_user.Name} was created with the following information:<br><br> ID: {_user.Id}<br> Age: {_user.Age}<br>Username: {_user.UserName}<br>Email: {_user.Email}";
 		_user = new User();
-		userManager.SaveUserToFile();
+		userManager.AddUser(_user);
 
 		for (int i = 6; i > 0; i--)
 		{
