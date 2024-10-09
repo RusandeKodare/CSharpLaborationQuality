@@ -10,39 +10,20 @@ namespace BlazorClassLibrary.Collections
 	public class UserManager : ICollections
     {
 		public List<User> Users { get; set; } = [];
-
-		public void AddUser(User user)
-        {
-            Users.Add(user);
-        }
-
-        public void SaveUserToFile()
+        public void AddUser(User user)
         {
 			string? groupJson = JsonSerializer.Serialize(Users, new JsonSerializerOptions { WriteIndented = true });
 			File.WriteAllText("List_Of_People_Save.json", groupJson);
 		}
-
-        public List<User> GetUsersFromFile()
+        public List<User> GetUsers()
         {
 			if (File.Exists("List_Of_People_Save.json"))
 			{
-
 				var loadedJson = File.ReadAllText("List_Of_People_Save.json");
 				Users = JsonSerializer.Deserialize<List<User>>(loadedJson) ?? [];
-
-
 				return Users ?? [];
 			}
-
-
             return Users = new List<User>();
-			
-			
-		}
-
-		public List<User> GetUsers()
-		{
-			throw new NotImplementedException();
 		}
 	}
 }
