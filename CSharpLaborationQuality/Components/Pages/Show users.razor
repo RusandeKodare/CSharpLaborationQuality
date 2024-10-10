@@ -1,28 +1,34 @@
-﻿@page "/showusers"
+﻿@using BlazorClassLibrary
+@using BlazorClassLibrary.Collections
+@page "/showusers"
 @rendermode InteractiveServer
 
-@if (_loading)
-{
+@* @if (_loading)
+{ *@
     <h1 style="font-family: Georgia;">@_loadingMessage</h1> 
-}
-else
-{
-    <TableLab /> 
-}
+@* } *@
+@* else
+{ *@
+    <TableLab FilteredUsers="_filteredUsers" Users="_users" />
+@* } *@
 
 @code {
+
+    public List<User> _users = new List<User>();
+    public List<User> _filteredUsers = new List<User>();
     private string _loadingMessage = "";
     private bool _loading = true;
 
     protected override async Task OnInitializedAsync()
     {
-        LoadData();
+        ApiCollection api = new ApiCollection();
+        // LoadData();
+        _users = await api.GetUsersFromApi();
+        _filteredUsers = _users;
     }
-
     private async Task LoadData()
     {
-        _loading = true; 
-        StateHasChanged(); 
+        _loading = true;  
         for (int i = 0; i < 7; i++)
         {
             StateHasChanged();

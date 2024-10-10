@@ -2,11 +2,10 @@
 @using BlazorClassLibrary.Collections
 @rendermode InteractiveServer
 
-@if(_showFields)
+@if (_showFields)
 {
 	<EditForm Model="@_user" OnValidSubmit="@HandleValidSubmit" FormName="createUserForm">
 		<DataAnnotationsValidator />
-
 
 		<div class=" accordion-flush">
 			Name
@@ -34,46 +33,42 @@
 }
 else
 {
-<p style="font-family: Georgia"> @_submitMessage</p>
-@_counter
+	<p style="font-family: Georgia"> @_submitMessage</p>
+	@_counter
 }
 
-
 @code {
-	private User _user = new User();
+	UserCollection userCollection = new UserCollection();
+
+	public User _user = new User();
 	private MarkupString _submitMessage;
-	private List<User> _users = new List<User>();
+	public List<User> _users = new List<User>();
 	private bool _showFields = true;
-	UserCollection userManager = new UserCollection();
 	private int _id = 0;
 	private string _counter = "";
 
 	protected override async Task OnInitializedAsync()
 	{
-		// _users = userManager.GetUsersFromFile();
+		_users = userCollection.GetUsers();
 	}
-
 
 	private async Task HandleValidSubmit()
 	{
+		
 		_user.Id = _users.Count + 1;
+		userCollection.AddUser(_user);
+		userCollection.SaveList();
 		_showFields = false;
-		_users.Add(_user);
 		_submitMessage = (MarkupString)$"User {_user.Name} was created with the following information:<br><br> ID: {_user.Id}<br> Age: {_user.Age}<br>Username: {_user.UserName}<br>Email: {_user.Email}";
 		_user = new User();
-		userManager.AddUser(_user);
+		
 
 		for (int i = 6; i > 0; i--)
 		{
-			_counter = $"Coming back to start in: {i-1}";
+			_counter = $"Coming back to start in: {i - 1}";
 			await Task.Delay(800);
 			StateHasChanged();
 		}
-
-		
-
 		_showFields = true;
-
-		
 	}
 }

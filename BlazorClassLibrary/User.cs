@@ -14,7 +14,6 @@ namespace BlazorClassLibrary
 		public string Name { get; set; } = "";
 		public int? Age { get; set; } = null;
 		public string UserName { get; set; } = "";
-		[Required]
 		public string Email { get; set; } = "";
 		public string Phone { get; set; } = "";
 		public string Website { get; set; } = "";
@@ -32,6 +31,14 @@ namespace BlazorClassLibrary
 			Address = address;
 			Company = company;
 		}
+		public User(int id, string name, string email, int age, Address address, Company company)
+        {
+            Id = id;
+            Name = name;
+            Age = age;
+            Email = email;
+           
+        }
 		public User()
 		{
 
