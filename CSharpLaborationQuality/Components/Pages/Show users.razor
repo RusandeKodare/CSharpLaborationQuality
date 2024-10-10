@@ -3,14 +3,16 @@
 @page "/showusers"
 @rendermode InteractiveServer
 
-@* @if (_loading)
-{ *@
-    <h1 style="font-family: Georgia;">@_loadingMessage</h1> 
-@* } *@
-@* else
-{ *@
+@if (_loading)
+{
+    <h1 style="font-family: Georgia;">@_loadingMessage</h1>
+}
+    
+
     <TableLab FilteredUsers="_filteredUsers" Users="_users" />
-@* } *@
+
+   
+
 
 @code {
 
