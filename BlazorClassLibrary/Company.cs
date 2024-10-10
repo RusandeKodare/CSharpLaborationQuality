@@ -19,11 +19,6 @@ namespace BlazorClassLibrary
 			CatchPhrase = catchPhrase;
 			BS = bs;
 		}
-		public Company(string name, string catchPhrase) :this(name, catchPhrase, "")
-        {
-			Name = name;
-            CatchPhrase = catchPhrase;
-        }
 		public Company()
 		{
 

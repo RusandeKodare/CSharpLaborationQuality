@@ -1,0 +1,50 @@
+[
+  {
+    "Id": 1,
+    "Name": "",
+    "Age": 44,
+    "UserName": "wad",
+    "Email": "awd",
+    "Phone": "",
+    "Website": "",
+    "Address": {
+      "Street": "",
+      "Suite": "",
+      "City": "",
+      "ZipCode": "",
+      "Geo": {
+        "Lat": "",
+        "Lng": ""
+      }
+    },
+    "Company": {
+      "Name": "",
+      "CatchPhrase": "",
+      "BS": ""
+    }
+  },
+  {
+    "Id": 2,
+    "Name": "",
+    "Age": 44,
+    "UserName": "wad",
+    "Email": "awdawd@hotmail.com",
+    "Phone": "",
+    "Website": "",
+    "Address": {
+      "Street": "",
+      "Suite": "",
+      "City": "",
+      "ZipCode": "",
+      "Geo": {
+        "Lat": "",
+        "Lng": ""
+      }
+    },
+    "Company": {
+      "Name": "",
+      "CatchPhrase": "",
+      "BS": ""
+    }
+  }
+]

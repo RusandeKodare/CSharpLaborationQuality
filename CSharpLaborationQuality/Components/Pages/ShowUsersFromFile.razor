@@ -8,13 +8,15 @@
     public List<User> Users = new List<User>();
     public List<User> FilteredUsers = new List<User>();
 
-    protected override void OnInitialized()
+    protected override async void OnInitialized()
     {
         UserCollection userCollection = new UserCollection();
         Users = userCollection.GetUsers();
+
+
         if (Users.Count <= 0)
         {
-            Users = userCollection.GetUsersFromApi();
+            Users = userCollection.GetUsersFromInternalDb();
         }
         
         FilteredUsers = Users;

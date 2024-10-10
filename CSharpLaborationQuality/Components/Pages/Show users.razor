@@ -25,7 +25,7 @@
     {
         ApiCollection api = new ApiCollection();
         // LoadData();
-        _users = await api.GetUsersFromApi();
+        _users = await api.GetUsers();
         _filteredUsers = _users;
     }
     private async Task LoadData()
