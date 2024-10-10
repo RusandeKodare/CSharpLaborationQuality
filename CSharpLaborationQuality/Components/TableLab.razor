@@ -64,6 +64,13 @@
 						   FilteredUsersChanged="(users) => FilteredUsers = users" />
 @code {
 
+	// protected override async Task OnInitializedAsync()
+	// {
+	// 	ApiCollection api = new ApiCollection();
+	// 	Users = await api.GetUsersFromApi();
+	// 	FilteredUsers = Users;
+	// }
+
 	[Parameter]
 	public List<User> FilteredUsers {get; set; } = new List<User>();
 	[Parameter]

@@ -7,7 +7,7 @@
 
 		if (!string.IsNullOrEmpty(item.Value.ToString()))
 		{
-            <p style=" font-size: 0.9rem; font-family: Georgia;"><span class="key" style=" font-weight: bold;">@item.Key</span> : @item.Value</p>
+            <p style="font-size: 0.8rem; font-family: Georgia;"> <span style="font-weight: bold;">@item.Key</span> : @item.Value</p>
 		}
 		else
 		{
@@ -30,7 +30,7 @@ else
         paramInfos = new Dictionary<string, object>
         {
             { "Name", SpecificUser.Name },
-            {"Age", SpecificUser.Age!},
+            { "Age", SpecificUser.Age.ToString()!},
             { "Username", SpecificUser.UserName },
             { "Email", SpecificUser.Email },
             { "Phone", SpecificUser.Phone },
@@ -45,8 +45,4 @@ else
             { "Company BS", SpecificUser.Company.BS }
         };
     }
-
-
-
-
 }

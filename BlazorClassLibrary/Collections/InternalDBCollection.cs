@@ -47,7 +47,6 @@ namespace BlazorClassLibrary.Collections
                             CatchPhrase = "Proactive didactic contingency"
                         }
                     },
-                    // Add 12 more users
                     new User
                     {
                         Id = 3,
@@ -228,7 +227,6 @@ namespace BlazorClassLibrary.Collections
                             CatchPhrase = "Proactive didactic contingency"
                         }
                     },
-                    // Add 12 more users
                     new User
                     {
                         Id = 13,

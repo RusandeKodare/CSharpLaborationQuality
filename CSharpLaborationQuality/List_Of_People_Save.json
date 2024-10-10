@@ -1,34 +1,10 @@
 [
   {
     "Id": 1,
-    "Name": "",
-    "Age": 44,
-    "UserName": "wad",
-    "Email": "awd",
-    "Phone": "",
-    "Website": "",
-    "Address": {
-      "Street": "",
-      "Suite": "",
-      "City": "",
-      "ZipCode": "",
-      "Geo": {
-        "Lat": "",
-        "Lng": ""
-      }
-    },
-    "Company": {
-      "Name": "",
-      "CatchPhrase": "",
-      "BS": ""
-    }
-  },
-  {
-    "Id": 2,
-    "Name": "",
-    "Age": 44,
-    "UserName": "wad",
-    "Email": "awdawd@hotmail.com",
+    "Name": "Pontus",
+    "Age": 26,
+    "UserName": "IAmGrahsp",
+    "Email": "IAmGrahsp@hotmail.com",
     "Phone": "",
     "Website": "",
     "Address": {
