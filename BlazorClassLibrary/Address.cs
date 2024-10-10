@@ -23,12 +23,6 @@ namespace BlazorClassLibrary
 			ZipCode = zipcode;
 			Geo = geo;
 		}
-		public Address(string street, string city, string zipcode) :this(street, "", city, zipcode, new Geo())
-        {
-            Street = street;
-            City = city;
-            ZipCode = zipcode;
-        }
 		public Address()
 		{
 

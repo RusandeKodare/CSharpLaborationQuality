@@ -5,15 +5,16 @@ using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using System.Net.Http.Json;
+using BlazorClassLibrary.Collections.Interfaces;
 
 namespace BlazorClassLibrary.Collections
 {
-	public class ApiCollection : ICollections
+    public class ApiCollection : ICollections
 	{
 		public List<User> Users { get; set; } = [];
 		public HttpClient _httpClient = new();
 
-		public async Task<List<User>> GetUsersFromApi()
+		public async Task<List<User>> GetUsers()
 		{
 			Users = await _httpClient.GetFromJsonAsync<List<User>>("https://jsonplaceholder.typicode.com/users")?? [];
 			if (Users != null)
@@ -25,12 +26,9 @@ namespace BlazorClassLibrary.Collections
 
 		public void AddUser(User user)
 		{
+			Users.Add(user);
+        }
 
-		}
-
-		public List<User> GetUsers()
-		{
-			throw new NotImplementedException();
-		}
-	}
+      
+    }
 }
