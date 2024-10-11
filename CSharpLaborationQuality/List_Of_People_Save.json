@@ -1,0 +1,50 @@
+[
+  {
+    "Id": 1,
+    "Name": "Oscar",
+    "Age": null,
+    "UserName": "Orrelion",
+    "Email": "awdawd@hotmail.com",
+    "Phone": "",
+    "Website": "",
+    "Address": {
+      "Street": "",
+      "Suite": "",
+      "City": "Stockholm",
+      "ZipCode": "",
+      "Geo": {
+        "Lat": "",
+        "Lng": ""
+      }
+    },
+    "Company": {
+      "Name": "ITHS",
+      "CatchPhrase": "",
+      "BS": ""
+    }
+  },
+  {
+    "Id": 2,
+    "Name": "Pontus",
+    "Age": null,
+    "UserName": "Grahsp",
+    "Email": "Grahsp@hotmail.com",
+    "Phone": "",
+    "Website": "",
+    "Address": {
+      "Street": "",
+      "Suite": "",
+      "City": "Nyn\u00E4shamn",
+      "ZipCode": "",
+      "Geo": {
+        "Lat": "",
+        "Lng": ""
+      }
+    },
+    "Company": {
+      "Name": "ITHS",
+      "CatchPhrase": "",
+      "BS": ""
+    }
+  }
+]

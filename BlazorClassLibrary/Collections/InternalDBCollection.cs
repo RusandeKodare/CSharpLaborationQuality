@@ -1,476 +1,507 @@
 ﻿using System;
+using System.Buffers.Text;
 using System.Collections.Generic;
 using System.Linq;
+using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml;
+using System.Xml.Linq;
 using BlazorClassLibrary.Collections.Interfaces;
 
 namespace BlazorClassLibrary.Collections
 {
-    public class InternalDBCollection : ICollections, IGetUsersSync
-    {
-        public List<User> Users { get; set; } = new List<User>
-                {
-                    new User
-                    {
-                        Id = 1,
-                        Name = "Leanne Graham",
-                        Email = "Leanne.Graham@hotmail.com",
-                        Age = 25,
-                        Address = new Address
-                        {
-                            Street = "Kulas Light",
-                            City = "Gwenborough",
-                            ZipCode = "92998-3874"
-                        },
-                        Company = new Company
-                        {
-                            Name = "Romaguera-Crona",
-                            CatchPhrase = "Multi-layered client-server neural-net"
-                        }
-                    },
-                    new User
-                    {
-                        Id = 2,
-                        Name = "Ervin Howell",
-                        Email = "Ervin.Howell@outlook.se",
-                        Age = 25,
-                        Address = new Address
-                        {
-                            Street = "Victor Plains",
-                            City = "Wisokyburgh",
-                            ZipCode = "90566-7771"
-                        },
-                        Company = new Company
-                        {
-                            Name = "Deckow-Crist",
-                            CatchPhrase = "Proactive didactic contingency"
-                        }
-                    },
-                    new User
-                    {
-                        Id = 3,
-                        Name = "Clementine Bauch",
-                        Email = "Clementine.Bauch@gmail.com",
-                        Age = 30,
-                        Address = new Address
-                        {
-                            Street = "Douglas Extension",
-                            City = "McKenziehaven",
-                            ZipCode = "59590-4157"
-                        },
-                        Company = new Company
-                        {
-                            Name = "Romaguera-Jacobson",
-                            CatchPhrase = "Face to face bifurcated interface"
-                        }
-                    },
-                    new User
-                    {
-                        Id = 4,
-                        Name = "Patricia Lebsack",
-                        Email = "Patricia.Lebsack@kory.org",
-                        Age = 35,
-                        Address = new Address
-                        {
-                            Street = "Hoeger Mall",
-                            City = "South Elvis",
-                            ZipCode = "53919-4257"
-                        },
-                        Company = new Company
-                        {
-                            Name = "Robel-Corkery",
-                            CatchPhrase = "Multi-tiered zero tolerance productivity"
-                        }
-                    },
-                    new User
-                    {
-                        Id = 5,
-                        Name = "Chelsey Dietrich",
-                        Email = "Chelsey.Dietrich@annie.ca",
-                        Age = 28,
-                        Address = new Address
-                        {
-                            Street = "Skiles Walks",
-                            City = "Roscoeview",
-                            ZipCode = "33263"
-                        },
-                        Company = new Company
-                        {
-                            Name = "Keebler LLC",
-                            CatchPhrase = "User-centric fault-tolerant solution"
-                        }
-                    },
-                    new User
-                    {
-                        Id = 6,
-                        Name = "Mrs. Dennis Schulist",
-                        Email = "Dennis.Schulist@jasper.info",
-                        Age = 40,
-                        Address = new Address
-                        {
-                            Street = "Norberto Crossing",
-                            City = "South Christy",
-                            ZipCode = "23505-1337"
-                        },
-                        Company = new Company
-                        {
-                            Name = "Considine-Lockman",
-                            CatchPhrase = "Synchronised bottom-line interface"
-                        }
-                    },
-                    new User
-                    {
-                        Id = 7,
-                        Name = "Kurtis Weissnat",
-                        Email = "Kurtis.Weissnat@billy.biz",
-                        Age = 32,
-                        Address = new Address
-                        {
-                            Street = "Rex Trail",
-                            City = "Howemouth",
-                            ZipCode = "58804-1099"
-                        },
-                        Company = new Company
-                        {
-                            Name = "Johns Group",
-                            CatchPhrase = "Configurable multimedia task-force"
-                        }
-                    },
-                    new User
-                    {
-                        Id = 8,
-                        Name = "Nicholas Runolfsdottir V",
-                        Email = "Nicholas.Runo@rosamond.me",
-                        Age = 36,
-                        Address = new Address
-                        {
-                            Street = "Ellsworth Summit",
-                            City = "Aliyaview",
-                            ZipCode = "45169"
-                        },
-                        Company = new Company
-                        {
-                            Name = "Abernathy Group",
-                            CatchPhrase = "Implemented secondary concept"
-                        }
-                    },
-                    new User
-                    {
-                        Id = 9,
-                        Name = "Glenna Reichert",
-                        Email = "Glenna.Reichert@dana.io",
-                        Age = 27,
-                        Address = new Address
-                        {
-                            Street = "Dayna Park",
-                            City = "Bartholomebury",
-                            ZipCode = "76495-3109"
-                        },
-                        Company = new Company
-                        {
-                            Name = "Yost and Sons",
-                            CatchPhrase = "Switchable contextually-based project"
-                        }
-                    },
-                    new User
-                    {
-                        Id = 10,
-                        Name = "Clementina DuBuque",
-                        Email = "Clementina.DuBuque@karina.biz",
-                        Age = 31,
-                        Address = new Address
-                        {
-                            Street = "Kattie Turnpike",
-                            City = "Lebsackbury",
-                            ZipCode = "31428-2261"
-                        },
-                        Company = new Company
-                        {
-                            Name = "Hoeger LLC",
-                            CatchPhrase = "Centralized empowering task-force"
-                        }
-                    },
-                    new User
-                    {
-                        Id = 11,
-                        Name = "Leanne Graham",
-                        Email = "Leanne.Graham@hotmail.com",
-                        Age = 25,
-                        Address = new Address
-                        {
-                            Street = "Kulas Light",
-                            City = "Gwenborough",
-                            ZipCode = "92998-3874"
-                        },
-                        Company = new Company
-                        {
-                            Name = "Romaguera-Crona",
-                            CatchPhrase = "Multi-layered client-server neural-net"
-                        }
-                    },
-                    new User
-                    {
-                        Id = 12,
-                        Name = "Ervin Howell",
-                        Email = "Ervin.Howell@outlook.se",
-                        Age = 25,
-                        Address = new Address
-                        {
-                            Street = "Victor Plains",
-                            City = "Wisokyburgh",
-                            ZipCode = "90566-7771"
-                        },
-                        Company = new Company
-                        {
-                            Name = "Deckow-Crist",
-                            CatchPhrase = "Proactive didactic contingency"
-                        }
-                    },
-                    new User
-                    {
-                        Id = 13,
-                        Name = "John Doe",
-                        Email = "john.doe@example.com",
-                        Age = 30,
-                        Address = new Address
-                        {
-                            Street = "Main Street",
-                            City = "New York",
-                            ZipCode = "10001"
-                        },
-                        Company = new Company
-                        {
-                            Name = "ABC Company",
-                            CatchPhrase = "Innovative solutions"
-                        }
-                    },
-                    new User
-                    {
-                        Id = 14,
-                        Name = "Jane Smith",
-                        Email = "jane.smith@example.com",
-                        Age = 35,
-                        Address = new Address
-                        {
-                            Street = "Oak Avenue",
-                            City = "Los Angeles",
-                            ZipCode = "90001"
-                        },
-                        Company = new Company
-                        {
-                            Name = "XYZ Corporation",
-                            CatchPhrase = "Driving success"
-                        }
-                    },
-                    new User
-                    {
-                        Id = 15,
-                        Name = "Michael Johnson",
-                        Email = "michael.johnson@example.com",
-                        Age = 28,
-                        Address = new Address
-                        {
-                            Street = "Pine Street",
-                            City = "Chicago",
-                            ZipCode = "60601"
-                        },
-                        Company = new Company
-                        {
-                            Name = "123 Industries",
-                            CatchPhrase = "Innovating the future"
-                        }
-                    },
-                    new User
-                    {
-                        Id = 16,
-                        Name = "Emily Davis",
-                        Email = "emily.davis@example.com",
-                        Age = 40,
-                        Address = new Address
-                        {
-                            Street = "Cedar Road",
-                            City = "Seattle",
-                            ZipCode = "98101"
-                        },
-                        Company = new Company
-                        {
-                            Name = "XYZ Corporation",
-                            CatchPhrase = "Driving success"
-                        }
-                    },
-                    new User
-                    {
-                        Id = 17,
-                        Name = "David Wilson",
-                        Email = "david.wilson@example.com",
-                        Age = 32,
-                        Address = new Address
-                        {
-                            Street = "Maple Avenue",
-                            City = "San Francisco",
-                            ZipCode = "94101"
-                        },
-                        Company = new Company
-                        {
-                            Name = "ABC Company",
-                            CatchPhrase = "Innovative solutions"
-                        }
-                    },
-                    new User
-                    {
-                        Id = 18,
-                        Name = "Olivia Thompson",
-                        Email = "olivia.thompson@example.com",
-                        Age = 36,
-                        Address = new Address
-                        {
-                            Street = "Elm Street",
-                            City = "Boston",
-                            ZipCode = "02101"
-                        },
-                        Company = new Company
-                        {
-                            Name = "123 Industries",
-                            CatchPhrase = "Innovating the future"
-                        }
-                    },
-                    new User
-                    {
-                        Id = 19,
-                        Name = "James Anderson",
-                        Email = "james.anderson@example.com",
-                        Age = 27,
-                        Address = new Address
-                        {
-                            Street = "Spruce Lane",
-                            City = "Dallas",
-                            ZipCode = "75201"
-                        },
-                        Company = new Company
-                        {
-                            Name = "XYZ Corporation",
-                            CatchPhrase = "Driving success"
-                        }
-                    },
-                    new User
-                    {
-                        Id = 20,
-                        Name = "Sophia Martinez",
-                        Email = "sophia.martinez@example.com",
-                        Age = 31,
-                        Address = new Address
-                        {
-                            Street = "Birch Street",
-                            City = "Houston",
-                            ZipCode = "77001"
-                        },
-                        Company = new Company
-                        {
-                            Name = "ABC Company",
-                            CatchPhrase = "Innovative solutions"
-                        }
-                    },
-                    new User
-                    {
-                        Id = 21,
-                        Name = "Alexander Clark",
-                        Email = "alexander.clark@example.com",
-                        Age = 25,
-                        Address = new Address
-                        {
-                            Street = "Willow Drive",
-                            City = "Atlanta",
-                            ZipCode = "30301"
-                        },
-                        Company = new Company
-                        {
-                            Name = "123 Industries",
-                            CatchPhrase = "Innovating the future"
-                        }
-                    },
-                    new User
-                    {
-                        Id = 22,
-                        Name = "Mia Rodriguez",
-                        Email = "mia.rodriguez@example.com",
-                        Age = 25,
-                        Address = new Address
-                        {
-                            Street = "Hickory Lane",
-                            City = "Miami",
-                            ZipCode = "33101"
-                        },
-                        Company = new Company
-                        {
-                            Name = "XYZ Corporation",
-                            CatchPhrase = "Driving success"
-                        }
-                    },
-                    new User
-                    {
-                        Id = 23,
-                        Name = "William Baker",
-                        Email = "william.baker@example.com",
-                        Age = 30,
-                        Address = new Address
-                        {
-                            Street = "Chestnut Street",
-                            City = "Philadelphia",
-                            ZipCode = "19101"
-                        },
-                        Company = new Company
-                        {
-                            Name = "ABC Company",
-                            CatchPhrase = "Innovative solutions"
-                        }
-                    },
-                    new User
-                    {
-                        Id = 24,
-                        Name = "Sofia Hernandez",
-                        Email = "sofia.hernandez@example.com",
-                        Age = 35,
-                        Address = new Address
-                        {
-                            Street = "Sycamore Lane",
-                            City = "Phoenix",
-                            ZipCode = "85001"
-                        },
-                        Company = new Company
-                        {
-                            Name = "123 Industries",
-                            CatchPhrase = "Innovating the future"
-                        }
-                    },
-                    new User
-                    {
-                        Id = 25,
-                        Name = "Benjamin Green",
-                        Email = "benjamin.green@example.com",
-                        Age = 28,
-                        Address = new Address
-                        {
-                            Street = "Oak Street",
-                            City = "Denver",
-                            ZipCode = "80201"
-                        },
-                        Company = new Company
-                        {
-                            Name = "XYZ Corporation",
-                            CatchPhrase = "Driving success"
-                        }
-                    }
-                };
+	public class InternalDBCollection : ICollections, IGetUsersSync
+	{
+		public List<User> Users { get; set; } = new List<User>
+			{
+				new User
+				{
+					Id = 1,
+					Name = "Simba Lion",
+					UserName = "SimbaLion",
+					Email = "simba.lion@pride.com",
+					Age = 5,
+					Address = new Address
+					{
+						Street = "Pride Rock",
+						City = "Savanna",
+						ZipCode = "00001"
+					},
+					Company = new Company
+					{
+						Name = "Circle of Life Co.",
+						CatchPhrase = "Hakuna Matata"
+					}
+				},
+				new User
+				{
+					Id = 2,
+					Name = "Elsa Arendelle",
+					UserName = "ElsaArendelle",
+					Email = "elsa.arendelle@frozen.com",
+					Age = 25,
+					Address = new Address
+					{
+						Street = "Ice Palace",
+						City = "Arendelle",
+						ZipCode = "30303"
+					},
+					Company = new Company
+					{
+						Name = "Frozen Enterprises",
+						CatchPhrase = "Let It Go"
+					}
+				},
+				new User
+				{
+					Id = 3,
+					Name = "Woody Cowboy",
+					UserName = "WoodyCowboy",
+					Email = "woody.cowboy@toybox.com",
+					Age = 30,
+					Address = new Address
+					{
+						Street = "Andy's Room",
+						City = "Toyland",
+						ZipCode = "12345"
+					},
+					Company = new Company
+					{
+						Name = "Toybox LLC",
+						CatchPhrase = "You've Got a Friend in Me"
+					}
+				},
+				new User
+				{
+					Id = 4,
+					Name = "Buzz Lightyear",
+					UserName = "BuzzLightyear",
+					Email = "buzz.lightyear@space.com",
+					Age = 32,
+					Address = new Address
+					{
+						Street = "Star Command",
+						City = "Infinity",
+						ZipCode = "67890"
+					},
+					Company = new Company
+					{
+						Name = "Galactic Defenders",
+						CatchPhrase = "To Infinity and Beyond"
+					}
+				},
+				new User
+				{
+					Id = 5,
+					Name = "Mickey Mouse",
+					UserName = "MickeyMouse",
+					Email = "mickey.mouse@disney.com",
+					Age = 93,
+					Address = new Address
+					{
+						Street = "Main Street",
+						City = "Disneyland",
+						ZipCode = "12345"
+					},
+					Company = new Company
+					{
+						Name = "Disney Inc.",
+						CatchPhrase = "Oh Boy!"
+					}
+				},
+				new User
+				{
+					Id = 6,
+					Name = "Donald Duck",
+					UserName = "DonaldDuck",
+					Email = "donald.duck@disney.com",
+					Age = 88,
+					Address = new Address
+					{
+						Street = "Duckburg",
+						City = "Duckburg",
+						ZipCode = "67890"
+					},
+					Company = new Company
+					{
+						Name = "Duck Enterprises",
+						CatchPhrase = "Aw, Phooey!"
+					}
+				},
+				new User
+				{
+					Id = 7,
+					Name = "Ariel Mermaid",
+					UserName = "ArielMermaid",
+					Email = "ariel.mermaid@ocean.com",
+					Age = 18,
+					Address = new Address
+					{
+						Street = "Undersea Castle",
+						City = "Atlantica",
+						ZipCode = "10234"
+					},
+					Company = new Company
+					{
+						Name = "Ocean Enterprises",
+						CatchPhrase = "Part of Your World"
+					}
+				},
+				new User
+				{
+					Id = 8,
+					Name = "Peter Pan",
+					UserName = "PeterPan",
+					Email = "peter.pan@neverland.com",
+					Age = 16,
+					Address = new Address
+					{
+						Street = "Lost Boys Hideout",
+						City = "Neverland",
+						ZipCode = "20456"
+					},
+					Company = new Company
+					{
+						Name = "Neverland Ventures",
+						CatchPhrase = "Never Grow Up"
+					}
+				},
+				new User
+				{
+					Id = 9,
+					Name = "Cinderella Princess",
+					UserName = "CinderellaPrincess",
+					Email = "cinderella.princess@fairytale.com",
+					Age = 22,
+					Address = new Address
+					{
+						Street = "Royal Castle",
+						City = "Kingdom",
+						ZipCode = "30567"
+					},
+					Company = new Company
+					{
+						Name = "Royal Dreams",
+						CatchPhrase = "A Dream is a Wish Your Heart Makes"
+					}
+				},
+				new User
+				{
+					Id = 10,
+					Name = "Mulan Warrior",
+					UserName = "MulanWarrior",
+					Email = "mulan.warrior@china.com",
+					Age = 28,
+					Address = new Address
+					{
+						Street = "Imperial Palace",
+						City = "China",
+						ZipCode = "40678"
+					},
+					Company = new Company
+					{
+						Name = "Warrior Enterprises",
+						CatchPhrase = "I'll Make a Man Out of You"
+					}
+				},
+				new User
+				{
+					Id = 11,
+					Name = "Tiana Frog",
+					UserName = "TianaFrog",
+					Email = "tiana.frog@nola.com",
+					Age = 26,
+					Address = new Address
+					{
+						Street = "Bayou Lane",
+						City = "New Orleans",
+						ZipCode = "50689"
+					},
+					Company = new Company
+					{
+						Name = "Frog Enterprises",
+						CatchPhrase = "Almost There"
+					}
+				},
+				new User
+				{
+					Id = 12,
+					Name = "Rapunzel Tangled",
+					UserName = "RapunzelTangled",
+					Email = "rapunzel.tangled@tower.com",
+					Age = 19,
+					Address = new Address
+					{
+						Street = "Tower Heights",
+						City = "Corona",
+						ZipCode = "60790"
+					},
+					Company = new Company
+					{
+						Name = "Hair Care Inc.",
+						CatchPhrase = "Let Your Hair Down"
+					}
+				},
+				new User
+				{
+					Id = 13,
+					Name = "Aladdin Thief",
+					UserName = "AladdinThief",
+					Email = "aladdin.thief@agrabah.com",
+					Age = 22,
+					Address = new Address
+					{
+						Street = "Market Street",
+						City = "Agrabah",
+						ZipCode = "70801"
+					},
+					Company = new Company
+					{
+						Name = "Genie Enterprises",
+						CatchPhrase = "A Whole New World"
+					}
+				},
+				new User
+				{
+					Id = 14,
+					Name = "Belle Beauty",
+					UserName = "BelleBeauty",
+					Email = "belle.beauty@france.com",
+					Age = 24,
+					Address = new Address
+					{
+						Street = "Beast Castle",
+						City = "Provincial Town",
+						ZipCode = "80912"
+					},
+					Company = new Company
+					{
+						Name = "Enchanted Services",
+						CatchPhrase = "Beauty and the Beast"
+					}
+				},
+				new User
+				{
+					Id = 15,
+					Name = "Tarzan Jungle",
+					UserName = "TarzanJungle",
+					Email = "tarzan.jungle@jungle.com",
+					Age = 30,
+					Address = new Address
+					{
+						Street = "Treehouse Lane",
+						City = "Jungle",
+						ZipCode = "90123"
+					},
+					Company = new Company
+					{
+						Name = "Vine Ventures",
+						CatchPhrase = "Son of Man"
+					}
+				},
+				new User
+				{
+					Id = 16,
+					Name = "Moana Wayfinder",
+					UserName = "MoanaWayfinder",
+					Email = "moana.wayfinder@oceania.com",
+					Age = 18,
+					Address = new Address
+					{
+						Street = "Ocean Drive",
+						City = "Motunui",
+						ZipCode = "10234"
+					},
+					Company = new Company
+					{
+						Name = "Wayfinding Enterprises",
+						CatchPhrase = "How Far I'll Go"
+					}
+				},
+				new User
+				{
+					Id = 17,
+					Name = "Pocahontas Nature",
+					UserName = "PocahontasNature",
+					Email = "pocahontas.nature@tribe.com",
+					Age = 21,
+					Address = new Address
+					{
+						Street = "Forest Path",
+						City = "Powhatan",
+						ZipCode = "20345"
+					},
+					Company = new Company
+					{
+						Name = "Spirit of the Wind",
+						CatchPhrase = "Colors of the Wind"
+					}
+				},
+				new User
+				{
+					Id = 18,
+					Name = "Goofy Goof",
+					UserName = "GoofyGoof",
+					Email = "goofy.goof@disney.com",
+					Age = 37,
+					Address = new Address
+					{
+						Street = "Goof Street",
+						City = "Spoonerville",
+						ZipCode = "90909"
+					},
+					Company = new Company
+					{
+						Name = "Goofy Enterprises",
+						CatchPhrase = "Gawrsh!"
+					}
+				},
+				new User
+				{
+					Id = 19,
+					Name = "Aurora Rose",
+					UserName = "AuroraRose",
+					Email = "aurora.rose@castle.com",
+					Age = 26,
+					Address = new Address
+					{
+						Street = "Briar Woods",
+						City = "Fairy Kingdom",
+						ZipCode = "20356"
+					},
+					Company = new Company
+					{
+						Name = "Royal Dreams Inc.",
+						CatchPhrase = "Once Upon a Dream"
+					}
+				},
+				new User
+				{
+					Id = 20,
+					Name = "Jasmine Agrabah",
+					UserName = "JasmineAgrabah",
+					Email = "jasmine.agrabah@palace.com",
+					Age = 24,
+					Address = new Address
+					{
+						Street = "Royal Palace",
+						City = "Agrabah",
+						ZipCode = "40789"
+					},
+					Company = new Company
+					{
+						Name = "Magic Carpet Co.",
+						CatchPhrase = "A Whole New World"
+					}
+				},
+				new User
+				{
+					Id = 21,
+					Name = "Hercules Hero",
+					UserName = "HerculesHero",
+					Email = "hercules.hero@olympus.com",
+					Age = 28,
+					Address = new Address
+					{
+						Street = "Mount Olympus",
+						City = "Olympus",
+						ZipCode = "50890"
+					},
+					Company = new Company
+					{
+						Name = "Hero for Hire",
+						CatchPhrase = "Go the Distance"
+					}
+				},
+				new User
+				{
+					Id = 22,
+					Name = "Merida Brave",
+					UserName = "MeridaBrave",
+					Email = "merida.brave@highlands.com",
+					Age = 21,
+					Address = new Address
+					{
+						Street = "Stone Circle",
+						City = "DunBroch",
+						ZipCode = "60901"
+					},
+					Company = new Company
+					{
+						Name = "Clan Brave Ltd.",
+						CatchPhrase = "Fate Be Changed"
+					}
+				},
+				new User
+				{
+					Id = 23,
+					Name = "Stitch Alien",
+					UserName = "StitchAlien",
+					Email = "stitch.alien@hawaii.com",
+					Age = 5,
+					Address = new Address
+					{
+						Street = "Experiment Road",
+						City = "Kauai",
+						ZipCode = "10234"
+					},
+					Company = new Company
+					{
+						Name = "Ohana Services",
+						CatchPhrase = "Ohana Means Family"
+					}
+				},
+				new User
+				{
+					Id = 24,
+					Name = "Alice Wonderland",
+					UserName = "AliceWonderland",
+					Email = "alice.wonderland@rabbit.com",
+					Age = 19,
+					Address = new Address
+					{
+						Street = "Madhatter Lane",
+						City = "Wonderland",
+						ZipCode = "10345"
+					},
+					Company = new Company
+					{
+						Name = "Wonderland Ventures",
+						CatchPhrase = "Curioser and Curioser"
+					}
+				},
+				new User
+				{
+					Id = 25,
+					Name = "Tinkerbell Fairy",
+					UserName = "TinkerbellFairy",
+					Email = "tinkerbell.fairy@pixie.com",
+					Age = 22,
+					Address = new Address
+					{
+						Street = "Pixie Hollow",
+						City = "Neverland",
+						ZipCode = "30456"
+					},
+					Company = new Company
+					{
+						Name = "Pixie Dust Inc.",
+						CatchPhrase = "Faith, Trust, and Pixie Dust"
+					}
+				}
+			};
 
-        public List<User> GetUsers()
-        {
-            return Users;
-        }
 
-        public void AddUser(User user)
-        {
-            Users.Add(user);
-        }
-    }
+
+		public List<User> GetUsers()
+		{
+			return Users;
+		}
+
+		public void AddUser(User user)
+		{
+			Users.Add(user);
+		}
+	}
 }

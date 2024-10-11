@@ -23,9 +23,14 @@
 			<ValidationMessage For="@(() => _user.Email)" />
 		</div>
 		<div class="accordion-flush">
-			Age
-			<InputNumber id="age" @bind-Value="@_user.Age" class="form-control" />
-			<ValidationMessage For="@(() => _user.Age)" />
+			City
+			<InputText id="city" @bind-Value="@_user.Address.City" class="form-control" />
+			<ValidationMessage For="@(() => _user.Address.City)" />
+		</div>
+		<div class="accordion-flush">
+			Company Name
+			<InputText id="compyName" @bind-Value="@_user.Company.Name" class="form-control" />
+			<ValidationMessage For="@(() => _user.Company.Name)" />
 		</div>
 		<br />
 		<button type="submit" class="border-success">Submit</button>
@@ -46,9 +51,10 @@ else
 	private bool _showFields = true;
 	private string _counter = "";
 
-	protected override async Task OnInitializedAsync()
+	protected override void OnInitialized()
 	{
-		_users = userCollection.GetUsers();
+		_showFields = true;
+		_users =  userCollection.GetUsers();
 	}
 
 	private async Task HandleValidSubmit()
@@ -58,7 +64,7 @@ else
 		userCollection.AddUser(_user);
 		userCollection.SaveList();
 		_showFields = false;
-		_submitMessage = (MarkupString)$"User {_user.Name} was created with the following information:<br><br> ID: {_user.Id}<br> Age: {_user.Age}<br>Username: {_user.UserName}<br>Email: {_user.Email}";
+		_submitMessage = (MarkupString)$"User {_user.Name} was created with the following information:<br><br> ID: {_user.Id}<br> Name: {_user.Name}<br>Username: {_user.UserName}<br>Email: {_user.Email} <br>City: {_user.Address.City}<br>Company name: {_user.Company.Name}";
 		_user = new User();
 		
 
