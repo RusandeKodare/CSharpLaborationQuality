@@ -5,15 +5,91 @@
 
 @if (_loading)
 {
-    <div style="background-color: black;  height: 90vh;">
-        <h1 style=" transform: rotate(180deg); padding-right: 80rem; color: gray; font-size: 4rem; font-family: Georgia;">@_loadingMessage</h1>
-        <h1 style=" padding-left: 80rem; color: #02f72b; font-size: 10rem; font-family: Georgia;">@_loadingMessage</h1>
-        <h1 style=" padding-left: 60rem;color: yellow; font-size: 12rem; font-family: Georgia;">@_loadingMessage</h1><br />
-        <h1 style=" padding-left: 40rem;color: darkred; font-size: 10rem; font-family: Georgia;">@_loadingMessage</h1>
-        <h1 style=" padding-left: 20rem;color: Blue; font-size: 8rem; font-family: Georgia;">@_loadingMessage</h1>
-        <h1 style=" color: White; font-size: 5rem; font-family: Georgia;">@_loadingMessage</h1>
-        <h1 style=" padding-right: 100rem; padding-bottom: 50rem; transform:rotate(120deg); color: pink; font-size: 5rem; font-family: Georgia;">@_loadingMessage</h1>        
+    <div style="background-color: #e0f7fa; height: 90vh; position: relative; overflow: hidden;">
+        <h1 style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%) rotate(180deg); color: #ff00ff; font-size: 4rem; font-family: Georgia; animation: flyAround 5s infinite, swing 3s infinite, glow 2s infinite;">
+            @_loadingMessage
+        </h1>
+        <h1 style="position: absolute; top: 30%; left: 20%; color: #00ffff; font-size: 10rem; font-family: Georgia; animation: rotateAround 8s infinite, swingMonkeys 4s infinite, glow 2s infinite;">
+            @_loadingMessage
+        </h1>
+        <h1 style="position: absolute; top: 70%; left: 70%; color: #ff9900; font-size: 12rem; font-family: Georgia; animation: rotateAround 7s infinite, swing 5s infinite, glow 2s infinite;">
+            @_loadingMessage
+        </h1>
+        <h1 style="position: absolute; top: 10%; left: 40%; color: #33cc33; font-size: 10rem; font-family: Georgia; animation: flyAround 6s infinite, swingMonkeys 3s infinite, glow 2s infinite;">
+            @_loadingMessage
+        </h1>
+        <h1 style="position: absolute; top: 80%; left: 10%; color: #9933ff; font-size: 8rem; font-family: Georgia; animation: rotateAround 9s infinite, swing 4s infinite, glow 2s infinite;">
+            @_loadingMessage
+        </h1>
+        <h1 style="position: absolute; top: 40%; left: 60%; color: #cc00cc; font-size: 5rem; font-family: Georgia; animation: flyAround 7s infinite, swingMonkeys 5s infinite, glow 2s infinite;">
+            @_loadingMessage
+        </h1>
+        <h1 style="position: absolute; top: 60%; left: 80%; transform: rotate(120deg); color: #00cc99; font-size: 5rem; font-family: Georgia; animation: rotateAround 6s infinite, swing 3s infinite, glow 2s infinite;">
+            @_loadingMessage
+        </h1>
+        <h1 style="position: absolute; top: 20%; left: 50%; color: #cc6600; font-size: 7rem; font-family: Georgia; animation: flyAround 8s infinite, swingMonkeys 5s infinite, glow 2s infinite;">
+            @_loadingMessage
+        </h1>
     </div>
+
+
+<style>
+    .loading-container {
+        background-color: #f0f0f0; /* Light gray background */
+        height: 90vh;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .loading-text {
+        position: absolute;
+        font-size: 4rem;
+        font-family: Georgia;
+        animation: flyAround 5s infinite, swing 3s infinite, glow 2s infinite;
+    }
+
+    @@keyframes flyAround {
+        0% {
+            transform: translate(0, 0);
+        }
+
+        50% {
+            transform: translate(50px, 50px);
+        }
+
+        100% {
+            transform: translate(0, 0);
+        }
+    }
+
+    @@keyframes swing {
+        0% {
+            transform: rotate(0deg);
+        }
+
+        50% {
+            transform: rotate(15deg);
+        }
+
+        100% {
+            transform: rotate(0deg);
+        }
+    }
+
+    @@keyframes glow {
+        0% {
+            text-shadow: 0 0 10px #666;
+        }
+
+        50% {
+            text-shadow: 0 0 20px #666;
+        }
+
+        100% {
+            text-shadow: 0 0 10px #666;
+        }
+    }
+</style>
 }
 else
 { 
@@ -31,72 +107,17 @@ else
     {
         ApiCollection api = new ApiCollection();
         LoadData();
+        
         _users = await api.GetUsers();
         _filteredUsers = _users;
     }
     private async Task LoadData()
     {
-       
-        _loading = true;  
-        for (int i = 0; i < 7; i++)
-        {
-            StateHasChanged();
-            if (i==0)
-            {
-                _loadingMessage = "Loading.";
-                
-                await Task.Delay(500);
 
-            }
-
-            else if (i==1)
-            {
-
-                _loadingMessage = "Loading. .";
-               
-                await Task.Delay(500);
-                
-            }
-            else if (i==2)
-            {
-                _loadingMessage = "Loading. . .";
-               
-                await Task.Delay(500);
-                
-            }
-            else if (i==3)
-            {
-                _loadingMessage = "Loading. . . .";
-               
-                await Task.Delay(500);
-                
-            }
-            else if (i==4)
-            {
-                _loadingMessage = "Loading. . . .";
-               
-                await Task.Delay(500);
-                
-            }
-            else if (i == 5)
-            {
-                _loadingMessage = "Loading. . . . .";
-              
-                await Task.Delay(500);
-              
-            }
-            else if (i == 6)
-            {
-                _loadingMessage = "Loading. . . . . .";
-               
-                await Task.Delay(500);
-                
-            }
-
-        }
-        
-
-        _loading = false; 
+         
+        _loadingMessage = "Loading";
+        await Task.Delay(4000);
+        _loading = false;
         StateHasChanged();
     }
 }
