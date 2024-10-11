@@ -7,33 +7,41 @@
 	<EditForm Model="@_user" OnValidSubmit="@HandleValidSubmit" FormName="createUserForm">
 		<DataAnnotationsValidator />
 
-		<div class=" accordion-flush">
+		<div style="font-family: Georgia; font-weight:bold; " class=" accordion-flush">
 			Name
 			<InputText id="name" @bind-Value="@_user.Name" class="form-control" />
 			<ValidationMessage For="@(() => _user.Name)" />
 		</div>
-		<div class="accordion-flush">
+		<br />
+		<div style="font-family: Georgia; font-weight:bold; " class="accordion-flush">
 			UserName
 			<InputText id="username" @bind-Value="@_user.UserName" class="form-control" />
 			<ValidationMessage For="@(() => _user.UserName)" />
-		</div>
-		<div class="accordion-flush">
+		</div><br />
+		<div style="font-family: Georgia; font-weight:bold; " class="accordion-flush">
 			Email
 			<InputText id="email" @bind-Value="@_user.Email" class="form-control" />
 			<ValidationMessage For="@(() => _user.Email)" />
-		</div>
-		<div class="accordion-flush">
+		</div><br />
+		<div style="font-family: Georgia; font-weight:bold; " class="accordion-flush">
 			City
 			<InputText id="city" @bind-Value="@_user.Address.City" class="form-control" />
 			<ValidationMessage For="@(() => _user.Address.City)" />
-		</div>
-		<div class="accordion-flush">
+		</div><br />
+		<div style="font-family: Georgia; font-weight:bold; " class="accordion-flush">
 			Company Name
 			<InputText id="compyName" @bind-Value="@_user.Company.Name" class="form-control" />
 			<ValidationMessage For="@(() => _user.Company.Name)" />
-		</div>
+		</div><br />
 		<br />
-		<button type="submit" class="border-success">Submit</button>
+		<button style="background-color: yellowgreen; width: 8rem; height: 3rem; font-family: Georgia; font-weight: bold;
+    border: none; cursor: pointer; transition: transform 0.3s;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);"
+				onmouseover="this.style.transform='scale(1.1)';"
+				onmouseout="this.style.transform='scale(1)';">
+			Submit
+		</button>
+
 	</EditForm>
 }
 else
@@ -54,19 +62,19 @@ else
 	protected override void OnInitialized()
 	{
 		_showFields = true;
-		_users =  userCollection.GetUsers();
+		_users = userCollection.GetUsers();
 	}
 
 	private async Task HandleValidSubmit()
 	{
-		
+
 		_user.Id = _users.Count + 1;
 		userCollection.AddUser(_user);
 		userCollection.SaveList();
 		_showFields = false;
 		_submitMessage = (MarkupString)$"User {_user.Name} was created with the following information:<br><br> ID: {_user.Id}<br> Name: {_user.Name}<br>Username: {_user.UserName}<br>Email: {_user.Email} <br>City: {_user.Address.City}<br>Company name: {_user.Company.Name}";
 		_user = new User();
-		
+
 
 		for (int i = 6; i > 0; i--)
 		{
