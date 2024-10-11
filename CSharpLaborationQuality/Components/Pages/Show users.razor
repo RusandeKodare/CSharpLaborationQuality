@@ -5,26 +5,20 @@
 
 @if (_loading)
 {
-    <div style="background-color: black; display: flex; flex-direction: column; justify-content: center; align-items: center; height: 90vh;">
-        
-        <h1 style=" color: #02f72b; font-size: 15rem; font-family: Georgia;">@_loadingMessage</h1>
-        <h1 style=" color: yellow; font-size: 12rem; font-family: Georgia;">@_loadingMessage</h1><br />
-        <h1 style=" color: darkred; font-size: 10rem; font-family: Georgia;">@_loadingMessage</h1>
-         <h1 style=" color: Blue; font-size: 8rem; font-family: Georgia;">@_loadingMessage</h1>
+    <div style="background-color: black;  height: 90vh;">
+        <h1 style=" transform: rotate(180deg); padding-right: 80rem; color: gray; font-size: 4rem; font-family: Georgia;">@_loadingMessage</h1>
+        <h1 style=" padding-left: 80rem; color: #02f72b; font-size: 10rem; font-family: Georgia;">@_loadingMessage</h1>
+        <h1 style=" padding-left: 60rem;color: yellow; font-size: 12rem; font-family: Georgia;">@_loadingMessage</h1><br />
+        <h1 style=" padding-left: 40rem;color: darkred; font-size: 10rem; font-family: Georgia;">@_loadingMessage</h1>
+        <h1 style=" padding-left: 20rem;color: Blue; font-size: 8rem; font-family: Georgia;">@_loadingMessage</h1>
         <h1 style=" color: White; font-size: 5rem; font-family: Georgia;">@_loadingMessage</h1>
+        <h1 style=" padding-right: 100rem; padding-bottom: 50rem; transform:rotate(120deg); color: pink; font-size: 5rem; font-family: Georgia;">@_loadingMessage</h1>        
     </div>
-    
-
 }
-
 else
 {
     <TableLab FilteredUsers="_filteredUsers" Users="_users" />
 }
-
-
-   
-
 
 @code {
 
