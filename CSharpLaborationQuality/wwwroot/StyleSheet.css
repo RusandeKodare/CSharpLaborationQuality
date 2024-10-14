@@ -17,3 +17,25 @@
     height: 20px; 
     margin-left: 10px; 
 }
+
+
+@keyframes fadeInSlow {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+@keyframes popOut {
+    0%, 100% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.1);
+    }
+}
+
