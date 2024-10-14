@@ -1,25 +1,7 @@
 ﻿@using BlazorClassLibrary
 @using BlazorClassLibrary.Collections
-@if (SpecificUser != null)
-{
-	@foreach(var item in paramInfos)
-	{
 
-		if (!string.IsNullOrEmpty(item.Value.ToString()))
-		{
-            <p style="font-size: 0.8rem; font-family: Georgia;"> <span style="font-weight: bold;">@item.Key</span> : @item.Value</p>
-		}
-		else
-		{
-           
-		}
-		
-	}
-}
-else
-{
-	<h5 style="font-family: Georgia;">Click the plus sign to the left of the users name to show more information</h5>
-}
+<UserInfoForSpecificUser_razor ParamInfos="paramInfos" SpecificUser="SpecificUser"/>
 @code {
 	[Parameter]
 	public User SpecificUser { get; set; } = new User();
@@ -30,12 +12,12 @@ else
         paramInfos = new Dictionary<string, object>
         {
             { "Name", SpecificUser.Name },
-            { "Age", SpecificUser.Age.ToString()!},
             { "Username", SpecificUser.UserName },
             { "Email", SpecificUser.Email },
             { "Phone", SpecificUser.Phone },
             { "Website", SpecificUser.Website },
             { "Street", SpecificUser.Address.Street },
+            { "City", SpecificUser.Address.City},
             { "Suite", SpecificUser.Address.Suite },
             { "ZipCode", SpecificUser.Address.ZipCode },
             { "Latitude", SpecificUser.Address.Geo.Lat },
