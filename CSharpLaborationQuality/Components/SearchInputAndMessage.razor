@@ -40,7 +40,7 @@
 		FilteredUsers = Users.Where(item => item.Name.Contains(SearchTerm, StringComparison.OrdinalIgnoreCase)).ToList();
 		FilteredUsersChanged.InvokeAsync(FilteredUsers);
 
-		if (Users.Count > 0)
+		if (FilteredUsers.Count > 0)
 		{
 			ListBiggerThanZero();
 		}

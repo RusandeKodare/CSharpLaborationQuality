@@ -68,7 +68,7 @@ else
 	private async Task HandleValidSubmit()
 	{
 
-		_user.Id = _users.Count + 1;
+		_user.Id = userCollection.Users.Count + 1;
 		userCollection.AddUser(_user);
 		userCollection.SaveList();
 		_showFields = false;

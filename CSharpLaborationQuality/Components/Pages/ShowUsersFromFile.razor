@@ -13,12 +13,6 @@
         UserCollection userCollection = new UserCollection();
         Users = userCollection.GetUsers();
 
-
-        if (Users.Count <= 0)
-        {
-            Users = userCollection.GetUsersFromInternalDb();
-        }
-        
         FilteredUsers = Users;
     }
 }

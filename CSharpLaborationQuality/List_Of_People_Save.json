@@ -1,0 +1,26 @@
+[
+  {
+    "Id": 1,
+    "Name": "awf",
+    "Age": null,
+    "UserName": "ag",
+    "Email": "3qg",
+    "Phone": "",
+    "Website": "",
+    "Address": {
+      "Street": "",
+      "Suite": "",
+      "City": "q3g",
+      "ZipCode": "",
+      "Geo": {
+        "Lat": "",
+        "Lng": ""
+      }
+    },
+    "Company": {
+      "Name": "q3eg",
+      "CatchPhrase": "",
+      "BS": ""
+    }
+  }
+]
