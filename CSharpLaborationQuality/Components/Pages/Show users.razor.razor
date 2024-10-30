@@ -1,0 +1,108 @@
+﻿<div style="background-color: #e0f7fa; height: 90vh; position: relative; overflow: hidden;">
+    <h1 style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%) rotate(180deg); color: #ff00ff; font-size: 4rem; font-family: Georgia; animation: flyAround 5s infinite, swing 3s infinite, glow 2s infinite;">
+        @_loadingMessage
+    </h1>
+    <h1 style="position: absolute; top: 30%; left: 20%; color: #00ffff; font-size: 10rem; font-family: Georgia; animation: rotateAround 8s infinite, swingMonkeys 4s infinite, glow 2s infinite;">
+        @_loadingMessage
+    </h1>
+    <h1 style="position: absolute; top: 70%; left: 70%; color: #ff9900; font-size: 12rem; font-family: Georgia; animation: rotateAround 7s infinite, swing 5s infinite, glow 2s infinite;">
+        @_loadingMessage
+    </h1>
+    <h1 style="position: absolute; top: 10%; left: 40%; color: #33cc33; font-size: 10rem; font-family: Georgia; animation: flyAround 6s infinite, swingMonkeys 3s infinite, glow 2s infinite;">
+        @_loadingMessage
+    </h1>
+    <h1 style="position: absolute; top: 80%; left: 10%; color: #9933ff; font-size: 8rem; font-family: Georgia; animation: rotateAround 9s infinite, swing 4s infinite, glow 2s infinite;">
+        @_loadingMessage
+    </h1>
+    <h1 style="position: absolute; top: 40%; left: 60%; color: #cc00cc; font-size: 5rem; font-family: Georgia; animation: flyAround 7s infinite, swingMonkeys 5s infinite, glow 2s infinite;">
+        @_loadingMessage
+    </h1>
+    <h1 style="position: absolute; top: 60%; left: 80%; transform: rotate(120deg); color: #00cc99; font-size: 5rem; font-family: Georgia; animation: rotateAround 6s infinite, swing 3s infinite, glow 2s infinite;">
+        @_loadingMessage
+    </h1>
+    <h1 style="position: absolute; top: 20%; left: 50%; color: #cc6600; font-size: 7rem; font-family: Georgia; animation: flyAround 8s infinite, swingMonkeys 5s infinite, glow 2s infinite;">
+        @_loadingMessage
+    </h1>
+    <!-- Additional Loading Texts -->
+    <h1 style="position: absolute; top: 90%; left: 50%; color: #ff0033; font-size: 9rem; font-family: Georgia; animation: flyAround 9s infinite, swing 4s infinite, glow 2s infinite;">
+        @_loadingMessage
+    </h1>
+    <h1 style="position: absolute; top: 5%; left: 5%; color: #6699ff; font-size: 11rem; font-family: Georgia; animation: rotateAround 10s infinite, swingMonkeys 3s infinite, glow 2s infinite;">
+        @_loadingMessage
+    </h1>
+    <h1 style="position: absolute; top: 85%; left: 75%; color: #ff6600; font-size: 6rem; font-family: Georgia; animation: rotateAround 7s infinite, swing 4s infinite, glow 2s infinite;">
+        @_loadingMessage
+    </h1>
+    <h1 style="position: absolute; top: 50%; left: 10%; color: #cc33ff; font-size: 6rem; font-family: Georgia; animation: flyAround 6s infinite, swingMonkeys 3s infinite, glow 2s infinite;">
+        @_loadingMessage
+    </h1>
+    <h1 style="position: absolute; top: 15%; left: 75%; color: #3366cc; font-size: 8rem; font-family: Georgia; animation: rotateAround 8s infinite, swing 5s infinite, glow 2s infinite;">
+        @_loadingMessage
+    </h1>
+</div>
+
+
+
+
+<style>
+    .loading-container {
+        background-color: #f0f0f0; /* Light gray background */
+        height: 90vh;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .loading-text {
+        position: absolute;
+        font-size: 4rem;
+        font-family: Georgia;
+        animation: flyAround 5s infinite, swing 3s infinite, glow 2s infinite;
+    }
+
+    @@keyframes flyAround {
+        0% {
+            transform: translate(0, 0);
+        }
+
+        50% {
+            transform: translate(50px, 50px);
+        }
+
+        100% {
+            transform: translate(0, 0);
+        }
+    }
+
+    @@keyframes swing {
+        0% {
+            transform: rotate(0deg);
+        }
+
+        50% {
+            transform: rotate(15deg);
+        }
+
+        100% {
+            transform: rotate(0deg);
+        }
+    }
+
+    @@keyframes glow {
+        0% {
+            text-shadow: 0 0 10px #666;
+        }
+
+        50% {
+            text-shadow: 0 0 20px #666;
+        }
+
+        100% {
+            text-shadow: 0 0 10px #666;
+        }
+    }
+</style>
+@code {
+    
+    private string _loadingMessage = "Loading";
+
+}
