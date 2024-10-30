@@ -6,7 +6,7 @@
 {
 	<EditForm Model="@_user" OnValidSubmit="@HandleValidSubmit" FormName="createUserForm">
 		<DataAnnotationsValidator />
-
+		<br /><br />
 		<div style="font-family: Georgia; font-weight:bold; " class=" accordion-flush">
 			Name
 			<InputText id="name" @bind-Value="@_user.Name" class="form-control" />
@@ -14,9 +14,14 @@
 		</div>
 		<br />
 		<div style="font-family: Georgia; font-weight:bold; " class="accordion-flush">
+			Age
+			<InputNumber id="Age" @bind-Value="@_user.Age" class="form-control" />
+			<ValidationMessage For="@(() => _user.Age)" />
+		</div><br />
+		<br />
+		<div style="font-family: Georgia; font-weight:bold; " class="accordion-flush">
 			UserName
 			<InputText id="username" @bind-Value="@_user.UserName" class="form-control" />
-			<ValidationMessage For="@(() => _user.UserName)" />
 		</div><br />
 		<div style="font-family: Georgia; font-weight:bold; " class="accordion-flush">
 			Email
@@ -26,12 +31,10 @@
 		<div style="font-family: Georgia; font-weight:bold; " class="accordion-flush">
 			City
 			<InputText id="city" @bind-Value="@_user.Address.City" class="form-control" />
-			<ValidationMessage For="@(() => _user.Address.City)" />
 		</div><br />
 		<div style="font-family: Georgia; font-weight:bold; " class="accordion-flush">
 			Company Name
 			<InputText id="compyName" @bind-Value="@_user.Company.Name" class="form-control" />
-			<ValidationMessage For="@(() => _user.Company.Name)" />
 		</div><br />
 		<br />
 		<button style="background-color: yellowgreen; width: 8rem; height: 3rem; font-family: Georgia; font-weight: bold;

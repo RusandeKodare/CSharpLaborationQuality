@@ -11,9 +11,15 @@ namespace BlazorClassLibrary
 	public class User
 	{
 		public int Id { get; set; } = 0;
-        public string Name { get; set; } = "";
+		[StringLength(20)]
+		[RegularExpression("^[a-zA-Z]+$", ErrorMessage = "Name can only contain letters.")]
+		public string Name { get; set; } = "";
+		[Range(18, 120)]
 		public int? Age { get; set; } = null;
+		[StringLength(20)]
+		[RegularExpression("^[a-zA-Z]+$", ErrorMessage = "Name can only contain letters.")]
 		public string UserName { get; set; } = "";
+		[RegularExpression(@"^[^@\s]+@[^@\s]+\.(se|com)$", ErrorMessage = "Email must contain '@' and end with either '.se' or '.com'.")]
 		public string Email { get; set; } = "";
 		public string Phone { get; set; } = "";
 		public string Website { get; set; } = "";
