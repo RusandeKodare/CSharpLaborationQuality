@@ -22,6 +22,11 @@ namespace CSharpLaborationQuality.Components.Services
             _todoItems.Add(item);
         }
 
+        public void Delete(TodoItem item)
+        {
+            _todoItems.Remove(item);
+        }
+
         public IEnumerable<TodoItem> GetAll()
         {
             return _todoItems.ToList();

@@ -39,7 +39,7 @@
     }
 }
 
-.item-isDone {
+.item-completed {
     text-decoration: line-through;
     color: #999;
 }

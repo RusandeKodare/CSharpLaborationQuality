@@ -1,32 +1,37 @@
-﻿@using BlazorClassLibrary
-@using CSharpLaborationQuality.Components.Services;
+﻿@using CSharpLaborationQuality.Components.Services;
 @inject ITodoService _todoService;
+@using CSharpLaborationQuality.Components.Shared
+@rendermode InteractiveServer
+
 
 @page "/ToDoList"
 
-<h3>ToDo List</h3>
+
 
 <div class="border" style="padding: 20px;">
     <h4>New Item</h4>
-    <TodoItemForm OnItemAdded="@ItemAdded" />
-
+    <ToDoItemForm OnItemAdded="@ItemsChanged" />
+    
 </div>
-
 
 <div class="border" style="padding: 20px; margin-top: 20px;">
     <div style="display:flex; flex-direction: column;">
         @foreach (var todo in Todos)
         {
-            <div class="flex-center" style="margin-bottom: 10px;">
-                <div class="ItemClass(todo)" style="width: 280px;">@todo.Text</div>
+            <div style="display:flex; margin-bottom: 10px;">
+                <div style="display:flex; align-items: center; margin-bottom: 10px;">
+                    <div class="@ItemClass(todo)" style="width: 280px;">@todo.Text</div>
                 </div>
+                <div>
+                    <button class="btn btn-danger" @onclick="() => DeleteItem(todo)">Delete</button>
+                </div>
+            </div>
         }
-    
     </div>
 </div>
 
 @code {
-    private IList<TodoItem> Todos {get; set; } = new List<TodoItem>();
+    private IList<TodoItem> Todos { get; set; } = new List<TodoItem>();
 
     protected override void OnInitialized()
     {
@@ -35,10 +40,10 @@
 
     public string ItemClass(TodoItem item)
     {
-        return item.IsDone ? "item-isDone" : "";
+        return item.Completed ? "item-completed" : "";
     }
 
-    public void ItemChanged()
+    public void ItemsChanged()
     {
         Todos = _todoService.GetAll().ToList();
         StateHasChanged();
@@ -47,6 +52,6 @@
     public void DeleteItem(TodoItem item)
     {
         _todoService.Delete(item);
-        ItemsChanged();
+        ItemsChanged();   
     }
 }

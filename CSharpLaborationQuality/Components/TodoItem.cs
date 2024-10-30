@@ -5,13 +5,13 @@ using System.Text;
 using System.Threading.Tasks;
 
 
-namespace BlazorClassLibrary
+namespace CSharpLaborationQuality.Components
 {
     public class TodoItem
     {
 
         public string Text { get; set; }
-        public bool IsDone { get; set; }
+        public bool Completed { get; set; }
 
         public TodoItem(string text)
         {
