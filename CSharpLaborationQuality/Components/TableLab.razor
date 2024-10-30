@@ -1,86 +1,124 @@
 ﻿@using BlazorClassLibrary
 @using BlazorClassLibrary.Collections
+@using System.Text.Json
 @rendermode InteractiveServer
 
 <table class="table table-hover">
-	<thead class="thead-dark">
-		<tr>
-			<th class="clickable-header" style="cursor: pointer; font-weight: 500;background-color:aliceblue; " @onclick="() => FilteredUsers = sortingCollection.SortByID(FilteredUsers)">
-				Id <img style="width: 20px; height: 20px; margin-left: 10px;" src="Images\ArrowUpAndDown.png" />
-			</th>
-			<th class="clickable-header" style="cursor: pointer; transition: background-color 0.3s ease; font-weight: 500;background-color: aliceblue; " @onclick="()=> FilteredUsers = sortingCollection.SortByName(FilteredUsers)">
-				Name <img style="width: 20px; height: 20px; margin-left: 50px;" src="Images\ArrowUpAndDown.png" />
-			</th>
-			<th class="clickable-header" style="cursor: pointer; transition: background-color 0.3s ease; font-weight: 500;background-color:aliceblue; " @onclick="()=> FilteredUsers = sortingCollection.SortByUserName(FilteredUsers)">
-				Username <img style="width: 20px; height: 20px; margin-left: 50px;" src="Images\ArrowUpAndDown.png" />
-			</th>
-			<th class="clickable-header" style="cursor: pointer; transition: background-color 0.3s ease; font-weight: 500;background-color:aliceblue; " @onclick="()=> FilteredUsers = sortingCollection.SortByEmail(FilteredUsers)">
-				Email <img style="width: 20px; height: 20px; margin-left: 50px;" src="Images\ArrowUpAndDown.png" />
-			</th>
-			<th class="clickable-header" style="cursor: pointer; transition: background-color 0.3s ease; font-weight: 500;background-color:aliceblue; " @onclick="()=> FilteredUsers = sortingCollection.SortByCity(FilteredUsers)">
-				City <img style="width: 20px; height: 20px; margin-left: 50px;" src="Images\ArrowUpAndDown.png" />
-			</th>
-			<th class="clickable-header" style="cursor: pointer; transition: background-color 0.3s ease; font-weight: 500;background-color:aliceblue; " @onclick="()=> FilteredUsers = sortingCollection.SortByCompanyName(FilteredUsers)">
-				Company Name <img style="width: 20px; height: 20px; margin-left: 50px;" src="Images\ArrowUpAndDown.png" />
-			</th>
-		</tr>
-	</thead>
-	<tbody>
-		@foreach (var user in FilteredUsers)
-		{
-			<tr>
-				<td>@user.Id</td>
-				<td style=" transition: background-color 0.3s ease; font-weight: 500;background-color:aliceblue; ">
-					<span style="display: flex; align-items: center;">
-						<img @onclick="() => SpecificUser = (SpecificUser == user ? null : user)" style="cursor: pointer; block-size: 20px; display: flex; align-items: center;" src="Images/PlusSign.png" />
-						@user.Name
-					</span>
-				</td>
-				<td>@user.UserName</td>
-				<td>@user.Email</td>
-				<td>@user.Address.City</td>
-				<td>@user.Company.Name</td>
-			</tr>
-			@if (SpecificUser == user)
-			{
-				<tr>
-					<td colspan="6">
-						<div style="background-color: #f8f9fa; padding: 10px; border: 1px solid #ddd;">
-							<UserInfoForSpecificUser SpecificUser="@SpecificUser" />
-						</div>
-					</td>
-				</tr>
-			}
-		}
-	</tbody>
+    <thead class="thead-dark">
+        <tr>
+            <th class="clickable-header" style="cursor: pointer; font-weight: 500;background-color:aliceblue; " @onclick="() => FilteredUsers = sortingCollection.SortByID(FilteredUsers)">
+                Id <img style="width: 20px; height: 20px; margin-left: 10px;" src="Images\ArrowUpAndDown.png" />
+            </th>
+            <th class="clickable-header" style="cursor: pointer; transition: background-color 0.3s ease; font-weight: 500;background-color: aliceblue; " @onclick="()=> FilteredUsers = sortingCollection.SortByName(FilteredUsers)">
+                Name <img style="width: 20px; height: 20px; margin-left: 50px;" src="Images\ArrowUpAndDown.png" />
+            </th>
+            <th class="clickable-header" style="cursor: pointer; transition: background-color 0.3s ease; font-weight: 500;background-color:aliceblue; " @onclick="()=> FilteredUsers = sortingCollection.SortByUserName(FilteredUsers)">
+                Username <img style="width: 20px; height: 20px; margin-left: 50px;" src="Images\ArrowUpAndDown.png" />
+            </th>
+            <th class="clickable-header" style="cursor: pointer; transition: background-color 0.3s ease; font-weight: 500;background-color:aliceblue; " @onclick="()=> FilteredUsers = sortingCollection.SortByEmail(FilteredUsers)">
+                Email <img style="width: 20px; height: 20px; margin-left: 50px;" src="Images\ArrowUpAndDown.png" />
+            </th>
+            <th class="clickable-header" style="cursor: pointer; transition: background-color 0.3s ease; font-weight: 500;background-color:aliceblue; " @onclick="()=> FilteredUsers = sortingCollection.SortByCity(FilteredUsers)">
+                City <img style="width: 20px; height: 20px; margin-left: 50px;" src="Images\ArrowUpAndDown.png" />
+            </th>
+            <th class="clickable-header" style="cursor: pointer; transition: background-color 0.3s ease; font-weight: 500;background-color:aliceblue; " @onclick="()=> FilteredUsers = sortingCollection.SortByCompanyName(FilteredUsers)">
+                Company Name <img style="width: 20px; height: 20px; margin-left: 50px;" src="Images\ArrowUpAndDown.png" />
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var user in FilteredUsers)
+        {
+            <tr>
+                <td>@user.Id</td>
+                <td style=" transition: background-color 0.3s ease; font-weight: 500; background-color:aliceblue;">
+                    <span style="display: flex; align-items: center;">
+                        <img @onclick="() => SpecificUser = (SpecificUser == user ? null : user)" style="padding-right:1rem; cursor: pointer; block-size: 20px; display: flex; align-items: center;" src="Images/PlusSign.png" />
+                        @if (!FilteredUsers.Any(u => u.Name == "Simba Lion" || u.Name == "Leanne Graham"))
+                        {
+                            <img @onclick="()=>ClickedToRemoveUser(user)" style="padding-right:1rem; cursor: pointer; block-size: 20px; display: flex; align-items: center;" src="Images/MinusSign.png" />
+                        }
+                        
+
+                        @user.Name
+
+
+                    </span>
+                </td>
+                <td>@user.UserName</td>
+                <td>@user.Email</td>
+                <td>@user.Address.City</td>
+                <td>@user.Company.Name</td>
+            </tr>
+            @if (SpecificUser == user)
+            {
+                <tr>
+                    <td colspan="6">
+                        <div style="background-color: #f8f9fa; padding: 10px; border: 1px solid #ddd;">
+                            <UserInfoForSpecificUser SpecificUser="@SpecificUser" />
+                        </div>
+                    </td>
+                </tr>
+            }
+        }
+    </tbody>
 </table>
 
 <SearchInputAndMessage SearchTerm="@SearchTerm"
-					   SearchTermChanged="(term) => SearchTerm = term"
-					   TextMessage="@TextMessage"
-					   TextMessageChanged="(message) => TextMessage = message"
-					   Users="@Users"
-					   FilteredUsers="@FilteredUsers"
-					   FilteredUsersChanged="(users) => FilteredUsers = users" />
+                       SearchTermChanged="(term) => SearchTerm = term"
+                       TextMessage="@TextMessage"
+                       TextMessageChanged="(message) => TextMessage = message"
+                       Users="@Users"
+                       FilteredUsers="@FilteredUsers"
+                       FilteredUsersChanged="(users) => FilteredUsers = users" />
+
+@if (_saveToList)
+{
+    <button @onclick="SaveChanges" style="background-color: #007bff; color: white; border: none; padding: 10px 20px; cursor: pointer; transition: background-color 0.3s ease; font-weight: 500; border-radius: 5px;">Save changes</button>
+    <span style="color: #007bff; font-weight: bold;">  
+       @_messageWhenSaved  
+    </span>
+}
+
 @code {
 
-	// protected override async Task OnInitializedAsync()
-	// {
-	// 	ApiCollection api = new ApiCollection();
-	// 	Users = await api.GetUsersFromApi();
-	// 	FilteredUsers = Users;
-	// }
+    SortingCollection sortingCollection = new SortingCollection();
+    private bool _saveToList = false;
 
-	[Parameter]
-	public List<User> FilteredUsers { get; set; } = new List<User>();
-	[Parameter]
-	public List<User> Users { get; set; } = new();
+    [Parameter]
+    public List<User> FilteredUsers { get; set; } = new List<User>();
+    [Parameter]
+    public EventCallback<List<User>> FilteredUsersChanged { get; set; }
+    [Parameter]
+    public List<User> Users { get; set; } = new();
 
-	public string? TextMessage { get; set; } = String.Empty;
+    public string? TextMessage { get; set; } = String.Empty;
+    private string _messageWhenSaved = "";
 
-	public string? SearchTerm { get; set; } = String.Empty;
+    public string? SearchTerm { get; set; } = String.Empty;
 
-	public User? SpecificUser { get; set; } = new();
+    public User SpecificUser { get; set; } = new();
 
-	SortingCollection sortingCollection = new SortingCollection();
+    public void ClickedToRemoveUser(User user)
+    {
+        FilteredUsers.Remove(user);
+        int count = 1;
+        foreach (var item in FilteredUsers)
+        {
+            item.Id = count;
+            count++;
+        }
+        _saveToList = true;
+    }
+    public async Task SaveChanges()
+    {
+        var json = JsonSerializer.Serialize<List<User>>(FilteredUsers);
+        File.WriteAllText("List_Of_People_Save.json", json);
+        _messageWhenSaved = "Changes saved!";
+        StateHasChanged();
+        await Task.Delay(2000);
+        _messageWhenSaved = "";
+        
+    }
+
 }

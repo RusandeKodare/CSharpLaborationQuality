@@ -93,13 +93,13 @@
 }
 else
 { 
-    <TableLab FilteredUsers="_filteredUsers" Users="_users" />
+    <TableLab FilteredUsers="FilteredUsers" Users="Users"/>
 }
 
 @code {
 
-    public List<User> _users = new List<User>();
-    public List<User> _filteredUsers = new List<User>();
+    public List<User> Users = new List<User>();
+    public List<User> FilteredUsers = new List<User>();
     private string _loadingMessage = "";
     private bool _loading = true;
 
@@ -107,14 +107,11 @@ else
     {
         ApiCollection api = new ApiCollection();
         LoadData();
-        
-        _users = await api.GetUsers();
-        _filteredUsers = _users;
+        Users = await api.GetUsers();
+        FilteredUsers.AddRange(Users);
     }
     private async Task LoadData()
     {
-
-         
         _loadingMessage = "Loading";
         await Task.Delay(4000);
         _loading = false;

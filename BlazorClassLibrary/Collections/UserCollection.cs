@@ -17,6 +17,11 @@ namespace BlazorClassLibrary.Collections
         {
             Users.Add(user);
         }
+
+        public void RemoveUser(User user)
+        {
+            Users.Remove(user);
+		}
         public void SaveList()
         {
             string? groupJson = JsonSerializer.Serialize(Users, new JsonSerializerOptions { WriteIndented = true });
@@ -28,7 +33,16 @@ namespace BlazorClassLibrary.Collections
             {
                 var loadedJson = File.ReadAllText("List_Of_People_Save.json");
                 Users = JsonSerializer.Deserialize<List<User>>(loadedJson) ?? [];
-                return Users;
+                if (Users.Count>0)
+                {
+                    return Users;
+                }
+                else
+                {
+                    return GetUsersFromInternalDb();
+
+                }
+                
             }
             else
             {

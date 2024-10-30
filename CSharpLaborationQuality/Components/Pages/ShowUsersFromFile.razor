@@ -2,17 +2,16 @@
 @using BlazorClassLibrary.Collections
 @page "/ShowUsersFromFile"
 
-<TableLab FilteredUsers="FilteredUsers" Users="Users" />
+<TableLab FilteredUsers="FilteredUsers" Users="Users"/>
 
 @code {
     public List<User> Users = new List<User>();
     public List<User> FilteredUsers = new List<User>();
+    UserCollection userCollection = new UserCollection();
 
     protected override async void OnInitialized()
     {
-        UserCollection userCollection = new UserCollection();
         Users = userCollection.GetUsers();
-
-        FilteredUsers = Users;
+        FilteredUsers.AddRange(Users);
     }
 }
