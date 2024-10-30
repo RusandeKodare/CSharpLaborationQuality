@@ -3,26 +3,26 @@
 
 @if (SpecificUser != null)
 {
-	@foreach (var item in ParamInfos)
-	{
+    @foreach (var item in ParamInfos)
+    {
 
-		if (!string.IsNullOrEmpty(item.Value.ToString()))
-		{
-			<p style="font-size: 0.8rem; font-family: Georgia; color: black; background-color: white;"> <span style="font-weight: bold;">@item.Key</span> : @item.Value</p>
-		}
+        if (!string.IsNullOrEmpty(item.Value.ToString()) && !(item.Key == "Age" && item.Value.ToString() == "0"))
+        {
+            <p style="font-size: 0.8rem; font-family: Georgia; color: black; background-color: white;"> <span style="font-weight: bold;">@item.Key</span> : @item.Value</p>
+        }
 
-	}
+    }
 }
 
 else
 {
-	<h5 style="font-family: Georgia;">Click the plus sign to the left of the users name to show more information</h5>
+    <h5 style="font-family: Georgia;">Click the plus sign to the left of the users name to show more information</h5>
 }
 @code {
 
-	[Parameter]
-	public User SpecificUser { get; set; } = new ();
-	[Parameter]
-	public Dictionary<string, object> ParamInfos { get; set; } = new ();
+    [Parameter]
+    public User SpecificUser { get; set; } = new();
+    [Parameter]
+    public Dictionary<string, object> ParamInfos { get; set; } = new();
 
 }

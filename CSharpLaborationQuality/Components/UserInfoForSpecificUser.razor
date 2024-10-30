@@ -12,6 +12,7 @@
         paramInfos = new Dictionary<string, object>
         {
             { "Name", SpecificUser.Name },
+            { "Age", SpecificUser.Age??0 },
             { "Username", SpecificUser.UserName },
             { "Email", SpecificUser.Email },
             { "Phone", SpecificUser.Phone },
