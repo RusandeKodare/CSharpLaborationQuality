@@ -1,4 +1,5 @@
 using CSharpLaborationQuality.Components;
+using CSharpLaborationQuality.Components.Services;
 
 namespace CSharpLaborationQuality
 {
@@ -11,8 +12,9 @@ namespace CSharpLaborationQuality
 			// Add services to the container.
 			builder.Services.AddRazorComponents()
 				.AddInteractiveServerComponents();
+			builder.Services.AddSingleton<ITodoService, TodoService>();
 
-			var app = builder.Build();
+            var app = builder.Build();
 
 			// Configure the HTTP request pipeline.
 			if (!app.Environment.IsDevelopment())
