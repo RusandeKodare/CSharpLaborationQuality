@@ -31,5 +31,16 @@ namespace CSharpLaborationQuality.Components.Services
         {
             return _todoItems.ToList();
         }
+
+        public void Complete(TodoItem item)
+
+        {
+            item.Completed = true;
+        }
+
+        public void Incomplete(TodoItem item)
+        {
+            item.Completed = false;
+        }
     }
 }

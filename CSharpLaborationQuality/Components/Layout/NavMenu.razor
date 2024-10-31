@@ -1,4 +1,6 @@
-﻿<div class="top-row ps-3 navbar navbar-dark">
+﻿<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.5.0/font/bootstrap-icons.min.css" rel="stylesheet">
+
+<div class="top-row ps-3 navbar navbar-dark">
     <div class="container-fluid">
         <a class="navbar-brand" href="">Menu</a>
     </div>
@@ -10,34 +12,32 @@
     <nav class="flex-column">
         <div class="nav-item px-3">
             <NavLink class="nav-link" href="" Match="NavLinkMatch.All">
-                <span class="bi bi-house-door-fill-nav-menu" aria-hidden="true"></span> Home
+                <span class="bi bi-house-door-fill" aria-hidden="true"></span> Home
             </NavLink>
         </div>
 
         <div class="nav-item px-3">
             <NavLink class="nav-link" href="CreateNewUser">
-                <span class="bi bi-plus-square-fill-nav-menu" aria-hidden="true"></span> Create new user
-            </NavLink>
-        </div>
-
-        <div class="nav-item px-3">
-            <NavLink class="nav-link" href="showusers">
-                <span class="bi bi-plus-square-fill-nav-menu" aria-hidden="true"></span> Show users
+                <span class="bi bi-person-plus-fill" aria-hidden="true"></span> Create a new user
             </NavLink>
         </div>
 
         <div class="nav-item px-3">
             <NavLink class="nav-link" href="ShowUsersFromFile">
-                <span class="bi bi-plus-square-fill-nav-menu" aria-hidden="true"></span> Show users from file
+                <span class="bi bi-folder-symlink-fill" aria-hidden="true"></span> Fetch users from file
+            </NavLink>
+        </div>
+
+        <div class="nav-item px-3">
+            <NavLink class="nav-link" href="showusers">
+                <span class="bi bi-cloud-download-fill" aria-hidden="true"></span> Fetch users from API
             </NavLink>
         </div>
 
         <div class="nav-item px-3">
             <NavLink class="nav-link" href="/ToDoList">
-                <span class="bi bi-plus-square-fill-nav-menu" aria-hidden="true"></span> Your to-do list
+                <span class="bi bi-list-check" aria-hidden="true"></span> To-do list
             </NavLink>
         </div>
-
     </nav>
 </div>
-
