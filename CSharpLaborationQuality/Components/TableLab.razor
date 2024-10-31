@@ -64,12 +64,10 @@
     </tbody>
 </table>
 
-<SearchInputAndMessage SearchTerm="@SearchTerm"
+<SearchInputAndMessage 
                        SearchTermChanged="(term) => SearchTerm = term"
-                       TextMessage="@TextMessage"
                        TextMessageChanged="(message) => TextMessage = message"
                        Users="@Users"
-                       FilteredUsers="@FilteredUsers"
                        FilteredUsersChanged="(users) => FilteredUsers = users" />
 
 @if (_saveToList)
