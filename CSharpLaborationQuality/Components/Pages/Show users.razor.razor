@@ -1,5 +1,5 @@
-﻿<div style="background-color: #e0f7fa; height: 90vh; position: relative; overflow: hidden;">
-    <h1 style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%) rotate(180deg); color: #ff00ff; font-size: 4rem; font-family: Georgia; animation: flyAround 5s infinite, swing 3s infinite, glow 2s infinite;">
+﻿<div style="background-color: #e0f7fa; height: 99vh; position: relative; overflow: hidden;">
+    <h1 style="position: absolute; top: 50%; left: 50%; color: #ff00ff; font-size: 10rem; font-family: Georgia; animation: flyAround 5s infinite, swing 3s infinite, glow 2s infinite;">
         @_loadingMessage
     </h1>
     <h1 style="position: absolute; top: 30%; left: 20%; color: #00ffff; font-size: 10rem; font-family: Georgia; animation: rotateAround 8s infinite, swingMonkeys 4s infinite, glow 2s infinite;">
@@ -17,7 +17,7 @@
     <h1 style="position: absolute; top: 40%; left: 60%; color: #cc00cc; font-size: 5rem; font-family: Georgia; animation: flyAround 7s infinite, swingMonkeys 5s infinite, glow 2s infinite;">
         @_loadingMessage
     </h1>
-    <h1 style="position: absolute; top: 60%; left: 80%; transform: rotate(120deg); color: #00cc99; font-size: 5rem; font-family: Georgia; animation: rotateAround 6s infinite, swing 3s infinite, glow 2s infinite;">
+    <h1 style="position: absolute; top: 60%; left: 80%; color: #00cc99; font-size: 5rem; font-family: Georgia; animation: rotateAround 6s infinite, swing 3s infinite, glow 2s infinite;">
         @_loadingMessage
     </h1>
     <h1 style="position: absolute; top: 20%; left: 50%; color: #cc6600; font-size: 7rem; font-family: Georgia; animation: flyAround 8s infinite, swingMonkeys 5s infinite, glow 2s infinite;">
@@ -64,15 +64,29 @@
             transform: translate(0, 0);
         }
     }
-    @@keyframes swing {
+    @@keyframes swingMonkeys {
         0% {
-            transform: rotate(0deg);
+            transform: rotate(333deg);
         }
         50% {
-            transform: rotate(15deg);
+            transform: rotate(120deg);
         }
         100% {
-            transform: rotate(0deg);
+            transform: rotate(99999deg);
+        }
+    }
+
+    @@keyframes swing {
+        0% {
+            transform: rotate(333deg);
+        }
+
+        50% {
+            transform: rotate(120deg);
+        }
+
+        100% {
+            transform: rotate(99999999deg);
         }
     }
     @@keyframes glow {

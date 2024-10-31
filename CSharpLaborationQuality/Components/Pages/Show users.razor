@@ -15,7 +15,6 @@ else
 
     public List<User> Users = new List<User>();
     public List<User> FilteredUsers = new List<User>();
-    private string _loadingMessage = "";
     private bool _loading = true;
 
     protected override async Task OnInitializedAsync()
@@ -27,8 +26,7 @@ else
     }
     private async Task LoadData()
     {
-        _loadingMessage = "Loading";
-        await Task.Delay(4000);
+        await Task.Delay(6000);
         _loading = false;
         StateHasChanged();
     }
