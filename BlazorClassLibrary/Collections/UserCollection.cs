@@ -33,20 +33,12 @@ namespace BlazorClassLibrary.Collections
             {
                 var loadedJson = File.ReadAllText("List_Of_People_Save.json");
                 Users = JsonSerializer.Deserialize<List<User>>(loadedJson) ?? [];
-                if (Users.Count>0)
-                {
+               
                     return Users;
-                }
-                else
-                {
-                    return GetUsersFromInternalDb();
-
-                }
-                
             }
             else
             {
-                return GetUsersFromInternalDb();
+                return new (); 
             }
         }
         public List<User> GetUsersFromInternalDb()
