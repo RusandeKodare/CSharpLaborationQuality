@@ -9,13 +9,14 @@
 }
 else
 { 
-    <TableLab FilteredUsers="FilteredUsers" Users="Users"/>
+    <TableLab FilteredUsers="FilteredUsers" Users="Users" FromSavedFile="FromSavedFile"/>
 }
 @code {
 
     public List<User> Users = new List<User>();
     public List<User> FilteredUsers = new List<User>();
     private bool _loading = true;
+    public bool FromSavedFile = false;
 
     protected override async Task OnInitializedAsync()
     {

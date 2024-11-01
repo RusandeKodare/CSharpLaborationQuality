@@ -34,15 +34,11 @@
                 <td style=" transition: background-color 0.3s ease; font-weight: 500; background-color:aliceblue;">
                     <span style="display: flex; align-items: center;">
                         <img @onclick="() => SpecificUser = (SpecificUser == user ? null : user)" style="padding-right:1rem; cursor: pointer; block-size: 20px; display: flex; align-items: center;" src="Images/PlusSign.png" />
-                        @if (!FilteredUsers.Any(u => u.Name == "Simba Lion" || u.Name == "Leanne Graham"))
+                        @if (FromSavedFile)
                         {
-                            <img @onclick="()=>ClickedToRemoveUser(user)" style="padding-right:1rem; cursor: pointer; block-size: 20px; display: flex; align-items: center;" src="Images/MinusSign.png" />
+                            <img @onclick="()=>RemoveUser(user)" style="padding-right:1rem; cursor: pointer; block-size: 20px; display: flex; align-items: center;" src="Images/MinusSign.png" />
                         }
-                        
-
                         @user.Name
-
-
                     </span>
                 </td>
                 <td>@user.UserName</td>
@@ -80,43 +76,62 @@
 
 @code {
 
-    SortingCollection sortingCollection = new SortingCollection();
-    private bool _saveToList = false;
-
+    [Parameter]
+    public bool FromSavedFile { get; set; }
     [Parameter]
     public List<User> FilteredUsers { get; set; } = new List<User>();
     [Parameter]
-    public EventCallback<List<User>> FilteredUsersChanged { get; set; }
-    [Parameter]
     public List<User> Users { get; set; } = new();
 
+    SortingCollection sortingCollection = new SortingCollection();
+    private bool _saveToList = false;
+
+    InternalDBCollection collection = new InternalDBCollection();
     public string? TextMessage { get; set; } = String.Empty;
     private string _messageWhenSaved = "";
-
     public string? SearchTerm { get; set; } = String.Empty;
-
     public User? SpecificUser { get; set; } = new();
 
-    public void ClickedToRemoveUser(User user)
+    public void RemoveUser(User user)
     {
         FilteredUsers.Remove(user);
+        UpdateIndexValueOfUser();
+        _saveToList = true;
+    }
+    public async Task SaveChanges()
+    {
+        Serialize();
+        _messageWhenSaved = "Changes saved!";
+        await Task.Delay(2000);
+        _messageWhenSaved = "";
+        _saveToList = false;
+        CheckIfListIsEmpty();
+
+    }
+
+    public void Serialize()
+    {
+        var json = JsonSerializer.Serialize<List<User>>(FilteredUsers);
+        File.WriteAllText("List_Of_People_Save.json", json);
+    }
+
+    public void UpdateIndexValueOfUser()
+    {
         int count = 1;
         foreach (var item in FilteredUsers)
         {
             item.Id = count;
             count++;
         }
-        _saveToList = true;
     }
-    public async Task SaveChanges()
+
+    public void CheckIfListIsEmpty()
     {
-        var json = JsonSerializer.Serialize<List<User>>(FilteredUsers);
-        File.WriteAllText("List_Of_People_Save.json", json);
-        _messageWhenSaved = "Changes saved!";
-        StateHasChanged();
-        await Task.Delay(2000);
-        _messageWhenSaved = "";
-        
+        if (FilteredUsers.Count<=0)
+        {
+            FromSavedFile = false;
+            FilteredUsers.AddRange(collection.GetUsers());
+        }
     }
 
 }

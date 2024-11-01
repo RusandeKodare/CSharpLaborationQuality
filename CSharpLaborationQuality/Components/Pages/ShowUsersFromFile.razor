@@ -2,16 +2,29 @@
 @using BlazorClassLibrary.Collections
 @page "/ShowUsersFromFile"
 
-<TableLab FilteredUsers="FilteredUsers" Users="Users"/>
+<TableLab FilteredUsers="FilteredUsers" Users="Users" FromSavedFile="FromSavedFile"/>
 
 @code {
     public List<User> Users = new List<User>();
     public List<User> FilteredUsers = new List<User>();
     UserCollection userCollection = new UserCollection();
+    InternalDBCollection internalDBCollection = new InternalDBCollection();
+    public bool FromSavedFile = false;
 
     protected override async void OnInitialized()
     {
         Users = userCollection.GetUsers();
+
+        if (Users==null||Users.Count<=0)
+        {
+            Users = internalDBCollection.GetUsers();
+            FromSavedFile = false;
+        }
+
+        else
+        {
+            FromSavedFile = true;
+        }
         FilteredUsers.AddRange(Users);
     }
 }

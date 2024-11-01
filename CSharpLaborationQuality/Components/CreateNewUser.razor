@@ -72,10 +72,8 @@ else
 	{
 
 		_user.Id = userCollection.Users.Count + 1;
-		userCollection.AddUser(_user);
-		userCollection.SaveList();
-		_showFields = false;
-		_submitMessage = (MarkupString)$"User {_user.Name} was created with the following information:<br><br> <span style=\"font-weight: bold;\">ID:</span> {_user.Id}<br> <span style=\"font-weight: bold;\">Name</span>: {_user.Name}<br><span style=\"font-weight: bold;\">Age</span>: {_user.Age}<br><span style=\"font-weight: bold;\">Username</span>: {_user.UserName}<br><span style=\"font-weight: bold;\">Email</span>: {_user.Email} <br><span style=\"font-weight: bold;\">City</span>: {_user.Address.City}<br><span style=\"font-weight: bold;\">Company name</span>: {_user.Company.Name}";
+		AddUserAndSaveList();
+		SendMessage();
 		_user = new User();
 
 
@@ -86,5 +84,22 @@ else
 			StateHasChanged();
 		}
 		_showFields = true;
+	}
+
+	public void AddUserAndSaveList()
+	{
+		userCollection.AddUser(_user);
+		userCollection.SaveList();
+	}
+
+	public void SendMessage()
+	{
+		ChangeBoolValue();
+		_submitMessage = (MarkupString)$"User {_user.Name} was created with the following information:<br><br> <span style=\"font-weight: bold;\">ID:</span> {_user.Id}<br> <span style=\"font-weight: bold;\">Name</span>: {_user.Name}<br><span style=\"font-weight: bold;\">Age</span>: {_user.Age}<br><span style=\"font-weight: bold;\">Username</span>: {_user.UserName}<br><span style=\"font-weight: bold;\">Email</span>: {_user.Email} <br><span style=\"font-weight: bold;\">City</span>: {_user.Address.City}<br><span style=\"font-weight: bold;\">Company name</span>: {_user.Company.Name}";
+	}
+
+	private void ChangeBoolValue()
+	{
+		_showFields = false;
 	}
 }
