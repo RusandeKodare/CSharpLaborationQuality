@@ -8,7 +8,6 @@ namespace BlazorClassLibrary
 {
 	public class Company
 	{
-
 		public string Name { get; set; } = "";
 		public string CatchPhrase { get; set; } = "";
 		public string BS { get; set; } = "";
@@ -19,9 +18,6 @@ namespace BlazorClassLibrary
 			CatchPhrase = catchPhrase;
 			BS = bs;
 		}
-		public Company()
-		{
-
-		}
+		public Company(){}
 	}
 }

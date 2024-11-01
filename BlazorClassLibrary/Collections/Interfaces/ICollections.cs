@@ -9,6 +9,5 @@ namespace BlazorClassLibrary.Collections.Interfaces
     public interface ICollections
     {
         public List<User> Users { get; set; }
-        public void AddUser(User user);
     }
 }

@@ -37,9 +37,6 @@ namespace BlazorClassLibrary
 			Address = address;
 			Company = company;
 		}
-		public User()
-		{
-
-		}
+		public User(){}
 	}
 }

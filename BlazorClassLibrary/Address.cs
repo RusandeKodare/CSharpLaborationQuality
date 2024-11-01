@@ -8,7 +8,6 @@ namespace BlazorClassLibrary
 {
 	public class Address
 	{
-
 		public string Street { get; set; } = "";
 		public string Suite { get; set; } = "";
 		public string City { get; set; } = "";
@@ -23,9 +22,6 @@ namespace BlazorClassLibrary
 			ZipCode = zipcode;
 			Geo = geo;
 		}
-		public Address()
-		{
-
-		}
+		public Address(){}
 	}
 }
