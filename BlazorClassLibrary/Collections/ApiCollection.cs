@@ -9,8 +9,8 @@ using BlazorClassLibrary.Collections.Interfaces;
 
 namespace BlazorClassLibrary.Collections
 {
-    public class ApiCollection : ICollections
-	{
+    public class ApiCollection : ICollections , IGetUsersAsync
+    {
 		public List<User> Users { get; set; } = [];
 		public HttpClient _httpClient = new();
 
@@ -23,12 +23,5 @@ namespace BlazorClassLibrary.Collections
 			}
 			return [];
 		}
-
-		public void AddUser(User user)
-		{
-			Users.Add(user);
-        }
-
-      
     }
 }

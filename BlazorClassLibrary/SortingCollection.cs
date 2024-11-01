@@ -76,8 +76,5 @@ namespace BlazorClassLibrary
 			users = users.OrderBy(user => user.Company.Name).ToList();
 			return users;
 		}
-
-
-
 	}
 }

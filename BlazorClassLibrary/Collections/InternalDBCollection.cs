@@ -20,9 +20,5 @@ namespace BlazorClassLibrary.Collections
 			Users = JsonSerializer.Deserialize<List<User>>(File.ReadAllText("Internal_Db_List.json")) ?? [];
 			return Users;
 		}
-		public void AddUser(User user)
-		{
-			Users.Add(user);
-		}
 	}
 }

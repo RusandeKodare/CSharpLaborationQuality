@@ -9,6 +9,5 @@ namespace BlazorClassLibrary.Collections.Interfaces
     internal interface IGetUsersAsync
     {
         public Task<List<User>> GetUsers();
-
     }
 }
