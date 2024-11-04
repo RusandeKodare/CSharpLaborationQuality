@@ -68,8 +68,6 @@
                        Users="@Users"
                        FilteredUsersChanged="(users) => FilteredUsers = users" />
 
-
-
 @if (_saveToList)
 {
     <button @onclick="SaveChanges" style="background-color: #007bff; color: white; border: none; padding: 10px 20px; cursor: pointer; transition: background-color 0.3s ease; font-weight: 500; border-radius: 5px;">Save changes</button>
@@ -90,7 +88,6 @@
     {
         <button  @onclick="ShowOnlyFiveUsers">Show only five users</button>
     }
-
 </div>
 
 @code {
@@ -125,28 +122,30 @@
         if (FilteredUsers.Count == Users.Count)
         {
             IfShowAllUsers = true;
-
         }
     }
 
     private void ShowAllUsers()
     {
         IfShowAllUsers = true;
-        var allUsers = Users.Count();
-        FilteredUsers = Users.Take(allUsers).ToList();
+        AmountOfUsers = Users.Count();
+        FilteredUsers = Users.Take(AmountOfUsers).ToList();
     }
+
     private void ShowOnlyFiveUsers()
     {
         FilteredUsers = Users.Take(5).ToList();
         IfShowAllUsers = false;
         AmountOfUsers = 5;
     }
+
     public void RemoveUser(User user)
     {
         FilteredUsers.Remove(user);
         UpdateIndexValueOfUser();
         _saveToList = true;
     }
+
     public async Task SaveChanges()
     {
         Serialize();
