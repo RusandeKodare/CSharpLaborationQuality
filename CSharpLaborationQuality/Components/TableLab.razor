@@ -6,7 +6,7 @@
 <table class="table table-hover">
     <thead class="thead-dark">
         <tr>
-            <th class="clickable-header" style="cursor: pointer; font-weight: 500;background-color:aliceblue; " @onclick="() => FilteredUsers = sortingCollection.SortByID(FilteredUsers)">
+            <th class="clickable-header" style="cursor: pointer; font-weight: 500; background-color: aliceblue; width: 100px;" @onclick="() => FilteredUsers = sortingCollection.SortByID(FilteredUsers)">
                 Id <img style="width: 20px; height: 20px; margin-left: 10px;" src="Images\ArrowUpAndDown.png" />
             </th>
             <th class="clickable-header" style="cursor: pointer; transition: background-color 0.3s ease; font-weight: 500;background-color: aliceblue; " @onclick="()=> FilteredUsers = sortingCollection.SortByName(FilteredUsers)">
@@ -143,14 +143,15 @@
 
     public void RemoveUser(User user)
     {
-        FilteredUsers.Remove(user);
+        Users.Remove(user);
+        FilteredUsers = Users.Take(5).ToList();
         UpdateIndexValueOfUser();
         _saveToList = true;
     }
 
     public async Task SaveChanges()
     {
-        Serialize();
+        SaveAsJson();
         _messageWhenSaved = "Changes saved!";
         await Task.Delay(2000);
         _messageWhenSaved = "";
@@ -158,7 +159,7 @@
         CheckIfListIsEmpty();
     }
 
-    public void Serialize()
+    public void SaveAsJson()
     {
         var json = JsonSerializer.Serialize<List<User>>(FilteredUsers);
         File.WriteAllText("List_Of_People_Save.json", json);
@@ -179,7 +180,8 @@
         if (FilteredUsers.Count <= 0)
         {
             FromSavedFile = false;
-            FilteredUsers.AddRange(collection.GetUsers());
+            Users= collection.GetUsers();
+            FilteredUsers = Users.Take(5).ToList();
         }
     }
 
