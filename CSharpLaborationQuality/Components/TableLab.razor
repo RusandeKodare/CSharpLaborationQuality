@@ -62,7 +62,8 @@
     </tbody>
 </table>
 
-<SearchInputAndMessage AmountOfUsers="AmountOfUsers"
+<SearchInputAndMessage SearchingChanged="(search)=> Searching = search "
+                       AmountOfUsers="AmountOfUsers"
                        SearchTermChanged="(term) => SearchTerm = term"
                        TextMessageChanged="(message) => TextMessage = message"
                        Users="@Users"
@@ -78,15 +79,15 @@
 <div class="button-container">
 
 
-    @if (!IfShowAllUsers)
+    @if (!IfShowAllUsers && !_saveToList && FilteredUsers.Count >= 5&&!Searching)
     {
-        <button  @onclick="IncreaseAmountOfUsers">Show five more users</button>
-        <button  @onclick="ShowAllUsers">Show all users</button>
+        <button @onclick="IncreaseAmountOfUsers">Show five more users</button>
+        <button @onclick="ShowAllUsers">Show all users</button>
     }
-    
-    @if (IfShowAllUsers||FilteredUsers.Count>5)
+
+    @if (IfShowAllUsers || FilteredUsers.Count > 5 && !Searching)
     {
-        <button  @onclick="ShowOnlyFiveUsers">Show only five users</button>
+        <button @onclick="ShowOnlyFiveUsers">Show only five users</button>
     }
 </div>
 
@@ -109,6 +110,7 @@
     private string _messageWhenSaved = "";
     public string? SearchTerm { get; set; } = String.Empty;
     public User? SpecificUser { get; set; } = new();
+    public bool Searching { get; set; }
 
     protected override void OnInitialized()
     {

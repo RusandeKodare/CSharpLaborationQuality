@@ -18,6 +18,9 @@
 	public EventCallback<List<User>> FilteredUsersChanged { get; set; }
 	[Parameter]
 	public int AmountOfUsers { get; set; }
+	[Parameter]
+	public EventCallback<bool> SearchingChanged { get; set; }
+	public bool Searching;
 
 	public string? SearchTerm;
 	public List<User>? FilteredUsers;
@@ -25,6 +28,8 @@
 
 	private void SearchForUser(ChangeEventArgs e)
 	{
+		Searching = true;
+		SearchingChanged.InvokeAsync(Searching);
 		SearchTerm = e.Value?.ToString() ?? "";
 		SearchTermChanged.InvokeAsync(SearchTerm);
 		if (!Users.Any())
@@ -34,6 +39,8 @@
 		}
 		else if (SearchTerm==string.Empty)
 		{
+			Searching = false;
+			SearchingChanged.InvokeAsync(Searching);
 			FilteredUsers = Users.Take(AmountOfUsers).ToList();
 			FilteredUsersChanged.InvokeAsync(FilteredUsers);
 			TextMessage = $"";
