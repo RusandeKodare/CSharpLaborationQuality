@@ -69,6 +69,25 @@
                            TextMessageChanged="(message) => TextMessage = message"
                            Users="@Users"
                            FilteredUsersChanged="(users) => FilteredUsers = users" />
+    @if (_saveToList)
+    {
+        <button @onclick="SaveChanges" style="background-color: #007bff; color: white; border: none; padding: 10px 20px; cursor: pointer; transition: background-color 0.3s ease; font-weight: 500; border-radius: 5px;">Save changes</button>
+        <span style="color: #007bff; font-weight: bold;">
+            @_messageWhenSaved
+        </span>
+    }
+    <div class="button-container">
+        @if (!IfShowAllUsers && !_saveToList && FilteredUsers.Count >= 5 && !Searching)
+        {
+            <button @onclick="IncreaseAmountOfUsers">Show five more users</button>
+            <button @onclick="ShowAllUsers">Show all users</button>
+        }
+
+        @if ((IfShowAllUsers || FilteredUsers.Count > 5) && !Searching && !IfRemoveUser)
+        {
+            <button @onclick="ShowOnlyFiveUsers">Show only five users</button>
+        }
+    </div>
 }
 @if (IfShowToDoList)
 {
@@ -80,25 +99,7 @@
 
 
 
-@if (_saveToList)
-{
-    <button @onclick="SaveChanges" style="background-color: #007bff; color: white; border: none; padding: 10px 20px; cursor: pointer; transition: background-color 0.3s ease; font-weight: 500; border-radius: 5px;">Save changes</button>
-    <span style="color: #007bff; font-weight: bold;">
-        @_messageWhenSaved
-    </span>
-}
-<div class="button-container">
-    @if (!IfShowAllUsers && !_saveToList && FilteredUsers.Count >= 5 && !Searching)
-    {
-        <button @onclick="IncreaseAmountOfUsers">Show five more users</button>
-        <button @onclick="ShowAllUsers">Show all users</button>
-    }
 
-    @if ((IfShowAllUsers || FilteredUsers.Count > 5) && !Searching && !IfRemoveUser)
-    {
-        <button @onclick="ShowOnlyFiveUsers">Show only five users</button>
-    }
-</div>
 
 @code {
 
