@@ -57,29 +57,73 @@
         }
     </div>
 </div>
-<br />
-<div style="padding-left:0rem;">
-    <button style="background-color: greenyellow; color:black; font-weight:bold;" class="btn btn-primary" @onclick="UpdateList">Save</button>
+<div class="border" style="padding: 20px; margin-top: 20px;">
+    <div style="display:flex; flex-direction: column;">
 
+        @foreach (var todo in FinishedItems)
+        {
+            <div style="display:flex; margin-bottom: 10px; font-weight:bold;">
+                <div style="display:flex; align-items: center; margin-bottom: 10px;">
+
+                    @if (SpecificItem == todo && IfEdit)
+                    {
+                        <div style="display: flex; align-items: center;">
+                            <EditForm Model="@SpecificItem" FormName="ToEditItem" OnSubmit="@ItemAdded" style="display: flex; align-items: center;">
+                                <InputText @bind-Value="SpecificItem.Text" class="form-control" style="margin-right: 10px; width: auto;" id="Item" />
+                                <button type="submit" class="btn btn-primary">Save</button>
+                            </EditForm>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="@ItemClass(todo)" style="width: 180px;">@todo.Text</div>
+                        @if (todo.Completed)
+                        {
+                            <div style=" width: 200px;">
+                                <button class="btn btn-primary" @onclick="@(() => IncompleteItem(todo))">I Regret My Decision</button>
+                            </div>
+                        }
+                        @if (!todo.Completed)
+                        {
+                            <div style=" width: 120px;">
+                                <button class="btn btn-primary" @onclick="@(() => CompleteItem(todo))">Complete</button>
+                            </div>
+                        }
+                        <div>
+                            <button class="btn btn-danger" @onclick="() => DeleteItem(todo)">Delete</button>
+                        </div>
+                    }
+                </div>
+            </div>
+        }
+    </div>
+</div>
+<br />
+<div>
+    <button style="background-color: greenyellow; color:black; font-weight:bold;" class="btn btn-primary" @onclick="UpdateList">Save</button>
+    <span style="margin:0.3rem;"></span>
 
     <button style="background-color: aqua; color:black; font-weight:bold; " class="btn btn-primary" @onclick="UpdatePage">Go back</button>
+    <span class="message-dark">@Message</span>
+
 </div>
-@Message
+
 
 @code {
     [Parameter]
-    public User SpecificUser { get; set; }
+    public User SpecificUser { get; set; } = new User();
     [Parameter]
     public List<User> Users { get; set; } = new();
     [Parameter]
     public EventCallback<bool> IfShowTodoListChanged { get; set; }
-    private TodoItem SpecificItem { get; set; }
+    private TodoItem SpecificItem { get; set; } = new TodoItem("");
     public bool IfShowTodoList;
     private bool IfEdit = false;
     private IList<TodoItem> Todos { get; set; } = new List<TodoItem>();
     private string Message = "";
     private TodoItem NewItem = new TodoItem("");
     public required Action OnItemAdded { get; set; }
+    private List<TodoItem> FinishedItems { get; set; } = new();
 
     public void ItemAdded()
     {
@@ -91,7 +135,7 @@
                 existingItem.Text = SpecificItem.Text;
             }
             IfEdit = false;
-            SpecificItem = null;
+            SpecificItem = new TodoItem("");
         }
         else
         {
@@ -112,7 +156,7 @@
     }
     private async Task UpdateList()
     {
-        Message = "Saved!";
+        Message = "Changes were saved!";
         var json = JsonSerializer.Serialize<List<User>>(Users,new JsonSerializerOptions{WriteIndented=true});
         File.WriteAllText("List_Of_People_Save.json", json);
         await Task.Delay(2000);
@@ -121,8 +165,8 @@
     }
     public void EditItem(TodoItem item)
     {
-        SpecificItem = item; // Set the clicked item as the current specific item.
-        IfEdit = true;       // Enable editing mode.
+        SpecificItem = item; 
+        IfEdit = true;  
     }
     public string ItemClass(TodoItem item)
     {
@@ -143,12 +187,17 @@
 
     public void CompleteItem(TodoItem item)
     {
+        SpecificUser.TodoService.TodoItems.Remove(item);
+        FinishedItems.Add(item);
         _todoService.Complete(item);
         ItemsChanged();
     }
 
     public void IncompleteItem(TodoItem item)
     {
+        FinishedItems.Remove(item);
+        SpecificUser.TodoService.TodoItems.Add(item);
+        
         _todoService.Incomplete(item);
         ItemsChanged();
     }

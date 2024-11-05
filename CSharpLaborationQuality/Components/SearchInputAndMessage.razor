@@ -59,16 +59,19 @@
 			FilteredUsersChanged.InvokeAsync(FilteredUsers);
 		}
 		
-
-		if (FilteredUsers.Count > 0)
+		if (FilteredUsers != null)
 		{
-			ListBiggerThanZero();
+			if (FilteredUsers.Count > 0)
+			{
+				ListBiggerThanZero();
+			}
+			else
+			{
+				TextMessage = $"No users found with the term '{SearchTerm}'";
+				TextMessageChanged.InvokeAsync(TextMessage);
+			}
 		}
-		else
-		{
-			TextMessage = $"No users found with the term '{SearchTerm}'";
-			TextMessageChanged.InvokeAsync(TextMessage);
-		}
+		
 
 	}
 	public void ListBiggerThanZero()
