@@ -3,7 +3,7 @@
 
 <PageTitle>Home</PageTitle>
 
-<div style="height: 94vh; background-image: url('Images/NatureBackGround.jpg'); background-size: cover; background-position: center; position: relative;">
+<div style="height: 95vh; background-image: url('Images/NatureBackGround.jpg'); background-size: cover; background-position: center; position: relative;">
     <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); text-align: center; animation: fadeInSlow 5s;">
         <h1 style="font-family: 'Georgia', serif; font-size: 6rem; margin: 0; color: #e0e0e0; -webkit-text-stroke: 2px #000000; text-shadow: 4px 4px 15px rgba(0, 0, 0, 1), -4px -4px 15px rgba(0, 0, 0, 1); animation: popOut 1s infinite alternate;">
             <span style="color: #ff6f00;">H</span>
@@ -18,22 +18,29 @@
             <span style="color: #2e7d32;">d</span>!
         </h1>
         <br /> <br /><br /> <br /> <br />
-        <div style="background-color: rgba(0, 0, 0, 0.7); border-radius: 10px; display: inline-block;">
-            <p style="font-family: Georgia, sans-serif; font-size: 2rem; margin-top: 10px; color: darkorange; font-weight:bold;">
+        <div style="background-color: rgba(0, 0, 0, 0.85); border-radius: 150px; padding: 30px; max-width: 100rem; margin: auto; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);">
+            <p style="font-family: 'Georgia', serif; font-size: 3rem; margin: 10px 0; color: darkorange; font-weight: bold; text-align: center;">
                 Welcome to my first website :D
             </p>
-            <br />
-            <p style="font-family: Georgia, sans-serif; font-size: 2rem; margin-top: 20px; color: lightgoldenrodyellow; font-weight:bold;">
-                In this website you can:  <br /> <br />* Create a new user that saves a list to a file <br /> * Fetch users from that file (if file != exists, fetch automatically from a different file) <br />* Fetch a list of users from an API  <br /> * Add items(tasks) to a Todo list
-            </p> <br /> <br />
-            <p style="font-family: Georgia, sans-serif; font-size: 2rem; margin-top: 20px; color: lightgoldenrodyellow; font-weight:bold;">
-                I am excited to share my journey of learning web development with you! Stay tuned for more updates and features.
+            <p style="font-family: 'Georgia', serif; font-size: 1.5rem; margin: 20px 0; color: lightgoldenrodyellow; font-weight: bold; line-height: 1.6;">
+                In this Blazor web-application, you can do the following:
+                <ul style="list-style-type: disc; margin-left: 20px; color: lightgoldenrodyellow;">
+                    <li>Create a new user that saves a list to a file</li>
+                    <li>Fetch users from that file (if file doesn't exist, automatically fetch from an existing user file)</li>
+                    <li>Fetch a list of users from an API</li>
+                    <li>Add items to a to-do list for a specific user</li>
+                </ul>
             </p>
-            <br />
-            <p style="font-family: Georgia, sans-serif; font-size: 2rem; margin-top: 20px; color: greenyellow; font-weight:bold;">
-                Press the button to start creating a user.
+            <p style="font-family: 'Georgia', serif; font-size: 1.5rem; margin: 20px 0; color: lightgoldenrodyellow; font-weight: bold; text-align: center;">
+                I am excited to share my journey of learning web development with you!
+                <br /><br />
+                Stay tuned for more updates and features!
+            </p>
+            <p style="font-family: 'Georgia', serif; font-size: 1.5rem; margin: 20px 0; color: greenyellow; font-weight: bold; text-align: center;">
+                Press the button to start creating a user!
             </p>
         </div>
+
 
         <NavLink href="/CreateNewUser" style="text-decoration: none;">
             <button style="background-color: #4caf50; color: white; border: none; padding: 10px 20px; font-size: 1.2rem; margin-top: 20px; cursor: pointer; transition: transform 0.2s, background-color 0.2s; border-radius: 5px; animation: popOut 1s infinite alternate;"

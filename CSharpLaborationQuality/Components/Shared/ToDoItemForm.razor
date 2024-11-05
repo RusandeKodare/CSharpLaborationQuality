@@ -25,7 +25,11 @@
     {  
         var newItem = new TodoItem(NewItem.Text);  
         NewItem.Text = "";
-        SpecificUser.TodoService.TodoItems.Add(newItem);
+        if (!string.IsNullOrEmpty(newItem.Text))
+        {
+            SpecificUser.TodoService.TodoItems.Add(newItem);
+        }
+       
 
        if (OnItemAdded != null)  
        {  

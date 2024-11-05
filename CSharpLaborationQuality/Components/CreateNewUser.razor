@@ -37,7 +37,7 @@
 			<InputText id="compyName" @bind-Value="@_user.Company.Name" class="form-control" />
 		</div><br />
 		<br />
-		<button style="background-color: yellowgreen; width: 8rem; height: 3rem; font-family: Georgia; font-weight: bold;
+		<button class="btn btn-primary" style="background-color: yellowgreen; color:black; width: 8rem; height: 3rem; font-family: Georgia; font-weight: bold;
     border: none; cursor: pointer; transition: transform 0.3s;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);"
 				onmouseover="this.style.transform='scale(1.1)';"
@@ -50,6 +50,9 @@
 else
 {
 	<p style="font-family: Georgia"> @_submitMessage</p>
+	<p>Is there anything you would like to change?</p>
+	<button>Change</button>
+	<button>Save</button>
 	@_counter
 }
 
@@ -77,9 +80,9 @@ else
 		_user = new User();
 
 
-		for (int i = 4; i > 0; i--)
+		for (int i = 999; i > 0; i--)
 		{
-            _counter = (MarkupString)$"<div style=\"font-family: 'Georgia', Courier, monospace; color: darkblue; font-size: 1.6rem; transition: transform 0.3s; font-weight:bold;\" onmouseover=\"this.style.transform='scale(1.1)';\" onmouseout=\"this.style.transform='scale(1)';\">Coming back to start in: {i - 1}</div>";
+            _counter = (MarkupString)$"<div style=\"font-family: 'Georgia', Courier, monospace; color: black; font-size: 1.6rem; font-weight:bold;\">Coming back to start in: {i - 1}</div>";
 
 			await Task.Delay(700);
 			StateHasChanged();
