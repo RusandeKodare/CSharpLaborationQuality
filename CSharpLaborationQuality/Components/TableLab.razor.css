@@ -1,2 +1,45 @@
-﻿body {
+﻿.button-container {
+    display: flex;
+    gap: 0.4rem;
 }
+
+.button-container>* {
+    padding: 10px 20px;
+    font-size: 13px;
+    font-weight: bold;
+    color: #fff;
+    background: linear-gradient(135deg, #6200ea, #03dac5);
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+    outline: none;
+    position: relative;
+    overflow: hidden;
+}
+
+    .button-container > *::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -75%;
+        width: 150%;
+        height: 100%;
+        background: rgba(255, 255, 255, 0.15);
+        transform: skewX(-45deg);
+        transition: left 0.5s;
+    }
+
+    .button-container > *:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 8px 15px rgba(98, 0, 234, 0.3);
+    }
+
+        .button-container > *:hover::after {
+            left: 100%;
+        }
+
+    .button-container > *:active {
+        transform: translateY(1px);
+        box-shadow: 0 5px 10px rgba(98, 0, 234, 0.2);
+    }

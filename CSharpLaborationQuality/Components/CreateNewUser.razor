@@ -60,7 +60,7 @@ else
 	private MarkupString _submitMessage;
 	private List<User> _users = new List<User>();
 	private bool _showFields = true;
-	private string _counter = "";
+	private MarkupString _counter;
 
 	protected override void OnInitialized()
 	{
@@ -77,10 +77,11 @@ else
 		_user = new User();
 
 
-		for (int i = 6; i > 0; i--)
+		for (int i = 4; i > 0; i--)
 		{
-			_counter = $"Coming back to start in: {i - 1}";
-			await Task.Delay(800);
+            _counter = (MarkupString)$"<div style=\"font-family: 'Georgia', Courier, monospace; color: darkblue; font-size: 1.6rem; transition: transform 0.3s; font-weight:bold;\" onmouseover=\"this.style.transform='scale(1.1)';\" onmouseout=\"this.style.transform='scale(1)';\">Coming back to start in: {i - 1}</div>";
+
+			await Task.Delay(700);
 			StateHasChanged();
 		}
 		_showFields = true;

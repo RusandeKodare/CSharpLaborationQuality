@@ -7,15 +7,18 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Components\Table\**" />
+    <Content Remove="Components\Table\**" />
+    <EmbeddedResource Remove="Components\Table\**" />
+    <None Remove="Components\Table\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Include="wwwroot\Images\ArrowUpAndDown.png" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\BlazorClassLibrary\BlazorClassLibrary.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Components\Table\" />
   </ItemGroup>
 
 </Project>

@@ -1,0 +1,25 @@
+﻿.countdown-text {
+    font-weight: bold;
+    font-size: 24px;
+    background: linear-gradient(90deg, #ff6f61, #6200ea);
+    -webkit-text-fill-color: transparent;
+    animation: pulse 1.5s infinite;
+    display: inline-block;
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+        text-shadow: 0 0 5px rgba(255, 111, 97, 0.7), 0 0 10px rgba(98, 0, 234, 0.5);
+    }
+
+    50% {
+        transform: scale(1.05);
+        text-shadow: 0 0 10px rgba(255, 111, 97, 0.7), 0 0 15px rgba(98, 0, 234, 0.5);
+    }
+
+    100% {
+        transform: scale(1);
+        text-shadow: 0 0 5px rgba(255, 111, 97, 0.7), 0 0 10px rgba(98, 0, 234, 0.5);
+    }
+}

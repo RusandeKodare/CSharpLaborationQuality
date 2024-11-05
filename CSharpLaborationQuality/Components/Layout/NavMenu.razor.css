@@ -47,6 +47,7 @@
 }
 
 .nav-item {
+    
     font-size: 0.9rem;
     padding-bottom: 0.5rem;
 }
@@ -99,4 +100,20 @@
         height: calc(100vh - 3.5rem);
         overflow-y: auto;
     }
+}
+
+.nav-link {
+    display: flex;
+    flex-direction: row;
+    gap: 0.5rem;
+    justify-content: center;
+    align-content: center;
+    background-color: red;
+    border: 2px solid yellow;
+}
+.nav-link>img {
+   
+    width: 50px; /* Adjust the width as needed */
+    height: 10px; /* Maintain aspect ratio */
+    background-color:yellow;
 }
