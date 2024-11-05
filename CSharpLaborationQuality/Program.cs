@@ -1,5 +1,5 @@
 using CSharpLaborationQuality.Components;
-using CSharpLaborationQuality.Components.Services;
+using BlazorClassLibrary.Services;
 
 namespace CSharpLaborationQuality
 {

@@ -53,8 +53,12 @@
 	}
 	public void FoundUser()
 	{
-		FilteredUsers = Users.Where(item => item.Name.Contains(SearchTerm, StringComparison.OrdinalIgnoreCase)).ToList();
-		FilteredUsersChanged.InvokeAsync(FilteredUsers);
+		if (!string.IsNullOrEmpty(SearchTerm))
+		{
+			FilteredUsers = Users.Where(item => item.Name.Contains(SearchTerm, StringComparison.OrdinalIgnoreCase)).ToList();
+			FilteredUsersChanged.InvokeAsync(FilteredUsers);
+		}
+		
 
 		if (FilteredUsers.Count > 0)
 		{

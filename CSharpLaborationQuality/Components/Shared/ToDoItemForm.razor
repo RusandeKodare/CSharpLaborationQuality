@@ -1,4 +1,5 @@
-﻿@using CSharpLaborationQuality.Components.Services;  
+﻿@using BlazorClassLibrary.Services;
+@using BlazorClassLibrary;
 @inject ITodoService _todoService;  
 
 <EditForm Model="@NewItem" FormName="ToAddNewItem" OnSubmit="@ItemAdded">  
@@ -10,9 +11,12 @@
    </div>  
 </EditForm>  
 
-@code {  
-   [Parameter]  
-   public required Action OnItemAdded { get; set; }  
+@code {
+    [Parameter]  
+    public required Action OnItemAdded { get; set; }
+    [Parameter]
+    public User SpecificUser { get; set; } = new User();
+    
 
    private TodoItem NewItem = new TodoItem("");  
 

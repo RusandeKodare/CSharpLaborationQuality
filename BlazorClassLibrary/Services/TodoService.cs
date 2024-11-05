@@ -1,30 +1,31 @@
 ﻿using BlazorClassLibrary;
 
-namespace CSharpLaborationQuality.Components.Services
+namespace BlazorClassLibrary.Services
 {
     public class TodoService : ITodoService
     {
-
-        private readonly IList<TodoItem> _todoItems;
+        public IList<TodoItem> TodoItems;
 
         public TodoService()
         {
-            _todoItems = new List<TodoItem>
+            TodoItems = new List<TodoItem>
             {
                 new TodoItem("Learn C#"),
                 new TodoItem("Learn Blazor"),
                 new TodoItem("Learn ASP.NET Core")
             };
         }
-        
         public void Add(TodoItem item)
         {
-            _todoItems.Add(item);
+            if (!string.IsNullOrEmpty(item.Text))
+            {
+                TodoItems.Add(item);
+            }
         }
 
         public void Delete(TodoItem item)
         {
-            _todoItems.Remove(item);
+            TodoItems.Remove(item);
         }
 
         public IEnumerable<TodoItem> GetAll()

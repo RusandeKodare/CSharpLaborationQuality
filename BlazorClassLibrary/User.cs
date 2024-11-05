@@ -5,7 +5,7 @@ using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations;
-
+using BlazorClassLibrary.Services;
 namespace BlazorClassLibrary
 {
 	public class User
@@ -25,7 +25,8 @@ namespace BlazorClassLibrary
 		public string Website { get; set; } = "";
 		public Address Address { get; set; } = new Address();
 		public Company Company { get; set; } = new Company();
-		public User(int id, string name, int age, string userName, string email, string phone, string website, Address address, Company company)
+		public TodoService TodoService { get; set; } = new();
+		public User(int id, string name, int age, string userName, string email, string phone, string website, Address address, Company company, TodoService todoService)
 		{
 			Id = id;
 			Name = name;
@@ -36,6 +37,7 @@ namespace BlazorClassLibrary
 			Website = website;
 			Address = address;
 			Company = company;
+			TodoService = todoService;
 		}
 		public User(){}
 	}

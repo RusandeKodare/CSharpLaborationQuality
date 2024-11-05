@@ -1,4 +1,4 @@
-﻿namespace CSharpLaborationQuality.Components.Services
+﻿namespace BlazorClassLibrary.Services
 {
     public interface ITodoService
     {
@@ -11,6 +11,5 @@
         public void Complete(TodoItem item);
 
         public void Incomplete(TodoItem item);
-
     }
 }

@@ -1,11 +1,12 @@
 ﻿@using BlazorClassLibrary
+@using BlazorClassLibrary.Services
 @using BlazorClassLibrary.Collections
 
 <UserInfoForSpecificUser_razor ParamInfos="paramInfos" SpecificUser="SpecificUser"/>
 @code {
-	[Parameter]
-	public User SpecificUser { get; set; } = new User();
-	public Dictionary<string, object> paramInfos = new Dictionary<string, object>();
+    [Parameter]
+    public User SpecificUser { get; set; } = new User();
+    public Dictionary<string, object> paramInfos = new Dictionary<string, object>();
 
     protected override void OnInitialized()
     {

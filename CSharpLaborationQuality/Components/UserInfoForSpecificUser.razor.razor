@@ -12,6 +12,30 @@
         }
 
     }
+    @* <NavLink href="/ToDoList" style="text-decoration: none;"> *@
+   <button @onclick="ShowUsersTodoList" style="background: linear-gradient(45deg, #333333, #444444, #555555, #666666, #777777, #888888, #999999, #aaaaaa, #bbbbbb, #cccccc, #dddddd, #eeeeee); 
+                   border: none; 
+                   border-radius: 12px; 
+                   color: white; 
+                   padding: 10px 20px; 
+                   font-size: 0.8rem; 
+                   font-family: 'Arial', sans-serif; 
+                   font-weight: bold; 
+                   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); 
+                   transition: transform 0.2s, box-shadow 0.2s;"
+           onmouseover="this.style.transform='scale(1.1)'; this.style.boxShadow='0 6px 8px rgba(0, 0, 0, 0.2)';"
+           onmouseout="this.style.transform='scale(1)'; this.style.boxShadow='0 4px 6px rgba(0, 0, 0, 0.1)';">
+       Your todo list
+   </button>
+   @*  </NavLink> *@
+
+   @if (ShowTodoItems)
+    {
+        <div style="display: fixed; width: 99rem; height: 99rem; background-color:yellow;">
+           <TodoList SpecificUser="SpecificUser"/>
+        </div>
+       
+    }
 }
 
 @code {

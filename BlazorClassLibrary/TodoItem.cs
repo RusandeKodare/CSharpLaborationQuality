@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 
-namespace CSharpLaborationQuality
+namespace BlazorClassLibrary
 {
     public class TodoItem
     {
