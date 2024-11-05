@@ -22,7 +22,6 @@ namespace BlazorClassLibrary.Services
                 TodoItems.Add(item);
             }
         }
-
         public void Delete(TodoItem item)
         {
             TodoItems.Remove(item);
@@ -30,7 +29,7 @@ namespace BlazorClassLibrary.Services
 
         public IEnumerable<TodoItem> GetAll()
         {
-            return _todoItems.ToList();
+            return TodoItems.ToList();
         }
 
         public void Complete(TodoItem item)

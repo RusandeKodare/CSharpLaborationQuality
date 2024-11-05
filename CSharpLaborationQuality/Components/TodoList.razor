@@ -1,7 +1,9 @@
 ﻿@using BlazorClassLibrary
+@using BlazorClassLibrary.Collections
 @using BlazorClassLibrary.Services
 @inject ITodoService _todoService
 @using CSharpLaborationQuality.Components.Shared
+@using System.Text.Json
 @rendermode InteractiveServer
 
 <h3>TodoList for @SpecificUser.Name</h3>
@@ -20,7 +22,7 @@
                 <div style="display:flex; align-items: center; margin-bottom: 10px;">
                     <div class="@ItemClass(todo)" style="width: 280px;">@todo.Text</div>
                 </div>
-
+                
                 @if (todo.Completed)
                 {
                     <div style=" width: 120px;">
@@ -41,15 +43,42 @@
     </div>
 </div>
 
+<button @onclick="UpdateList">Save</button>
+
+
+<button @onclick="UpdatePage">Back</button>
+
+@Message
+
 @code {
     [Parameter]
     public User SpecificUser { get; set; }
+    [Parameter]
+    public List<User> Users { get; set; } = new();
+    [Parameter]
+    public EventCallback<bool> IfShowTodoListChanged { get; set; }
+    public bool IfShowTodoList;
 
     private IList<TodoItem> Todos { get; set; } = new List<TodoItem>();
+    private string Message = "";
 
     protected override void OnInitialized()
     {
         Todos = _todoService.GetAll().ToList();
+    }
+    private void UpdatePage()
+    {
+        IfShowTodoList = false;
+        IfShowTodoListChanged.InvokeAsync(IfShowTodoList);
+    }
+    private async Task UpdateList()
+    {
+        Message = "Saved!";
+        var json = JsonSerializer.Serialize<List<User>>(Users,new JsonSerializerOptions{WriteIndented=true});
+        File.WriteAllText("List_Of_People_Save.json", json);
+        await Task.Delay(2000);
+        Message = string.Empty;
+        StateHasChanged();
     }
 
     public string ItemClass(TodoItem item)

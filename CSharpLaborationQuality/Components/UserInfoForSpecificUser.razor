@@ -2,12 +2,17 @@
 @using BlazorClassLibrary.Services
 @using BlazorClassLibrary.Collections
 
-<UserInfoForSpecificUser_razor ParamInfos="paramInfos" SpecificUser="SpecificUser"/>
+<UserInfoForSpecificUser_razor IfShowToDoListChanged="HandleToDoListToggle" ParamInfos="paramInfos" SpecificUser="SpecificUser"/>
 @code {
     [Parameter]
     public User SpecificUser { get; set; } = new User();
+    [Parameter]
+    public EventCallback<bool> IfShowToDoListChanged { get; set; }
     public Dictionary<string, object> paramInfos = new Dictionary<string, object>();
-
+    private async Task HandleToDoListToggle(bool showToDoList)
+    {
+        await IfShowToDoListChanged.InvokeAsync(showToDoList);
+    }
     protected override void OnInitialized()
     {
         paramInfos = new Dictionary<string, object>

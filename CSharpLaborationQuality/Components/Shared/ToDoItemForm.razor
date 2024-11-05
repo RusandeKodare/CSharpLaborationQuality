@@ -1,6 +1,7 @@
 ﻿@using BlazorClassLibrary.Services;
 @using BlazorClassLibrary;
 @inject ITodoService _todoService;  
+@rendermode InteractiveServer
 
 <EditForm Model="@NewItem" FormName="ToAddNewItem" OnSubmit="@ItemAdded">  
    <div style="display: flex; align-items: center; width: 400px;">  

@@ -5,7 +5,7 @@
 @rendermode InteractiveServer
 
 
-@page "/ToDoList"
+@page "/ToDoList/{userId}"
 
 
 
@@ -45,11 +45,19 @@
 </div>
 
 @code {
+    [Parameter]
+    public string? UserId { get; set; }
+    
     private IList<TodoItem> Todos { get; set; } = new List<TodoItem>();
+
 
     protected override void OnInitialized()
     {
-        Todos = _todoService.GetAll().ToList();
+        if (UserId != null)
+        {
+            Todos = _todoService.GetAll().ToList();
+        }
+        
     }
 
     public string ItemClass(TodoItem item)
