@@ -6,12 +6,10 @@
 @using System.Text.Json
 @rendermode InteractiveServer
 
-<h3>TodoList for @SpecificUser.Name</h3>
-
+<h3 class="animated-header">To do list for @SpecificUser.Name</h3>
 <div class="border" style="padding: 20px;">
     <h4>New Item</h4>
-    <ToDoItemForm SpecificUser="SpecificUser" OnItemAdded="@ItemsChanged" />
-
+    <ToDoItemForm SpecificUser="SpecificUser" OnItemAdded="@ItemsChanged"/>
 </div>
 
 <div class="border" style="padding: 20px; margin-top: 20px;">
@@ -42,7 +40,7 @@
         }
     </div>
 </div>
-
+<br />
 <button @onclick="UpdateList">Save</button>
 
 

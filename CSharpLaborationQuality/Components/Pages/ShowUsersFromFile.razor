@@ -9,7 +9,7 @@
     public List<User> FilteredUsers = new List<User>();
     UserCollection userCollection = new UserCollection();
     InternalDBCollection internalDBCollection = new InternalDBCollection();
-    public bool FromSavedFile = false;
+    public bool FromSavedFile = true;
 
     protected override async void OnInitialized()
     {
@@ -24,7 +24,8 @@
         else
         {
             FromSavedFile = true;
+            FilteredUsers.AddRange(Users);
         }
-        FilteredUsers.AddRange(Users);
+        
     }
 }

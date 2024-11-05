@@ -12,8 +12,9 @@
         }
 
     }
-    @* <NavLink href="/ToDoList/@SpecificUser.Id" style="text-decoration: none;">  *@
-    <button @onclick="ShowUsersTodoList" style="background: linear-gradient(45deg, #333333, #444444, #555555, #666666, #777777, #888888, #999999, #aaaaaa, #bbbbbb, #cccccc, #dddddd, #eeeeee);
+    @if(!FromApi&&FromSavedFile)
+    {
+        <button @onclick="ShowUsersTodoList" style="background: linear-gradient(45deg, #333333, #444444, #555555, #666666, #777777, #888888, #999999, #aaaaaa, #bbbbbb, #cccccc, #dddddd, #eeeeee);
                    border: none;
                    border-radius: 12px;
                    color: white;
@@ -23,13 +24,11 @@
                    font-weight: bold;
                    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
                    transition: transform 0.2s, box-shadow 0.2s;"
-            onmouseover="this.style.transform='scale(1.1)'; this.style.boxShadow='0 6px 8px rgba(0, 0, 0, 0.2)';"
-            onmouseout="this.style.transform='scale(1)'; this.style.boxShadow='0 4px 6px rgba(0, 0, 0, 0.1)';">
-        Your todo list
-    </button>
-  @*  </NavLink> *@
-
-    
+                onmouseover="this.style.transform='scale(1.1)'; this.style.boxShadow='0 6px 8px rgba(0, 0, 0, 0.2)';"
+                onmouseout="this.style.transform='scale(1)'; this.style.boxShadow='0 4px 6px rgba(0, 0, 0, 0.1)';">
+            Your todo list
+        </button>
+    } 
 }
 
 @code {
@@ -40,6 +39,10 @@
     public Dictionary<string, object> ParamInfos { get; set; } = new();
     [Parameter]
     public EventCallback<bool> IfShowToDoListChanged { get; set; }
+    [Parameter]
+    public bool FromApi { get; set; }
+    [Parameter]
+    public bool FromSavedFile { get; set; }
     public bool ShowTodoItems = false;
     public void ShowUsersTodoList()
     {

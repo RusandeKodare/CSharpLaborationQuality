@@ -1,0 +1,39 @@
+﻿.animated-header {
+    font-family: 'Georgia', serif;
+    font-size: 3rem;
+    font-weight: bold;
+    background: linear-gradient(90deg, purple, pink, blue, yellow);
+    -webkit-background-clip: text;
+    color: transparent;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    animation: fadeIn 1s ease-in-out, gradientShift 5s ease infinite;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 2;
+    }
+}
+
+@keyframes gradientShift {
+    0% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+.animated-header {
+    background-size: 200% 200%;
+}
+

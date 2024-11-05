@@ -2,13 +2,18 @@
 @using BlazorClassLibrary.Services
 @using BlazorClassLibrary.Collections
 
-<UserInfoForSpecificUser_razor IfShowToDoListChanged="HandleToDoListToggle" ParamInfos="paramInfos" SpecificUser="SpecificUser"/>
+<UserInfoForSpecificUser_razor FromSavedFile="FromSavedFile" FromApi="FromApi" IfShowToDoListChanged="HandleToDoListToggle" ParamInfos="paramInfos" SpecificUser="SpecificUser"/>
 @code {
     [Parameter]
     public User SpecificUser { get; set; } = new User();
     [Parameter]
     public EventCallback<bool> IfShowToDoListChanged { get; set; }
+    [Parameter]
+    public bool FromApi { get; set; }
+    [Parameter]
+    public bool FromSavedFile { get; set; }
     public Dictionary<string, object> paramInfos = new Dictionary<string, object>();
+
     private async Task HandleToDoListToggle(bool showToDoList)
     {
         await IfShowToDoListChanged.InvokeAsync(showToDoList);

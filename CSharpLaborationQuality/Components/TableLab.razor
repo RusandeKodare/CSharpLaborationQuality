@@ -54,7 +54,7 @@
                     <tr>
                         <td colspan="6">
                             <div style="background-color: #f8f9fa; padding: 10px; border: 1px solid #ddd;">
-                                <UserInfoForSpecificUser IfShowToDoListChanged="(show)=>IfShowToDoList = show" SpecificUser="@SpecificUser" />
+                                <UserInfoForSpecificUser FromSavedFile="FromSavedFile" FromApi="FromApi" IfShowToDoListChanged="(show)=>IfShowToDoList = show" SpecificUser="@SpecificUser" />
                             </div>
                         </td>
                     </tr>
@@ -109,6 +109,8 @@
     public List<User> FilteredUsers { get; set; } = new List<User>();
     [Parameter]
     public List<User> Users { get; set; } = new();
+    [Parameter]
+    public bool FromApi { get; set; }
 
     SortingCollection sortingCollection = new SortingCollection();
     private bool _saveToList = false;
