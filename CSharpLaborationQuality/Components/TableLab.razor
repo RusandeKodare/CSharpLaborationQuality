@@ -85,7 +85,7 @@
         <button @onclick="ShowAllUsers">Show all users</button>
     }
 
-    @if (IfShowAllUsers || FilteredUsers.Count > 5 && !Searching)
+    @if ((IfShowAllUsers || FilteredUsers.Count > 5) && !Searching && !IfRemoveUser)
     {
         <button @onclick="ShowOnlyFiveUsers">Show only five users</button>
     }
@@ -111,6 +111,7 @@
     public string? SearchTerm { get; set; } = String.Empty;
     public User? SpecificUser { get; set; } = new();
     public bool Searching { get; set; }
+    private bool IfRemoveUser;
 
     protected override void OnInitialized()
     {
@@ -143,10 +144,12 @@
 
     public void RemoveUser(User user)
     {
+        IfRemoveUser = true;
         Users.Remove(user);
-        FilteredUsers = Users.Take(5).ToList();
+        FilteredUsers = Users.Take(AmountOfUsers).ToList();
         UpdateIndexValueOfUser();
         _saveToList = true;
+        
     }
 
     public async Task SaveChanges()
@@ -157,6 +160,7 @@
         _messageWhenSaved = "";
         _saveToList = false;
         CheckIfListIsEmpty();
+        IfRemoveUser = false;
     }
 
     public void SaveAsJson()
