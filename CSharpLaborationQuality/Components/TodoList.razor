@@ -94,7 +94,7 @@
 
     public void DeleteItem(TodoItem item)
     {
-        _todoService.Delete(item);
+        SpecificUser.TodoService.TodoItems.Remove(item);
         ItemsChanged();
     }
 

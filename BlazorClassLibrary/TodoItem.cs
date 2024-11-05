@@ -11,7 +11,7 @@ namespace BlazorClassLibrary
     {
 
         public string Text { get; set; }
-        public bool Completed { get; set; }
+        public bool Completed { get; set; } = false;
 
         public TodoItem(string text)
         {

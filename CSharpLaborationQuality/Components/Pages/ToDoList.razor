@@ -1,4 +1,4 @@
-﻿@using BlazorClassLibrary.Services
+﻿@* @using BlazorClassLibrary.Services
 @using BlazorClassLibrary
 @inject ITodoService _todoService
 @using CSharpLaborationQuality.Components.Shared
@@ -55,7 +55,7 @@
     {
         if (UserId != null)
         {
-            Todos = _todoService.GetAll().ToList();
+            Todos = UserId.GetAll().ToList();
         }
         
     }
@@ -89,3 +89,4 @@
         ItemsChanged();
     }
 }
+ *@

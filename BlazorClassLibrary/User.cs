@@ -38,7 +38,7 @@ namespace BlazorClassLibrary
 			Address = address;
 			Company = company;
 			TodoService = todoService;
-		}
+        }
 		public User(){}
 	}
 }

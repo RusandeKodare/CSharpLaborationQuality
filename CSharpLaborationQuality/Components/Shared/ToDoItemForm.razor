@@ -17,15 +17,15 @@
     public required Action OnItemAdded { get; set; }
     [Parameter]
     public User SpecificUser { get; set; } = new User();
-    
 
-   private TodoItem NewItem = new TodoItem("");  
 
-   public void ItemAdded()  
-   {  
-       var newItem = new TodoItem(NewItem.Text);  
-       NewItem.Text = "";  
-       _todoService.Add(newItem);  
+    private TodoItem NewItem = new TodoItem("");  
+
+    public void ItemAdded()  
+    {  
+        var newItem = new TodoItem(NewItem.Text);  
+        NewItem.Text = "";
+        SpecificUser.TodoService.TodoItems.Add(newItem);
 
        if (OnItemAdded != null)  
        {  

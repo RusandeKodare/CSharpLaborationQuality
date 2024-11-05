@@ -4,16 +4,11 @@ namespace BlazorClassLibrary.Services
 {
     public class TodoService : ITodoService
     {
-        public IList<TodoItem> TodoItems;
+        public List<TodoItem> TodoItems { get; set; } = new(); 
 
         public TodoService()
         {
-            TodoItems = new List<TodoItem>
-            {
-                new TodoItem("Learn C#"),
-                new TodoItem("Learn Blazor"),
-                new TodoItem("Learn ASP.NET Core")
-            };
+           TodoItems = new();
         }
         public void Add(TodoItem item)
         {
