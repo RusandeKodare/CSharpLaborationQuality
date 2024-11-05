@@ -1,1 +1,34 @@
-[]
+[
+  {
+    "Id": 1,
+    "Name": "Oscar",
+    "Age": 33,
+    "UserName": "Orrelion",
+    "Email": "Oscar.Johansson@hotmail.com",
+    "Phone": "",
+    "Website": "",
+    "Address": {
+      "Street": "",
+      "Suite": "",
+      "City": "Stockholm",
+      "ZipCode": "",
+      "Geo": {
+        "Lat": "",
+        "Lng": ""
+      }
+    },
+    "Company": {
+      "Name": "ITHS",
+      "CatchPhrase": "",
+      "BS": ""
+    },
+    "TodoService": {
+      "TodoItems": [
+        {
+          "Text": "K\u00F6pa havremj\u00F6lk",
+          "Completed": false
+        }
+      ]
+    }
+  }
+]

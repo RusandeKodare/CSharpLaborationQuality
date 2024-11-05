@@ -72,6 +72,7 @@
     @if (_saveToList)
     {
         <button @onclick="SaveChanges" style="background-color: #007bff; color: white; border: none; padding: 10px 20px; cursor: pointer; transition: background-color 0.3s ease; font-weight: 500; border-radius: 5px;">Save changes</button>
+        <button @onclick="GoBack" style="background-color: #007bff; color: white; border: none; padding: 10px 20px; cursor: pointer; transition: background-color 0.3s ease; font-weight: 500; border-radius: 5px;">Discard changes</button>
         <span style="color: #007bff; font-weight: bold;">
             @_messageWhenSaved
         </span>
@@ -126,6 +127,7 @@
     private bool IfRemoveUser;
     public bool IfShowToDoList = false;
 
+
     protected override void OnInitialized()
     {
         FilteredUsers = Users.Take(AmountOfUsers).ToList();
@@ -158,8 +160,8 @@
     public void RemoveUser(User user)
     {
         IfRemoveUser = true;
-        Users.Remove(user);
-        FilteredUsers = Users.Take(AmountOfUsers).ToList();
+        FilteredUsers.Remove(user);
+        // FilteredUsers = Users.Take(AmountOfUsers).ToList();
         UpdateIndexValueOfUser();
         _saveToList = true;
 
@@ -174,6 +176,12 @@
         _saveToList = false;
         CheckIfListIsEmpty();
         IfRemoveUser = false;
+    }
+
+    public void GoBack()
+    {
+        FilteredUsers = Users.Take(AmountOfUsers).ToList();
+        _saveToList = false ;
     }
 
     public void SaveAsJson()
