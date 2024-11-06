@@ -162,8 +162,8 @@
     public void RemoveUser(User user)
     {
         IfRemoveUser = true;
-        FilteredUsers.Remove(user);
-
+        Users.Remove(user);
+        FilteredUsers = Users.Take(AmountOfUsers).ToList();
         // FilteredUsers = Users.Take(AmountOfUsers).ToList();
         UpdateIndexValueOfUsers();
         _saveToList = true;
@@ -190,14 +190,14 @@
 
     public void SaveAsJson()
     {
-        var json = JsonSerializer.Serialize<List<User>>(FilteredUsers);
+        var json = JsonSerializer.Serialize<List<User>>(Users);
         File.WriteAllText("List_Of_People_Save.json", json);
     }
 
     public void UpdateIndexValueOfUsers()
     {
         int count = 1;
-        foreach (var item in FilteredUsers)
+        foreach (var item in Users)
         {
             item.Id = count;
             count++;
