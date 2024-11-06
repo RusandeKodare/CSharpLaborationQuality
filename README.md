@@ -17,7 +17,7 @@ This Blazor web application allows users to create new profiles with personal in
     - If there are no new users, the app loads a default list of Disney character users (from a file).
     - The table features:
         - **Plus (+) Button**: View additional information about a user.
-        - **Minus (-) Button**: Delete a user from the list.
+        - **Minus (-) Button**: Delete a user from the list (only created users).
 
 3. **To-Do List**:
     - Users can add tasks to their To-Do list.
@@ -32,7 +32,6 @@ This Blazor web application allows users to create new profiles with personal in
   
 6. **API Integration**:
     - Users have the option to populate the list from an external API, which provides dynamic user data.
-    - The users are displayed in a table with the option to view additional details or delete the user.
 
 ### Technologies Used:
 - **Blazor** for building the interactive web app with C#.
@@ -41,8 +40,10 @@ This Blazor web application allows users to create new profiles with personal in
 - **API Integration** for dynamically populating the user list.
 
 ### Components Used:
-- **Child Components**: Various child components were created to manage different parts of the application (e.g., User Form, To-Do List, User Table).
+- **Parent and Child Components**: The application utilizes both parent and child components to organize functionality. Parent components manage child components, like the User Management Page or To-Do List Page, while child components handle individual tasks such as displaying the user form, showing the to-do list, and presenting user details in a table.
 - **EventCallback**: Used for communication between parent and child components, allowing for dynamic updates and interaction.
+- **Validation**: Form validation ensures that all required fields are filled, and the email format is correct before submitting user data.
+- **Routing**: Blazor's routing system is used to navigate between pages, enabling users to seamlessly move between different sections of the app (e.g., Create User, View Users).
 
 ## How it Works
 
@@ -54,21 +55,21 @@ This Blazor web application allows users to create new profiles with personal in
 2. **View and Manage Users**:
     - Users are displayed in a table, showing their basic information.
     - Clicking the **plus (+)** icon shows additional details about a user.
-    - Users can be deleted by clicking the **minus (-)** icon next to their name.
+    - Users can be deleted by clicking the **minus (-)** icon next to their name (only created users).
 
 3. **To-Do List**:
     - Users can manage their To-Do list by adding new tasks. The tasks are saved and persist across page reloads.
-    - To add a new item, users simply enter the task and click **Save**.
-
+    - To add a new item, navigate to the table where the specific user is and click the plus sign. This will open up additional information about the suer. You will then be able to see the Todo-list button.
+    - 
 4. **Edit User**:
-    - Users can edit their personal details by clicking the **Edit** button next to their profile.
+    - Users can edit their personal details by clicking the **Edit** button next to their profile (only created users).
     - This brings up a form where they can modify fields like name, age, email, city, etc.
 
 5. **Music Player**:
     - A song is embedded and plays continuously on the website, regardless of which page the user navigates to.
 
 6. **API Integration**:
-    - The **Fetch Users** button allows users to fetch dynamic user data from an external API.
+    - The **Fetch Users** page allows users to fetch dynamic user data from an external API.
     - This populates the user table with fresh data and allows the user to interact with it.
 
 ## How to Use:
@@ -109,3 +110,8 @@ Ensure the following are installed:
 - **Edit a User**: Click the **Edit** button next to a user's profile to modify their details.
 - **Manage To-Do List**: Add and save tasks to your To-Do list. It will persist even after page reloads.
 - **Play Music**: Enjoy the background music that plays across the website.
+
+### Further improvements:
+-Using an API to store all new users.
+-Let the user create an account and log into the website with their credentials
+-Adding the option to change, play and stop the song
