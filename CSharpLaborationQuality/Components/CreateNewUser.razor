@@ -50,9 +50,9 @@
 else
 {
 	<p style="font-family: Georgia"> @_submitMessage</p>
-	<p>Is there anything you would like to change?</p>
+@* 	<p>Is there anything you would like to change?</p>
 	<button>Change</button>
-	<button>Save</button>
+	<button>Save</button> *@
 	@_counter
 }
 
@@ -64,6 +64,7 @@ else
 	private List<User> _users = new List<User>();
 	private bool _showFields = true;
 	private MarkupString _counter;
+
 
 	protected override void OnInitialized()
 	{
@@ -80,7 +81,7 @@ else
 		_user = new User();
 
 
-		for (int i = 999; i > 0; i--)
+		for (int i = 6; i > 0; i--)
 		{
             _counter = (MarkupString)$"<div style=\"font-family: 'Georgia', Courier, monospace; color: black; font-size: 1.6rem; font-weight:bold;\">Coming back to start in: {i - 1}</div>";
 
