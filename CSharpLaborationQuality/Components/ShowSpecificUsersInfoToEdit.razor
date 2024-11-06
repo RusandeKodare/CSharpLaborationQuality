@@ -1,0 +1,149 @@
+﻿@using BlazorClassLibrary
+@using System.Text.Json
+
+<EditForm Model="@SpecificUser" OnValidSubmit="@HandleValidSubmit" FormName="EditUserForm">
+    <div class="accordion-flush" style="font-family: Georgia; font-weight: bold; font-size: 1.5rem;">
+        <span style="color: black; font-size: 2rem;">User's id:</span>
+        <span style="color: #333; font-size: 2.5rem; font-style: italic; text-shadow: 2px 2px 5px rgba(0,0,0,0.3); transition: color 0.3s ease-in-out;"
+              onmouseover="this.style.color='#8a2be2'" onmouseout="this.style.color='#333'">
+            @SpecificUser.Id
+        </span>
+    </div>
+
+    <div style="font-family: Georgia; font-weight: bold;" class="accordion-flush">
+        <label for="Name" style="font-size: 1.2rem; display: block; margin-bottom: 5px;">Name</label>
+        <InputText id="Name" @bind-Value="@SpecificUser.Name" class="form-control" style="width: 200px; padding: 5px 10px; font-size: 1rem; border-radius: 8px; border: 2px solid #ddd; box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); transition: all 0.3s ease;" />
+    </div>
+
+    <div style="font-family: Georgia; font-weight: bold;" class="accordion-flush">
+        <label for="Age" style="font-size: 1.2rem; display: block; margin-bottom: 5px;">Age</label>
+        <InputNumber id="Age" @bind-Value="@SpecificUser.Age" class="form-control" style="width: 200px; padding: 5px 10px; font-size: 1rem; border-radius: 8px; border: 2px solid #ddd; box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); transition: all 0.3s ease;" />
+    </div>
+
+    <div style="font-family: Georgia; font-weight: bold;" class="accordion-flush">
+        <label for="UserName" style="font-size: 1.2rem; display: block; margin-bottom: 5px;">Username</label>
+        <InputText id="UserName" @bind-Value="@SpecificUser.UserName" class="form-control" style="width: 200px; padding: 5px 10px; font-size: 1rem; border-radius: 8px; border: 2px solid #ddd; box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); transition: all 0.3s ease;" />
+    </div>
+
+    <div style="font-family: Georgia; font-weight: bold;" class="accordion-flush">
+        <label for="Email" style="font-size: 1.2rem; display: block; margin-bottom: 5px;">Email</label>
+        <InputText id="Email" @bind-Value="@SpecificUser.Email" class="form-control" style="width: 200px; padding: 5px 10px; font-size: 1rem; border-radius: 8px; border: 2px solid #ddd; box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); transition: all 0.3s ease;" />
+
+    </div>
+
+    <div style="font-family: Georgia; font-weight: bold;" class="accordion-flush">
+        <label for="City" style="font-size: 1.2rem; display: block; margin-bottom: 5px;">City</label>
+        <InputText id="City" @bind-Value="@SpecificUser.Address.City" class="form-control" style="width: 200px; padding: 5px 10px; font-size: 1rem; border-radius: 8px; border: 2px solid #ddd; box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); transition: all 0.3s ease;" />
+    </div>
+
+    <div style="font-family: Georgia; font-weight: bold;" class="accordion-flush">
+        <label for="CompanyName" style="font-size: 1.2rem; display: block; margin-bottom: 5px;">Company Name</label>
+        <InputText id="CompanyName" @bind-Value="@SpecificUser.Company.Name" class="form-control" style="width: 200px; padding: 5px 10px; font-size: 1rem; border-radius: 8px; border: 2px solid #ddd; box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); transition: all 0.3s ease;" />
+    </div>
+
+    <br /><br />
+    <button class="btn btn-primary">Save changes</button>
+    <button @onclick="GoBackToTable" class="btn btn-primary">Back</button>
+</EditForm>
+
+
+
+@Message
+
+
+
+@* <ul style="border: 2px solid #ddd; padding: 10px; border-radius: 8px; list-style-type: none; background-color: #f9f9f9;">
+    <br />
+  
+    @if (SpecificUser.Id != null)
+    {
+        <li>
+            <strong>Id:</strong>
+            <span style="border: 2px solid; padding: 2px 5px; border-radius: 5px; cursor: pointer;">
+                @SpecificUser.Id
+            </span>
+        </li>
+    }
+    <br />
+    @if (!string.IsNullOrEmpty(SpecificUser.Name))
+    {
+        <li>
+            <strong>Name:</strong>
+            
+                  <Input type="text" value="@SpecificUser.Name" size="@SpecificUser.Name?.Length ?? 1" />
+        </li>
+    }
+    <br />
+    @if (SpecificUser.Age != null)
+    {
+        <li>
+            <strong>Age:</strong>
+          
+               <Input type="number" value="@SpecificUser.Age" size="@(SpecificUser.Age?.ToString().Length ?? 1)" />
+        </li>
+    }
+    <br />
+    @if (!string.IsNullOrEmpty(SpecificUser.UserName))
+    {
+        <li>
+            <strong>UserName:</strong>
+               <Input type="text" value="@SpecificUser.UserName" size="@SpecificUser.UserName?.Length ?? 1" />
+        </li>
+    }
+    <br />
+    @if (!string.IsNullOrEmpty(SpecificUser.Email))
+    {
+        <li>
+            <strong>Email:</strong>
+              <Input type="text" value="@SpecificUser.Email" size="@SpecificUser.Email.Length" />
+        </li>
+    }
+    <br />
+    @if (!string.IsNullOrEmpty(SpecificUser.Address.City))
+    {
+        <li>
+            <strong>City:</strong>
+              <Input type="text" value="@SpecificUser.Address.City" size="@SpecificUser.Address.City?.Length ?? 1" />
+        </li>
+    }
+    <br />
+    @if (!string.IsNullOrEmpty(SpecificUser.Company.Name))
+    {
+        <li>
+            <strong>Company Name:</strong>
+            <Input type="text" value="@SpecificUser.Company.Name" size="@SpecificUser.Company.Name?.Length ?? 1" />
+        </li>
+    }
+    <br />
+</ul>
+ *@
+@code {
+    [Parameter]
+    public User SpecificUser { set; get; }
+    [Parameter]
+    public List<User> Users { get; set; }
+    [Parameter]
+    public EventCallback<bool> IfEditUserChanged { get; set; }
+    public bool IfEditUser = true;
+    private string Message = "";
+
+
+
+
+
+    private async Task HandleValidSubmit()
+    {
+        Message = "Changes were saved!";
+        var json = JsonSerializer.Serialize<List<User>>(Users, new JsonSerializerOptions { WriteIndented = true });
+        File.WriteAllText("List_Of_People_Save.json", json);
+        await Task.Delay(2000);
+        Message = string.Empty;
+        StateHasChanged();
+    }
+
+    private void GoBackToTable()
+    {
+        IfEditUser = false;
+        IfEditUserChanged.InvokeAsync(IfEditUser);
+    }
+}

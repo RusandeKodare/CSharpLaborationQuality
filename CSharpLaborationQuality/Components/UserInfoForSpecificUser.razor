@@ -2,12 +2,14 @@
 @using BlazorClassLibrary.Services
 @using BlazorClassLibrary.Collections
 
-<UserInfoForSpecificUser_razor FromSavedFile="FromSavedFile" FromApi="FromApi" IfShowToDoListChanged="HandleToDoListToggle" ParamInfos="paramInfos" SpecificUser="SpecificUser"/>
+<UserInfoForSpecificUser_razor IfEditUserChanged="HandleEditUserToggle" FromSavedFile="FromSavedFile" FromApi="FromApi" IfShowToDoListChanged="HandleToDoListToggle" ParamInfos="paramInfos" SpecificUser="SpecificUser"/>
 @code {
     [Parameter]
     public User SpecificUser { get; set; } = new User();
     [Parameter]
     public EventCallback<bool> IfShowToDoListChanged { get; set; }
+    [Parameter]
+    public EventCallback<bool> IfEditUserChanged { get; set; }
     [Parameter]
     public bool FromApi { get; set; }
     [Parameter]
@@ -18,6 +20,12 @@
     {
         await IfShowToDoListChanged.InvokeAsync(showToDoList);
     }
+
+    private async Task HandleEditUserToggle(bool showEditUser)
+    {
+        await IfEditUserChanged.InvokeAsync(showEditUser);
+    }
+
     protected override void OnInitialized()
     {
         paramInfos = new Dictionary<string, object>

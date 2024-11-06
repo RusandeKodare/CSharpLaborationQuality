@@ -2,7 +2,7 @@
 @using BlazorClassLibrary.Collections
 @using System.Text.Json
 @rendermode InteractiveServer
-@if (!IfShowToDoList)
+@if (!IfShowToDoList&&!IfEditUser)
 {
     <table class="table table-hover">
         <thead class="thead-dark">
@@ -41,6 +41,7 @@
                                 <img @onclick="()=>RemoveUser(user)" style="padding-right:1rem; cursor: pointer; block-size: 20px; display: flex; align-items: center;" src="Images/MinusSign.png" />
                             }
                             @user.Name
+                           
                         </span>
                     </td>
                     <td>@user.UserName</td>
@@ -54,7 +55,7 @@
                     <tr>
                         <td colspan="6">
                             <div style="background-color: #f8f9fa; padding: 10px; border: 1px solid #ddd;">
-                                <UserInfoForSpecificUser FromSavedFile="FromSavedFile" FromApi="FromApi" IfShowToDoListChanged="(show)=>IfShowToDoList = show" SpecificUser="@SpecificUser" />
+                                <UserInfoForSpecificUser IfEditUserChanged="(editUserShow)=>IfEditUser=editUserShow" FromSavedFile="FromSavedFile" FromApi="FromApi" IfShowToDoListChanged="(todoListShow)=>IfShowToDoList = todoListShow" SpecificUser="@SpecificUser" />
                             </div>
                         </td>
                     </tr>
@@ -90,17 +91,17 @@
         }
     </div>
 }
-@if (IfShowToDoList)
+ @if (IfShowToDoList&&!IfEditUser)
 {
     <div style="display: fixed;">
         <TodoList IfShowTodoListChanged="(show)=>IfShowToDoList=show" Users="Users" SpecificUser="SpecificUser" />
     </div>
 
+} 
+@if (IfEditUser)
+{
+        <EditUser IfEditUserChanged="(change)=>IfEditUser=change" Users="Users" SpecificUser="SpecificUser"></EditUser>
 }
-
-
-
-
 
 @code {
 
@@ -126,6 +127,7 @@
     public bool Searching { get; set; }
     private bool IfRemoveUser;
     public bool IfShowToDoList = false;
+    public bool IfEditUser = false;
 
 
     protected override void OnInitialized()

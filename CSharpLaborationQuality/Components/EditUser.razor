@@ -1,0 +1,34 @@
+﻿@using BlazorClassLibrary
+@using System.Text.Json
+
+<ShowSpecificUsersInfoToEdit IfEditUserChanged="HandleEditUserToggle" Users="Users" SpecificUser="SpecificUser"></ShowSpecificUsersInfoToEdit>
+<br />
+@* <button @onclick="SaveChangesToFile" class="btn btn-primary">Save</button>
+<button @onclick="GoBackToTable" class="btn btn-primary">Back</button>
+@Message *@
+
+@code {
+    [Parameter]
+    public User SpecificUser { get; set; } = new();
+    [Parameter]
+    public List<User> Users { get; set; } = new();
+    [Parameter]
+    public EventCallback<bool> IfEditUserChanged { get; set; }
+    public bool IfEditUser = true;
+    private string Message = "";
+
+    private async Task SaveChangesToFile()
+    {
+        Message = "Changes were saved!";
+        var json = JsonSerializer.Serialize<List<User>>(Users, new JsonSerializerOptions { WriteIndented = true });
+        File.WriteAllText("List_Of_People_Save.json", json);
+        await Task.Delay(2000);
+        Message = string.Empty;
+        StateHasChanged();
+    }
+
+    private async Task HandleEditUserToggle(bool showEditUser)
+    {
+        await IfEditUserChanged.InvokeAsync(showEditUser);
+    }
+}

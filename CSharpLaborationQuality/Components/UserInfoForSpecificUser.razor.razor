@@ -5,28 +5,20 @@
 {
     @foreach (var item in ParamInfos)
     {
-
         if (!string.IsNullOrEmpty(item.Value.ToString()) && !(item.Value.ToString() == "0"))
         {
             <p style="font-size: 0.8rem; font-family: Georgia; color: black; background-color: white;"> <span style="font-weight: bold;">@item.Key</span> : @item.Value</p>
-        }
 
+        }
     }
     @if(!FromApi&&FromSavedFile)
     {
-        <button @onclick="ShowUsersTodoList" style="background: linear-gradient(45deg, #333333, #444444, #555555, #666666, #777777, #888888, #999999, #aaaaaa, #bbbbbb, #cccccc, #dddddd, #eeeeee);
-                   border: none;
-                   border-radius: 12px;
-                   color: white;
-                   padding: 10px 20px;
-                   font-size: 0.8rem;
-                   font-family: 'Arial', sans-serif;
-                   font-weight: bold;
-                   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-                   transition: transform 0.2s, box-shadow 0.2s;"
-                onmouseover="this.style.transform='scale(1.1)'; this.style.boxShadow='0 6px 8px rgba(0, 0, 0, 0.2)';"
-                onmouseout="this.style.transform='scale(1)'; this.style.boxShadow='0 4px 6px rgba(0, 0, 0, 0.1)';">
+        <button @onclick="ShowUsersTodoList" class="cool-looking-button">
             Your todo list
+        </button>
+        
+        <button @onclick="EditUser" class="cool-looking-button">
+            Edit user
         </button>
     } 
 }
@@ -40,13 +32,21 @@
     [Parameter]
     public EventCallback<bool> IfShowToDoListChanged { get; set; }
     [Parameter]
+    public EventCallback<bool> IfEditUserChanged { get; set; }
+    [Parameter]
     public bool FromApi { get; set; }
     [Parameter]
     public bool FromSavedFile { get; set; }
     public bool ShowTodoItems = false;
+    private bool IfEditUser = false;
     public void ShowUsersTodoList()
     {
         ShowTodoItems = ShowTodoItems == false ? true : false;
         IfShowToDoListChanged.InvokeAsync(ShowTodoItems);
+    }
+    private void EditUser()
+    {
+        IfEditUser = true;
+        IfEditUserChanged.InvokeAsync(IfEditUser);
     }
 }

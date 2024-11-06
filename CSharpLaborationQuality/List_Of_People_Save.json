@@ -23,21 +23,12 @@
       "BS": ""
     },
     "TodoService": {
-      "TodoItems": [
-        {
-          "Text": "K\u00F6pa mj\u00F6lk",
-          "Completed": false
-        },
-        {
-          "Text": "d",
-          "Completed": false
-        }
-      ]
+      "TodoItems": []
     }
   },
   {
     "Id": 2,
-    "Name": "Pontus",
+    "Name": "Rickard",
     "Age": 28,
     "UserName": "Garh",
     "Email": "Pontus@hotmail.com",
@@ -109,6 +100,65 @@
     },
     "Company": {
       "Name": "Jugger",
+      "CatchPhrase": "",
+      "BS": ""
+    },
+    "TodoService": {
+      "TodoItems": []
+    }
+  },
+  {
+    "Id": 5,
+    "Name": "Oscar Johansson",
+    "Age": 44,
+    "UserName": "Orrelion awdawdwad",
+    "Email": "orrelion@outlook.com",
+    "Phone": "",
+    "Website": "",
+    "Address": {
+      "Street": "",
+      "Suite": "",
+      "City": "Stockholm",
+      "ZipCode": "",
+      "Geo": {
+        "Lat": "",
+        "Lng": ""
+      }
+    },
+    "Company": {
+      "Name": "ITHS",
+      "CatchPhrase": "",
+      "BS": ""
+    },
+    "TodoService": {
+      "TodoItems": [
+        {
+          "Text": "Poopy",
+          "Completed": false
+        }
+      ]
+    }
+  },
+  {
+    "Id": 6,
+    "Name": "awdawdawdawdaawfgaw",
+    "Age": 44,
+    "UserName": "awdawd",
+    "Email": "orrelion@outlook.com",
+    "Phone": "",
+    "Website": "",
+    "Address": {
+      "Street": "",
+      "Suite": "",
+      "City": "",
+      "ZipCode": "",
+      "Geo": {
+        "Lat": "",
+        "Lng": ""
+      }
+    },
+    "Company": {
+      "Name": "",
       "CatchPhrase": "",
       "BS": ""
     },
