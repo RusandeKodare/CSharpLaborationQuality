@@ -9,7 +9,7 @@
 <h3 class="animated-header" style="align-content:center;">@SpecificUser.Name's to do list!</h3>
 <div class="border" style="padding: 20px;">
     <h4 style="padding-left:6rem;">New Item</h4>
-    <ToDoItemForm SpecificUser="SpecificUser" OnItemAdded="@ItemsChanged"/>
+    <ToDoItemForm SpecificUser="SpecificUser" OnItemAdded="@StateHasChanged" />
 </div>
 
 <div class="border" style="padding: 20px; margin-top: 20px;">
@@ -19,23 +19,28 @@
         {
             <div style="display:flex; margin-bottom: 10px; font-weight:bold;">
                 <div style="display:flex; align-items: center; margin-bottom: 10px;">
-                    
+
                     @if (SpecificItem == todo && IfEdit)
                     {
-                        <div style="display: flex; align-items: center;">
-                            <EditForm Model="@SpecificItem" FormName="ToEditItem" OnSubmit="@ItemAdded" style="display: flex; align-items: center;">
+                        <div>
+                            <EditForm Model="@SpecificItem" OnSubmit="@ItemAdded" style="display: flex; flex-direction: column;">
                                 <DataAnnotationsValidator />
-                                <InputText @bind-Value="SpecificItem.Text" class="form-control" style="margin-right: 10px; width: auto;" id="Item" />
-                                
-                                <button type="submit" class="btn btn-primary">Save</button>
-
-                              
+                                <div style="display: flex; flex-direction: column; margin-bottom: 10px;">
+                                    <div style="display: flex; align-items: center;">
+                                        <InputText @bind-Value="SpecificItem.Text" class="form-control" style="margin-right: 10px; width: auto;" id="Item" />
+                                        <button type="submit" class="btn btn-primary">Save</button>
+                                        <div style="margin:0.5rem;"></div>
+                                        <button type="button" @onclick="GoBackToItem" class="btn btn-warning">Regret</button>
+                                       
+                                    </div>
+                                    <ValidationMessage For="@(() => SpecificItem.Text)" />
+                                </div>
                             </EditForm>
                         </div>
                     }
                     else
                     {
-                    <div class="@ItemClass(todo)" style="width: 180px;">@todo.Text</div>
+                        <div class="@ItemClass(todo)" style="width: 180px;">@todo.Text</div>
                         @if (todo.Completed)
                         {
                             <div style=" width: 120px;">
@@ -69,17 +74,8 @@
             <div style="display:flex; margin-bottom: 10px; font-weight:bold;">
                 <div style="display:flex; align-items: center; margin-bottom: 10px;">
 
-                    @if (SpecificItem == todo && IfEdit)
-                    {
-                        <div style="display: flex; align-items: center;">
-                            <EditForm Model="@SpecificItem" FormName="ToEditItem" OnSubmit="@ItemAdded" style="display: flex; align-items: center;">
-                                <InputText @bind-Value="SpecificItem.Text" class="form-control" style="margin-right: 10px; width: auto;" id="Item" />
-                                <button type="submit" class="btn btn-primary">Save</button>
-                            </EditForm>
-                        </div>
-                    }
-                    else
-                    {
+                    
+                    
                         <div class="@ItemClass(todo)" style="width: 180px;">@todo.Text</div>
                         @if (todo.Completed)
                         {
@@ -96,7 +92,7 @@
                         <div>
                             <button class="btn btn-danger" @onclick="() => DeleteItem(todo)">Delete</button>
                         </div>
-                    }
+                    
                 </div>
             </div>
         }
@@ -107,8 +103,8 @@
     <button style="background-color: greenyellow; color:black; font-weight:bold;" class="btn btn-primary" @onclick="SaveNewItems">Save</button>
     <span style="margin:0.3rem;"></span>
 
-        <button style="background-color: aqua; color:black; font-weight:bold; " class="btn btn-primary" @onclick="GoBackToTable">Go back</button>
-        <span class="message-dark">@Message</span>
+    <button style="background-color: aqua; color:black; font-weight:bold; " class="btn btn-primary" @onclick="GoBackToTable">Go back</button>
+    <span class="message-dark">@Message</span>
 </div>
 @code {
     [Parameter]
@@ -124,7 +120,18 @@
     private string Message = "";
     private TodoItem NewItem = new TodoItem("");
     public required Action OnItemAdded { get; set; }
+    private TodoItem? SavedItem { get; set; }
+    private string OriginalText { get; set; } = "";
 
+    private void GoBackToItem()
+    {
+        SpecificItem.Text = OriginalText;
+        StateHasChanged();
+    }
+    private void GiveItemAValue(TodoItem item)
+    {
+        SavedItem = item;
+    }
     public void ItemAdded()
     {
         if (string.IsNullOrEmpty(SpecificItem.Text))
@@ -147,39 +154,37 @@
             NewItem.Text = "";
             SpecificUser.TodoService.IncompleteTodoItems.Add(newItem);
         }
-        ItemsChanged();
+        // ItemsChanged();
     }
     private void GoBackToTable()
     {
         IfShowTodoList = false;
         IfShowTodoListChanged.InvokeAsync(IfShowTodoList);
-        StateHasChanged();
-
     }
     private async Task SaveNewItems()
     {
         Message = "Changes were saved!";
-        var json = JsonSerializer.Serialize<List<User>>(Users,new JsonSerializerOptions{WriteIndented=true});
+        var json = JsonSerializer.Serialize<List<User>>(Users, new JsonSerializerOptions { WriteIndented = true });
         File.WriteAllText("List_Of_People_Save.json", json);
         await Task.Delay(2000);
         Message = string.Empty;
-        StateHasChanged();
     }
     public void EditItem(TodoItem item)
     {
-            SpecificItem = item;
-            IfEdit = true;
+        OriginalText = item.Text;
+        SpecificItem = item;
+        IfEdit = true;   
     }
     public string ItemClass(TodoItem item)
     {
         return item.Completed ? "item-completed" : "";
     }
 
-    public void ItemsChanged()
-    {
-        SpecificUser.TodoService.IncompleteTodoItems.AddRange(_todoService.GetAllIncompleteItems().ToList());
-        StateHasChanged();
-    }
+    // public void ItemsChanged()
+    // {
+    //     SpecificUser.TodoService.IncompleteTodoItems.AddRange(_todoService.GetAllIncompleteItems().ToList());
+    //     StateHasChanged();
+    // }
 
     public void DeleteItem(TodoItem item)
     {
@@ -188,7 +193,7 @@
         {
             SpecificUser.TodoService.CompletedTodoItems.Remove(item);
         }
-        ItemsChanged();
+        // ItemsChanged();
     }
 
     public void CompleteItem(TodoItem item)
@@ -196,15 +201,15 @@
         SpecificUser.TodoService.IncompleteTodoItems.Remove(item);
         SpecificUser.TodoService.CompletedTodoItems.Add(item);
         _todoService.Complete(item);
-        ItemsChanged();
+        
+        // ItemsChanged();
     }
 
     public void IncompleteItem(TodoItem item)
     {
         SpecificUser.TodoService.CompletedTodoItems.Remove(item);
         SpecificUser.TodoService.IncompleteTodoItems.Add(item);
-        
         _todoService.Incomplete(item);
-        ItemsChanged();
+        // ItemsChanged();
     }
 }

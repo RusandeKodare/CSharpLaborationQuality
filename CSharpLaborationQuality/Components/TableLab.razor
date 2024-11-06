@@ -87,23 +87,15 @@
             {
                 <button @onclick="ShowAllUsers">Show all users</button>
             }
-            
-           
-
-
-
-
-
-
-
         }
-
         @if ((IfShowAllUsers || FilteredUsers.Count > 5) && !Searching && !IfRemoveUser)
         {
             <button @onclick="ShowOnlyFiveUsers">Show only five users</button>
         }
+       
     </div>
-}
+} <h1 class="cool-header">There are @UsersLeftToShow users left to show</h1>
+
 @if (IfShowToDoList && !IfEditUser)
 {
     <div style="display: fixed;">
@@ -141,21 +133,35 @@
     private bool IfRemoveUser;
     public bool IfShowToDoList = false;
     public bool IfEditUser = false;
+    private int UsersLeftToShow { get; set; }
 
 
     protected override void OnInitialized()
     {
+        UsersLeftToShow = Users.Count - AmountOfUsers;
         FilteredUsers = Users.Take(AmountOfUsers).ToList();
     }
 
     private void IncreaseAmountOfUsers()
     {
-        AmountOfUsers += 5;
-        FilteredUsers = Users.Take(AmountOfUsers).ToList();
+        if (Users.Count > AmountOfUsers + 5)
+        {
+            AmountOfUsers += 5;
+            FilteredUsers = Users.Take(AmountOfUsers).ToList();
+            UsersLeftToShow = Users.Count - AmountOfUsers;
+        }
+        else
+        {
+            AmountOfUsers = AmountOfUsers + (Users.Count - AmountOfUsers);
+            FilteredUsers = Users.Take(AmountOfUsers).ToList();
+            UsersLeftToShow = Users.Count - AmountOfUsers;
+        }
+        
         if (FilteredUsers.Count == Users.Count)
         {
             IfShowAllUsers = true;
         }
+        
     }
 
     private void ShowAllUsers()
@@ -163,6 +169,7 @@
         IfShowAllUsers = true;
         AmountOfUsers = Users.Count();
         FilteredUsers = Users.Take(AmountOfUsers).ToList();
+        UsersLeftToShow = Users.Count - AmountOfUsers;
     }
 
     private void ShowOnlyFiveUsers()
@@ -170,6 +177,7 @@
         FilteredUsers = Users.Take(5).ToList();
         IfShowAllUsers = false;
         AmountOfUsers = 5;
+        UsersLeftToShow = Users.Count - AmountOfUsers;
     }
 
     public void RemoveUser(User user)

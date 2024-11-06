@@ -4,107 +4,104 @@
 
 @if (_showFields)
 {
-	<EditForm Model="@_user" OnValidSubmit="@HandleValidSubmit" FormName="createUserForm">
-		<DataAnnotationsValidator />
-		<br /><br />
-		<div style="font-family: Georgia; font-weight:bold; " class=" accordion-flush">
-			Name
-			<InputText id="name" @bind-Value="@_user.Name" class="form-control" />
-			<ValidationMessage For="@(() => _user.Name)" />
-		</div>
-		<br />
-		<div style="font-family: Georgia; font-weight:bold; " class="accordion-flush">
-			Age
-			<InputNumber id="Age" @bind-Value="@_user.Age" class="form-control" />
-			<ValidationMessage For="@(() => _user.Age)" />
-		</div>
-		<br />
-		<div style="font-family: Georgia; font-weight:bold; " class="accordion-flush">
-			UserName
-			<InputText id="username" @bind-Value="@_user.UserName" class="form-control" />
-		</div><br />
-		<div style="font-family: Georgia; font-weight:bold; " class="accordion-flush">
-			Email
-			<InputText id="email" @bind-Value="@_user.Email" class="form-control" />
-			<ValidationMessage For="@(() => _user.Email)" />
-		</div><br />
-		<div style="font-family: Georgia; font-weight:bold; " class="accordion-flush">
-			City
-			<InputText id="city" @bind-Value="@_user.Address.City" class="form-control" />
-		</div><br />
-		<div style="font-family: Georgia; font-weight:bold; " class="accordion-flush">
-			Company Name
-			<InputText id="compyName" @bind-Value="@_user.Company.Name" class="form-control" />
-		</div><br />
-		<br />
-		<button class="btn btn-primary" style="background-color: yellowgreen; color:black; width: 8rem; height: 3rem; font-family: Georgia; font-weight: bold;
-    border: none; cursor: pointer; transition: transform 0.3s;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);"
-				onmouseover="this.style.transform='scale(1.1)';"
-				onmouseout="this.style.transform='scale(1)';">
-			Submit
-		</button>
+    <EditForm Model="@_user" OnValidSubmit="@HandleValidSubmit" FormName="createUserForm">
+        <DataAnnotationsValidator />
+        <br /><br />
+        <div style="font-family: Georgia; font-weight:bold; " class=" accordion-flush">
+            Name
+            <InputText id="name" @bind-Value="@_user.Name" class="form-control" />
+            <ValidationMessage For="@(() => _user.Name)" />
+        </div>
+        <br />
+        <div style="font-family: Georgia; font-weight:bold; " class="accordion-flush">
+            Age
+            <InputNumber id="Age" @bind-Value="@_user.Age" class="form-control" />
+            <ValidationMessage For="@(() => _user.Age)" />
+        </div>
+        <br />
+        <div style="font-family: Georgia; font-weight:bold; " class="accordion-flush">
+            User name
+            <InputText id="username" @bind-Value="@_user.UserName" class="form-control" />
+            <ValidationMessage For="@(() => _user.UserName)" />
+        </div><br />
+        <div style="font-family: Georgia; font-weight:bold; " class="accordion-flush">
+            Email
+            <InputText id="email" @bind-Value="@_user.Email" class="form-control" />
+            <ValidationMessage For="@(() => _user.Email)" />
+        </div><br />
+        <div style="font-family: Georgia; font-weight:bold; " class="accordion-flush">
+            City
+            <InputText id="city" @bind-Value="@_user.Address.City" class="form-control" />
+        </div><br />
+        <div style="font-family: Georgia; font-weight:bold; " class="accordion-flush">
+            Company Name
+            <InputText id="compyName" @bind-Value="@_user.Company.Name" class="form-control" />
+        </div><br />
+        <br />
+        <button class="btn btn-primary, cool-button">
+            Submit
+        </button>
 
-	</EditForm>
+    </EditForm>
 }
 else
 {
-	<p style="font-family: Georgia"> @_submitMessage</p>
-@* 	<p>Is there anything you would like to change?</p>
+    <p style="font-family: Georgia"> @_submitMessage</p>
+    @* 	<p>Is there anything you would like to change?</p>
 	<button>Change</button>
 	<button>Save</button> *@
-	@_counter
+    @_counter
 }
 
 @code {
-	UserCollection userCollection = new UserCollection();
+    UserCollection userCollection = new UserCollection();
 
-	private User _user = new User();
-	private MarkupString _submitMessage;
-	private List<User> _users = new List<User>();
-	private bool _showFields = true;
-	private MarkupString _counter;
-
-
-	protected override void OnInitialized()
-	{
-		_showFields = true;
-		_users = userCollection.GetUsers();
-	}
-
-	private async Task HandleValidSubmit()
-	{
-
-		_user.Id = userCollection.Users.Count + 1;
-		AddUserAndSaveList();
-		SendMessage();
-		_user = new User();
+    private User _user = new User();
+    private MarkupString _submitMessage;
+    private List<User> _users = new List<User>();
+    private bool _showFields = true;
+    private MarkupString _counter;
 
 
-		for (int i = 6; i > 0; i--)
-		{
+    protected override void OnInitialized()
+    {
+        _showFields = true;
+        _users = userCollection.GetUsers();
+    }
+
+    private async Task HandleValidSubmit()
+    {
+
+        _user.Id = userCollection.Users.Count + 1;
+        AddUserAndSaveList();
+        SendMessage();
+        _user = new User();
+
+
+        for (int i = 6; i > 0; i--)
+        {
             _counter = (MarkupString)$"<div style=\"font-family: 'Georgia', Courier, monospace; color: black; font-size: 1.6rem; font-weight:bold;\">Coming back to start in: {i - 1}</div>";
 
-			await Task.Delay(700);
-			StateHasChanged();
-		}
-		_showFields = true;
-	}
+            await Task.Delay(700);
+            StateHasChanged();
+        }
+        _showFields = true;
+    }
 
-	public void AddUserAndSaveList()
-	{
-		userCollection.AddUser(_user);
-		userCollection.SaveList();
-	}
+    public void AddUserAndSaveList()
+    {
+        userCollection.AddUser(_user);
+        userCollection.SaveList();
+    }
 
-	public void SendMessage()
-	{
-		ChangeBoolValue();
-		_submitMessage = (MarkupString)$"User {_user.Name} was created with the following information:<br><br> <span style=\"font-weight: bold;\">ID:</span> {_user.Id}<br> <span style=\"font-weight: bold;\">Name</span>: {_user.Name}<br><span style=\"font-weight: bold;\">Age</span>: {_user.Age}<br><span style=\"font-weight: bold;\">Username</span>: {_user.UserName}<br><span style=\"font-weight: bold;\">Email</span>: {_user.Email} <br><span style=\"font-weight: bold;\">City</span>: {_user.Address.City}<br><span style=\"font-weight: bold;\">Company name</span>: {_user.Company.Name}";
-	}
+    public void SendMessage()
+    {
+        ChangeBoolValue();
+        _submitMessage = (MarkupString)$"User {_user.Name} was created with the following information:<br><br> <span style=\"font-weight: bold;\">ID:</span> {_user.Id}<br> <span style=\"font-weight: bold;\">Name</span>: {_user.Name}<br><span style=\"font-weight: bold;\">Age</span>: {_user.Age}<br><span style=\"font-weight: bold;\">Username</span>: {_user.UserName}<br><span style=\"font-weight: bold;\">Email</span>: {_user.Email} <br><span style=\"font-weight: bold;\">City</span>: {_user.Address.City}<br><span style=\"font-weight: bold;\">Company name</span>: {_user.Company.Name}";
+    }
 
-	private void ChangeBoolValue()
-	{
-		_showFields = false;
-	}
+    private void ChangeBoolValue()
+    {
+        _showFields = false;
+    }
 }

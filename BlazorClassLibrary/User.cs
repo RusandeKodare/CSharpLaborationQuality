@@ -18,10 +18,9 @@ namespace BlazorClassLibrary
 		[Range(18, 120)]
 		public int? Age { get; set; } = null;
 		[StringLength(20)]
-		[RegularExpression("^[a-zA-Z]+$", ErrorMessage = "Name can only contain letters with no space.")]
+		[RegularExpression("^[a-zA-Z]+$", ErrorMessage = "User name can only contain letters with no space.")]
 		[Required]
 		public string UserName { get; set; } = "";
-		
 		
         [Required]
         [RegularExpression(@"^[^@\s]+@[^@\s]+\.[^@\s]+$", ErrorMessage = "Invalid email format.")]

@@ -23,3 +23,22 @@
         text-shadow: 0 0 5px rgba(255, 111, 97, 0.7), 0 0 10px rgba(98, 0, 234, 0.5);
     }
 }
+
+.cool-button {
+    background-color: yellowgreen;
+    color: black;
+    width: 8rem;
+    height: 3rem;
+    font-family: Georgia, serif;
+    font-weight: bold;
+    border: none;
+    border-radius: 2rem;
+    cursor: pointer;
+    transition: transform 0.3s;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+  
+    .cool-button:hover {
+        transform: scale(1.1);
+    }

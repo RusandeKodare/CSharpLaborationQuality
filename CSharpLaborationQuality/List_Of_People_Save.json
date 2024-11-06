@@ -23,16 +23,7 @@
       "BS": ""
     },
     "TodoService": {
-      "IncompleteTodoItems": [
-        {
-          "Text": "",
-          "Completed": false
-        },
-        {
-          "Text": "awd",
-          "Completed": false
-        }
-      ],
+      "IncompleteTodoItems": [],
       "CompletedTodoItems": []
     }
   },
@@ -430,6 +421,179 @@
   },
   {
     "Id": 16,
+    "Name": "awd",
+    "Age": 22,
+    "UserName": "Orrelion",
+    "Email": "orrelion@outlook.com",
+    "Phone": "",
+    "Website": "",
+    "Address": {
+      "Street": "",
+      "Suite": "",
+      "City": "",
+      "ZipCode": "",
+      "Geo": {
+        "Lat": "",
+        "Lng": ""
+      }
+    },
+    "Company": {
+      "Name": "",
+      "CatchPhrase": "",
+      "BS": ""
+    },
+    "TodoService": {
+      "IncompleteTodoItems": [],
+      "CompletedTodoItems": []
+    }
+  },
+  {
+    "Id": 17,
+    "Name": "Daniel",
+    "Age": 22,
+    "UserName": "Orrelion",
+    "Email": "orrelion@outlook.com",
+    "Phone": "",
+    "Website": "",
+    "Address": {
+      "Street": "",
+      "Suite": "",
+      "City": "",
+      "ZipCode": "",
+      "Geo": {
+        "Lat": "",
+        "Lng": ""
+      }
+    },
+    "Company": {
+      "Name": "",
+      "CatchPhrase": "",
+      "BS": ""
+    },
+    "TodoService": {
+      "IncompleteTodoItems": [
+        {
+          "Text": "awdawd",
+          "Completed": false
+        }
+      ],
+      "CompletedTodoItems": []
+    }
+  },
+  {
+    "Id": 18,
+    "Name": "awd",
+    "Age": 32,
+    "UserName": "aefgaeg",
+    "Email": "awdawd@hotmail.com",
+    "Phone": "",
+    "Website": "",
+    "Address": {
+      "Street": "",
+      "Suite": "",
+      "City": "",
+      "ZipCode": "",
+      "Geo": {
+        "Lat": "",
+        "Lng": ""
+      }
+    },
+    "Company": {
+      "Name": "",
+      "CatchPhrase": "",
+      "BS": ""
+    },
+    "TodoService": {
+      "IncompleteTodoItems": [],
+      "CompletedTodoItems": []
+    }
+  },
+  {
+    "Id": 19,
+    "Name": "awd",
+    "Age": 22,
+    "UserName": "Orrelion",
+    "Email": "orrelion@outlook.com",
+    "Phone": "",
+    "Website": "",
+    "Address": {
+      "Street": "",
+      "Suite": "",
+      "City": "",
+      "ZipCode": "",
+      "Geo": {
+        "Lat": "",
+        "Lng": ""
+      }
+    },
+    "Company": {
+      "Name": "",
+      "CatchPhrase": "",
+      "BS": ""
+    },
+    "TodoService": {
+      "IncompleteTodoItems": [],
+      "CompletedTodoItems": []
+    }
+  },
+  {
+    "Id": 20,
+    "Name": "awd",
+    "Age": 22,
+    "UserName": "Oscarito",
+    "Email": "orrelion@outlook.com",
+    "Phone": "",
+    "Website": "",
+    "Address": {
+      "Street": "",
+      "Suite": "",
+      "City": "Oh, so empty :(",
+      "ZipCode": "",
+      "Geo": {
+        "Lat": "",
+        "Lng": ""
+      }
+    },
+    "Company": {
+      "Name": "Oh, so empty :(",
+      "CatchPhrase": "",
+      "BS": ""
+    },
+    "TodoService": {
+      "IncompleteTodoItems": [],
+      "CompletedTodoItems": []
+    }
+  },
+  {
+    "Id": 21,
+    "Name": "awd",
+    "Age": 22,
+    "UserName": "awd",
+    "Email": "orrelion@outlook.com",
+    "Phone": "",
+    "Website": "",
+    "Address": {
+      "Street": "",
+      "Suite": "",
+      "City": "",
+      "ZipCode": "",
+      "Geo": {
+        "Lat": "",
+        "Lng": ""
+      }
+    },
+    "Company": {
+      "Name": "",
+      "CatchPhrase": "",
+      "BS": ""
+    },
+    "TodoService": {
+      "IncompleteTodoItems": [],
+      "CompletedTodoItems": []
+    }
+  },
+  {
+    "Id": 22,
     "Name": "awd",
     "Age": 22,
     "UserName": "Orrelion",
