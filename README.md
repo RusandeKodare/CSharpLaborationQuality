@@ -109,9 +109,3 @@ Ensure the following are installed:
 - **Edit a User**: Click the **Edit** button next to a user's profile to modify their details.
 - **Manage To-Do List**: Add and save tasks to your To-Do list. It will persist even after page reloads.
 - **Play Music**: Enjoy the background music that plays across the website.
-
-## License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
----
