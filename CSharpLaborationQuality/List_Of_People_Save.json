@@ -25,7 +25,11 @@
     "TodoService": {
       "IncompleteTodoItems": [
         {
-          "Text": "wd",
+          "Text": "",
+          "Completed": false
+        },
+        {
+          "Text": "awd",
           "Completed": false
         }
       ],

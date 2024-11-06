@@ -24,8 +24,12 @@
                     {
                         <div style="display: flex; align-items: center;">
                             <EditForm Model="@SpecificItem" FormName="ToEditItem" OnSubmit="@ItemAdded" style="display: flex; align-items: center;">
+                                <DataAnnotationsValidator />
                                 <InputText @bind-Value="SpecificItem.Text" class="form-control" style="margin-right: 10px; width: auto;" id="Item" />
+                                
                                 <button type="submit" class="btn btn-primary">Save</button>
+
+                              
                             </EditForm>
                         </div>
                     }
@@ -123,6 +127,10 @@
 
     public void ItemAdded()
     {
+        if (string.IsNullOrEmpty(SpecificItem.Text))
+        {
+            return;
+        }
         if (SpecificItem != null && SpecificUser.TodoService.IncompleteTodoItems.Contains(SpecificItem))
         {
             var existingItem = SpecificUser.TodoService.IncompleteTodoItems.FirstOrDefault(item => item == SpecificItem);
@@ -159,8 +167,8 @@
     }
     public void EditItem(TodoItem item)
     {
-        SpecificItem = item; 
-        IfEdit = true;  
+            SpecificItem = item;
+            IfEdit = true;
     }
     public string ItemClass(TodoItem item)
     {

@@ -10,7 +10,7 @@ namespace BlazorClassLibrary
 {
     public class TodoItem
     {
-        [Required(ErrorMessage = "The item text cannot be empty.")]
+        [Required(ErrorMessage = "Can not be empty")]
         public string Text { get; set; }
         public bool Completed { get; set; } = false;
 
