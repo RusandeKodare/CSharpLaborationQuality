@@ -79,7 +79,7 @@
         </span>
     }
     <div class="button-container">
-        @if (!IfShowAllUsers && !_saveToList && FilteredUsers.Count >= 5 && !Searching)
+        @if (!IfShowAllUsers && !_saveToList && Users.Count > 5 && !Searching)
         {
             <button @onclick="IncreaseAmountOfUsers">Show five more users</button>
             <button @onclick="ShowAllUsers">Show all users</button>
@@ -163,8 +163,9 @@
     {
         IfRemoveUser = true;
         FilteredUsers.Remove(user);
+
         // FilteredUsers = Users.Take(AmountOfUsers).ToList();
-        UpdateIndexValueOfUser();
+        UpdateIndexValueOfUsers();
         _saveToList = true;
 
     }
@@ -183,6 +184,7 @@
     public void GoBack()
     {
         FilteredUsers = Users.Take(AmountOfUsers).ToList();
+        UpdateIndexValueOfUsers();
         _saveToList = false ;
     }
 
@@ -192,7 +194,7 @@
         File.WriteAllText("List_Of_People_Save.json", json);
     }
 
-    public void UpdateIndexValueOfUser()
+    public void UpdateIndexValueOfUsers()
     {
         int count = 1;
         foreach (var item in FilteredUsers)

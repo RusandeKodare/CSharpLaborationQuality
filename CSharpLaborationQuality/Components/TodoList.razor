@@ -15,7 +15,7 @@
 <div class="border" style="padding: 20px; margin-top: 20px;">
     <div style="display:flex; flex-direction: column;">
 
-        @foreach (var todo in SpecificUser.TodoService.TodoItems)
+        @foreach (var todo in SpecificUser.TodoService.IncompleteTodoItems)
         {
             <div style="display:flex; margin-bottom: 10px; font-weight:bold;">
                 <div style="display:flex; align-items: center; margin-bottom: 10px;">
@@ -60,7 +60,7 @@
 <div class="border" style="padding: 20px; margin-top: 20px;">
     <div style="display:flex; flex-direction: column;">
 
-        @foreach (var todo in FinishedItems)
+        @foreach (var todo in SpecificUser.TodoService.CompletedTodoItems)
         {
             <div style="display:flex; margin-bottom: 10px; font-weight:bold;">
                 <div style="display:flex; align-items: center; margin-bottom: 10px;">
@@ -127,9 +127,9 @@
 
     public void ItemAdded()
     {
-        if (SpecificItem != null && SpecificUser.TodoService.TodoItems.Contains(SpecificItem))
+        if (SpecificItem != null && SpecificUser.TodoService.IncompleteTodoItems.Contains(SpecificItem))
         {
-            var existingItem = SpecificUser.TodoService.TodoItems.FirstOrDefault(item => item == SpecificItem);
+            var existingItem = SpecificUser.TodoService.IncompleteTodoItems.FirstOrDefault(item => item == SpecificItem);
             if (existingItem != null)
             {
                 existingItem.Text = SpecificItem.Text;
@@ -139,16 +139,16 @@
         }
         else
         {
-
             var newItem = new TodoItem(NewItem.Text);
             NewItem.Text = "";
-            SpecificUser.TodoService.TodoItems.Add(newItem);
+            SpecificUser.TodoService.IncompleteTodoItems.Add(newItem);
         }
         ItemsChanged();
     }
     protected override void OnInitialized()
     {
-        Todos = _todoService.GetAll().ToList();
+        Todos = _todoService.GetAllIncompleteItems().ToList();
+        FinishedItems = _todoService.GetAllCompletedItems().ToList();
     }
     private void UpdatePage()
     {
@@ -176,31 +176,30 @@
 
     public void ItemsChanged()
     {
-        Todos = _todoService.GetAll().ToList();
+        Todos = _todoService.GetAllIncompleteItems().ToList();
         StateHasChanged();
     }
 
     public void DeleteItem(TodoItem item)
     {
-        SpecificUser.TodoService.TodoItems.Remove(item);
+        SpecificUser.TodoService.IncompleteTodoItems.Remove(item);
         ItemsChanged();
     }
 
     public void CompleteItem(TodoItem item)
     {
-        SpecificUser.TodoService.TodoItems.Remove(item);
-        FinishedItems.Add(item);
+        SpecificUser.TodoService.IncompleteTodoItems.Remove(item);
+        SpecificUser.TodoService.CompletedTodoItems.Add(item);
         _todoService.Complete(item);
         ItemsChanged();
     }
 
     public void IncompleteItem(TodoItem item)
     {
-        FinishedItems.Remove(item);
-        SpecificUser.TodoService.TodoItems.Add(item);
+        SpecificUser.TodoService.CompletedTodoItems.Remove(item);
+        SpecificUser.TodoService.IncompleteTodoItems.Add(item);
         
         _todoService.Incomplete(item);
         ItemsChanged();
     }
-
 }

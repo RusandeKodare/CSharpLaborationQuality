@@ -4,27 +4,33 @@ namespace BlazorClassLibrary.Services
 {
     public class TodoService : ITodoService
     {
-        public List<TodoItem> TodoItems { get; set; } = new(); 
+        public List<TodoItem> IncompleteTodoItems { get; set; } = new();
+        public List<TodoItem> CompletedTodoItems { get; set; } = new();
 
         public TodoService()
         {
-           TodoItems = new();
+           IncompleteTodoItems = new();
+            CompletedTodoItems = new();
         }
         public void Add(TodoItem item)
         {
             if (!string.IsNullOrEmpty(item.Text))
             {
-                TodoItems.Add(item);
+                IncompleteTodoItems.Add(item);
             }
         }
         public void Delete(TodoItem item)
         {
-            TodoItems.Remove(item);
+            IncompleteTodoItems.Remove(item);
         }
 
-        public IEnumerable<TodoItem> GetAll()
+        public IEnumerable<TodoItem> GetAllIncompleteItems()
         {
-            return TodoItems.ToList();
+            return IncompleteTodoItems.ToList();
+        }
+        public IEnumerable<TodoItem> GetAllCompletedItems()
+        {
+            return CompletedTodoItems.ToList();
         }
 
         public void Complete(TodoItem item)

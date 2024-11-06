@@ -6,7 +6,8 @@
 
         public void Delete(TodoItem item);
 
-        public IEnumerable<TodoItem> GetAll();
+        public IEnumerable<TodoItem> GetAllIncompleteItems();
+        public IEnumerable<TodoItem> GetAllCompletedItems();
 
         public void Complete(TodoItem item);
 
