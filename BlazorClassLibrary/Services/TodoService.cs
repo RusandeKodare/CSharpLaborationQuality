@@ -17,11 +17,16 @@ namespace BlazorClassLibrary.Services
             if (!string.IsNullOrEmpty(item.Text))
             {
                 IncompleteTodoItems.Add(item);
+                if (CompletedTodoItems.Contains(item))
+                {
+                    CompletedTodoItems.Remove(item);
+                }
             }
         }
         public void Delete(TodoItem item)
         {
             IncompleteTodoItems.Remove(item);
+            CompletedTodoItems.Add(item);
         }
 
         public IEnumerable<TodoItem> GetAllIncompleteItems()

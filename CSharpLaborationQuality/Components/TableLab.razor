@@ -81,8 +81,12 @@
     <div class="button-container">
         @if (!IfShowAllUsers && !_saveToList && Users.Count > 5 && !Searching)
         {
-            <button @onclick="IncreaseAmountOfUsers">Show five more users</button>
-            <button @onclick="ShowAllUsers">Show all users</button>
+            <button @onclick="IncreaseAmountOfUsers">Show more users</button>
+            @if (Users.Count>FilteredUsers.Count+5)
+            {
+                <button @onclick="ShowAllUsers">Show all users</button>
+            }
+            
         }
 
         @if ((IfShowAllUsers || FilteredUsers.Count > 5) && !Searching && !IfRemoveUser)

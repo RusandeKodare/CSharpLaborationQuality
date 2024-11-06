@@ -6,8 +6,8 @@
 	<input style="font-family: Georgia; width:20rem;" @bind-value="SearchTerm" @oninput="SearchForUser" placeholder="Search for users name" class="styled-input" />
 <p style="font-family: Georgia; font-weight: 500;">@TextMessage</p>
 </div>
-@code {
 
+@code {
 	[Parameter]
 	public EventCallback<string> SearchTermChanged { get; set; }
 	[Parameter]
@@ -20,8 +20,8 @@
 	public int AmountOfUsers { get; set; }
 	[Parameter]
 	public EventCallback<bool> SearchingChanged { get; set; }
-	public bool Searching;
 
+	public bool Searching;
 	public string? SearchTerm;
 	public List<User>? FilteredUsers;
 	public string? TextMessage;
@@ -71,8 +71,6 @@
 				TextMessageChanged.InvokeAsync(TextMessage);
 			}
 		}
-		
-
 	}
 	public void ListBiggerThanZero()
 	{

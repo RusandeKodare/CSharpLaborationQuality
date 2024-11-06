@@ -17,8 +17,6 @@
     public required Action OnItemAdded { get; set; }
     [Parameter]
     public User SpecificUser { get; set; } = new User();
-
-
     private TodoItem NewItem = new TodoItem("");  
 
     public void ItemAdded()  
@@ -29,8 +27,6 @@
         {
             SpecificUser.TodoService.IncompleteTodoItems.Add(newItem);
         }
-       
-
        if (OnItemAdded != null)  
        {  
            OnItemAdded();  

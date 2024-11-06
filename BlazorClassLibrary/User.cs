@@ -14,13 +14,18 @@ namespace BlazorClassLibrary
         [StringLength(20, MinimumLength = 2, ErrorMessage = "Name has to be at least 2 letters long")]
         [RegularExpression("^[a-zA-Z ]+$", ErrorMessage = "Name can only contain letters.")]
         public string Name { get; set; } = "";
+		[Required]
 		[Range(18, 120)]
 		public int? Age { get; set; } = null;
 		[StringLength(20)]
 		[RegularExpression("^[a-zA-Z]+$", ErrorMessage = "Name can only contain letters with no space.")]
+		[Required]
 		public string UserName { get; set; } = "";
-		[RegularExpression(@"^[^@\s]+@[^@\s]+\.(se|com)$", ErrorMessage = "Email must contain '@' and end with either '.se' or '.com'.")]
-		public string Email { get; set; } = "";
+		
+		
+        [Required]
+        [RegularExpression(@"^[^@\s]+@[^@\s]+\.[^@\s]+$", ErrorMessage = "Invalid email format.")]
+        public string Email { get; set; }
 		public string Phone { get; set; } = "";
 		public string Website { get; set; } = "";
 		public Address Address { get; set; } = new Address();
