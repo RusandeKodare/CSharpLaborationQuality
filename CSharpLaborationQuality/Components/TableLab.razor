@@ -64,7 +64,7 @@
         </tbody>
     </table>
 
-    <SearchInputAndMessage SearchingChanged="(search)=> Searching = search "
+    <SearchInputAndMessage UsersLeftToShowChanged="(usersLeft)=>UsersLeftToShow=usersLeft" SearchingChanged="(search)=> Searching = search "
                            AmountOfUsers="AmountOfUsers"
                            SearchTermChanged="(term) => SearchTerm = term"
                            TextMessageChanged="(message) => TextMessage = message"
@@ -94,8 +94,11 @@
         }
        
     </div>
-} <h1 class="cool-header">There are @UsersLeftToShow users left to show</h1>
-
+} 
+@if (!IfShowToDoList && !IfEditUser)
+{
+    <h1 class="cool-header">There are @UsersLeftToShow users left to show</h1>
+}
 @if (IfShowToDoList && !IfEditUser)
 {
     <div style="display: fixed;">
@@ -135,7 +138,6 @@
     public bool IfEditUser = false;
     private int UsersLeftToShow { get; set; }
 
-
     protected override void OnInitialized()
     {
         UsersLeftToShow = Users.Count - AmountOfUsers;
@@ -156,12 +158,11 @@
             FilteredUsers = Users.Take(AmountOfUsers).ToList();
             UsersLeftToShow = Users.Count - AmountOfUsers;
         }
-        
         if (FilteredUsers.Count == Users.Count)
         {
             IfShowAllUsers = true;
         }
-        
+
     }
 
     private void ShowAllUsers()
@@ -169,7 +170,7 @@
         IfShowAllUsers = true;
         AmountOfUsers = Users.Count();
         FilteredUsers = Users.Take(AmountOfUsers).ToList();
-        UsersLeftToShow = Users.Count - AmountOfUsers;
+        UsersLeftToShow = 0;
     }
 
     private void ShowOnlyFiveUsers()
@@ -182,17 +183,24 @@
 
     public void RemoveUser(User user)
     {
+        int number = user.Id;
         IfRemoveUser = true;
-        Users.Remove(user);
-        FilteredUsers = Users.Take(AmountOfUsers).ToList();
-        // FilteredUsers = Users.Take(AmountOfUsers).ToList();
+        FilteredUsers.Remove(user);
         UpdateIndexValueOfUsers();
+
+
         _saveToList = true;
+        if (UsersLeftToShow!=0)
+        {
+            UsersLeftToShow -= 1;
+        }
 
     }
 
     public async Task SaveChanges()
     {
+        Users.Clear();
+        Users.AddRange(FilteredUsers);
         SaveAsJson();
         _messageWhenSaved = "Changes saved!";
         await Task.Delay(2000);
@@ -207,6 +215,8 @@
         FilteredUsers = Users.Take(AmountOfUsers).ToList();
         UpdateIndexValueOfUsers();
         _saveToList = false;
+        UsersLeftToShow = Users.Count - AmountOfUsers;
+        IfRemoveUser = false;
     }
 
     public void SaveAsJson()
@@ -218,7 +228,7 @@
     public void UpdateIndexValueOfUsers()
     {
         int count = 1;
-        foreach (var item in Users)
+        foreach (var item in FilteredUsers)
         {
             item.Id = count;
             count++;
@@ -234,5 +244,4 @@
             FilteredUsers = Users.Take(5).ToList();
         }
     }
-
 }

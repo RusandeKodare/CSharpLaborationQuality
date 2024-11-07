@@ -126,6 +126,7 @@
     private void GoBackToItem()
     {
         SpecificItem.Text = OriginalText;
+        ItemAdded();
         StateHasChanged();
     }
     private void GiveItemAValue(TodoItem item)

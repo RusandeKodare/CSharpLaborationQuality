@@ -20,6 +20,9 @@
 	public int AmountOfUsers { get; set; }
 	[Parameter]
 	public EventCallback<bool> SearchingChanged { get; set; }
+	[Parameter]
+	public EventCallback<int> UsersLeftToShowChanged { get; set; }
+	public int UsersLeftToShow;
 
 	public bool Searching;
 	public string? SearchTerm;
@@ -42,6 +45,8 @@
 			Searching = false;
 			SearchingChanged.InvokeAsync(Searching);
 			FilteredUsers = Users.Take(AmountOfUsers).ToList();
+			UsersLeftToShow = Users.Count - FilteredUsers.Count;
+			UsersLeftToShowChanged.InvokeAsync(UsersLeftToShow);
 			FilteredUsersChanged.InvokeAsync(FilteredUsers);
 			TextMessage = $"";
 			TextMessageChanged.InvokeAsync(TextMessage);
@@ -57,6 +62,8 @@
 		{
 			FilteredUsers = Users.Where(item => item.Name.Contains(SearchTerm, StringComparison.OrdinalIgnoreCase)).ToList();
 			FilteredUsersChanged.InvokeAsync(FilteredUsers);
+			UsersLeftToShow = Users.Count - FilteredUsers.Count;
+			UsersLeftToShowChanged.InvokeAsync(UsersLeftToShow);
 		}
 		
 		if (FilteredUsers != null)

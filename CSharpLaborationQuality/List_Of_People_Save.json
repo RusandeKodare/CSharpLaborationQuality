@@ -1,7 +1,7 @@
 [
   {
     "Id": 1,
-    "Name": "Ricakrd",
+    "Name": "awdawd",
     "Age": 33,
     "UserName": "Rickardo",
     "Email": "rickardo@hotmail.com",
@@ -23,7 +23,12 @@
       "BS": ""
     },
     "TodoService": {
-      "IncompleteTodoItems": [],
+      "IncompleteTodoItems": [
+        {
+          "Text": "awfawf",
+          "Completed": false
+        }
+      ],
       "CompletedTodoItems": []
     }
   },
@@ -598,6 +603,34 @@
     "Age": 22,
     "UserName": "Orrelion",
     "Email": "orrelion@outlook.com",
+    "Phone": "",
+    "Website": "",
+    "Address": {
+      "Street": "",
+      "Suite": "",
+      "City": "",
+      "ZipCode": "",
+      "Geo": {
+        "Lat": "",
+        "Lng": ""
+      }
+    },
+    "Company": {
+      "Name": "",
+      "CatchPhrase": "",
+      "BS": ""
+    },
+    "TodoService": {
+      "IncompleteTodoItems": [],
+      "CompletedTodoItems": []
+    }
+  },
+  {
+    "Id": 23,
+    "Name": "awfawf",
+    "Age": 22,
+    "UserName": "awdawd",
+    "Email": "awd@awdawd.awdawfawfawfawgawgawgawgawgawgawgawgawgawgwagawgawgagwawgawgawgwaggwa",
     "Phone": "",
     "Website": "",
     "Address": {
