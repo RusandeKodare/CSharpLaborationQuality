@@ -123,21 +123,25 @@
     public bool FromApi { get; set; }
 
     SortingCollection sortingCollection = new SortingCollection();
-    private bool _saveToList = false;
-
     InternalDBCollection collection = new InternalDBCollection();
-    private bool _ifShowAllUsers = false;
-    public int AmountOfUsers = 5;
-    public string? TextMessage { get; set; } = String.Empty;
-    private string _messageWhenSaved = "";
-    public string? SearchTerm { get; set; } = String.Empty;
-    public User? SpecificUser { get; set; } = new();
+
     public bool Searching { get; set; }
-    private bool _ifRemoveUser;
     public bool IfShowToDoList = false;
     public bool IfEditUser = false;
-    private int _usersLeftToShow { get; set; }
+
+    private bool _saveToList = false;
+    private bool _ifShowAllUsers = false;
+    private bool _ifRemoveUser;
+
     private List<User> _copyOfList { get; set; } = new();
+    private string _messageWhenSaved = "";
+    private int _usersLeftToShow { get; set; }
+
+    public User? SpecificUser { get; set; } = new();
+
+    public string? TextMessage { get; set; } = String.Empty;
+    public string? SearchTerm { get; set; } = String.Empty;
+    public int AmountOfUsers = 5;
 
     protected override void OnInitialized()
     {
