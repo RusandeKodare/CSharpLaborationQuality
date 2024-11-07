@@ -69,7 +69,7 @@
                            SearchTermChanged="(term) => SearchTerm = term"
                            TextMessageChanged="(message) => TextMessage = message"
                            Users="@Users"
-                           FilteredUsersChanged="(users) => FilteredUsers = users" />
+                           FilteredUsersChanged="(x) => FilteredUsers = x" />
     @if (_saveToList)
     {
         <button @onclick="SaveChanges" style="background-color: #007bff; color: white; border: none; padding: 10px 20px; cursor: pointer; transition: background-color 0.3s ease; font-weight: 500; border-radius: 5px;">Save changes</button>
@@ -95,7 +95,7 @@
        
     </div>
 } 
-@if (!IfShowToDoList && !IfEditUser)
+@if (!IfShowToDoList && !IfEditUser&&!Searching)
 {
     <h1 class="cool-header">There are @_usersLeftToShow users left to show</h1>
 }
@@ -194,7 +194,7 @@
         UpdateIndexValueOfUsers();
 
         _saveToList = true;
-        if (_usersLeftToShow!=0)
+        if (_usersLeftToShow>0)
         {
             _usersLeftToShow -= 1;
         }
@@ -219,7 +219,10 @@
         FilteredUsers = Users.Take(AmountOfUsers).ToList();
         UpdateIndexValueOfUsers();
         _saveToList = false;
-        _usersLeftToShow = Users.Count - AmountOfUsers;
+        
+            _usersLeftToShow = Users.Count-FilteredUsers.Count;
+        
+        
         _ifRemoveUser = false;
     }
 

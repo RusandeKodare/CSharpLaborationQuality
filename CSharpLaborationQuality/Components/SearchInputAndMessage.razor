@@ -44,10 +44,13 @@
 		{
 			Searching = false;
 			SearchingChanged.InvokeAsync(Searching);
+
 			FilteredUsers = Users.Take(AmountOfUsers).ToList();
+			FilteredUsersChanged.InvokeAsync(FilteredUsers);
+
 			UsersLeftToShow = Users.Count - FilteredUsers.Count;
 			UsersLeftToShowChanged.InvokeAsync(UsersLeftToShow);
-			FilteredUsersChanged.InvokeAsync(FilteredUsers);
+			
 			TextMessage = $"";
 			TextMessageChanged.InvokeAsync(TextMessage);
 		}
