@@ -141,7 +141,10 @@
 
     protected override void OnInitialized()
     {
-        _usersLeftToShow = Users.Count - AmountOfUsers;
+        if (Users.Count>5)
+        {
+            _usersLeftToShow = Users.Count - AmountOfUsers;
+        }
         FilteredUsers = Users.Take(AmountOfUsers).ToList();
         _copyOfList.AddRange(Users);
     }
