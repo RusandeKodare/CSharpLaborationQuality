@@ -64,7 +64,7 @@
         </tbody>
     </table>
 
-    <SearchInputAndMessage UsersLeftToShowChanged="(usersLeft)=>UsersLeftToShow=usersLeft" SearchingChanged="(search)=> Searching = search "
+    <SearchInputAndMessage UsersLeftToShowChanged="(usersLeft)=>_usersLeftToShow=usersLeft" SearchingChanged="(search)=> Searching = search "
                            AmountOfUsers="AmountOfUsers"
                            SearchTermChanged="(term) => SearchTerm = term"
                            TextMessageChanged="(message) => TextMessage = message"
@@ -79,7 +79,7 @@
         </span>
     }
     <div class="button-container">
-        @if (!IfShowAllUsers && !_saveToList && Users.Count > 5 && !Searching)
+        @if (!_ifShowAllUsers && !_saveToList && Users.Count > 5 && !Searching)
         {
             <button @onclick="IncreaseAmountOfUsers">Show more users</button>
 
@@ -88,7 +88,7 @@
                 <button @onclick="ShowAllUsers">Show all users</button>
             }
         }
-        @if ((IfShowAllUsers || FilteredUsers.Count > 5) && !Searching && !IfRemoveUser)
+        @if ((_ifShowAllUsers || FilteredUsers.Count > 5) && !Searching && !_ifRemoveUser)
         {
             <button @onclick="ShowOnlyFiveUsers">Show only five users</button>
         }
@@ -97,7 +97,7 @@
 } 
 @if (!IfShowToDoList && !IfEditUser)
 {
-    <h1 class="cool-header">There are @UsersLeftToShow users left to show</h1>
+    <h1 class="cool-header">There are @_usersLeftToShow users left to show</h1>
 }
 @if (IfShowToDoList && !IfEditUser)
 {
@@ -126,22 +126,24 @@
     private bool _saveToList = false;
 
     InternalDBCollection collection = new InternalDBCollection();
-    private bool IfShowAllUsers = false;
+    private bool _ifShowAllUsers = false;
     public int AmountOfUsers = 5;
     public string? TextMessage { get; set; } = String.Empty;
     private string _messageWhenSaved = "";
     public string? SearchTerm { get; set; } = String.Empty;
     public User? SpecificUser { get; set; } = new();
     public bool Searching { get; set; }
-    private bool IfRemoveUser;
+    private bool _ifRemoveUser;
     public bool IfShowToDoList = false;
     public bool IfEditUser = false;
-    private int UsersLeftToShow { get; set; }
+    private int _usersLeftToShow { get; set; }
+    private List<User> _copyOfList { get; set; } = new();
 
     protected override void OnInitialized()
     {
-        UsersLeftToShow = Users.Count - AmountOfUsers;
+        _usersLeftToShow = Users.Count - AmountOfUsers;
         FilteredUsers = Users.Take(AmountOfUsers).ToList();
+        _copyOfList.AddRange(Users);
     }
 
     private void IncreaseAmountOfUsers()
@@ -150,51 +152,49 @@
         {
             AmountOfUsers += 5;
             FilteredUsers = Users.Take(AmountOfUsers).ToList();
-            UsersLeftToShow = Users.Count - AmountOfUsers;
+            _usersLeftToShow = Users.Count - AmountOfUsers;
         }
         else
         {
             AmountOfUsers = AmountOfUsers + (Users.Count - AmountOfUsers);
             FilteredUsers = Users.Take(AmountOfUsers).ToList();
-            UsersLeftToShow = Users.Count - AmountOfUsers;
+            _usersLeftToShow = Users.Count - AmountOfUsers;
         }
         if (FilteredUsers.Count == Users.Count)
         {
-            IfShowAllUsers = true;
+            _ifShowAllUsers = true;
         }
-
     }
 
     private void ShowAllUsers()
     {
-        IfShowAllUsers = true;
+        _ifShowAllUsers = true;
         AmountOfUsers = Users.Count();
         FilteredUsers = Users.Take(AmountOfUsers).ToList();
-        UsersLeftToShow = 0;
+        _usersLeftToShow = 0;
     }
 
     private void ShowOnlyFiveUsers()
     {
         FilteredUsers = Users.Take(5).ToList();
-        IfShowAllUsers = false;
+        _ifShowAllUsers = false;
         AmountOfUsers = 5;
-        UsersLeftToShow = Users.Count - AmountOfUsers;
+        _usersLeftToShow = Users.Count - AmountOfUsers;
     }
 
     public void RemoveUser(User user)
     {
         int number = user.Id;
-        IfRemoveUser = true;
-        FilteredUsers.Remove(user);
+        _ifRemoveUser = true;
+        Users.Remove(user);
+        FilteredUsers = Users.Take(AmountOfUsers).ToList();
         UpdateIndexValueOfUsers();
 
-
         _saveToList = true;
-        if (UsersLeftToShow!=0)
+        if (_usersLeftToShow!=0)
         {
-            UsersLeftToShow -= 1;
+            _usersLeftToShow -= 1;
         }
-
     }
 
     public async Task SaveChanges()
@@ -207,16 +207,17 @@
         _messageWhenSaved = "";
         _saveToList = false;
         CheckIfListIsEmpty();
-        IfRemoveUser = false;
+        _ifRemoveUser = false;
     }
 
     public void GoBack()
     {
+        Users = _copyOfList.Take(_copyOfList.Count).ToList();
         FilteredUsers = Users.Take(AmountOfUsers).ToList();
         UpdateIndexValueOfUsers();
         _saveToList = false;
-        UsersLeftToShow = Users.Count - AmountOfUsers;
-        IfRemoveUser = false;
+        _usersLeftToShow = Users.Count - AmountOfUsers;
+        _ifRemoveUser = false;
     }
 
     public void SaveAsJson()
