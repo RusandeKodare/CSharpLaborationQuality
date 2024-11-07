@@ -52,92 +52,17 @@
     <button class="btn btn-primary">Save changes</button>
     <button @onclick="GoBackToTable" class="btn btn-primary">Back</button>
 </EditForm>
-
-
-
-
 @Message
 
-
-
-@* <ul style="border: 2px solid #ddd; padding: 10px; border-radius: 8px; list-style-type: none; background-color: #f9f9f9;">
-    <br />
-  
-    @if (SpecificUser.Id != null)
-    {
-        <li>
-            <strong>Id:</strong>
-            <span style="border: 2px solid; padding: 2px 5px; border-radius: 5px; cursor: pointer;">
-                @SpecificUser.Id
-            </span>
-        </li>
-    }
-    <br />
-    @if (!string.IsNullOrEmpty(SpecificUser.Name))
-    {
-        <li>
-            <strong>Name:</strong>
-            
-                  <Input type="text" value="@SpecificUser.Name" size="@SpecificUser.Name?.Length ?? 1" />
-        </li>
-    }
-    <br />
-    @if (SpecificUser.Age != null)
-    {
-        <li>
-            <strong>Age:</strong>
-          
-               <Input type="number" value="@SpecificUser.Age" size="@(SpecificUser.Age?.ToString().Length ?? 1)" />
-        </li>
-    }
-    <br />
-    @if (!string.IsNullOrEmpty(SpecificUser.UserName))
-    {
-        <li>
-            <strong>UserName:</strong>
-               <Input type="text" value="@SpecificUser.UserName" size="@SpecificUser.UserName?.Length ?? 1" />
-        </li>
-    }
-    <br />
-    @if (!string.IsNullOrEmpty(SpecificUser.Email))
-    {
-        <li>
-            <strong>Email:</strong>
-              <Input type="text" value="@SpecificUser.Email" size="@SpecificUser.Email.Length" />
-        </li>
-    }
-    <br />
-    @if (!string.IsNullOrEmpty(SpecificUser.Address.City))
-    {
-        <li>
-            <strong>City:</strong>
-              <Input type="text" value="@SpecificUser.Address.City" size="@SpecificUser.Address.City?.Length ?? 1" />
-        </li>
-    }
-    <br />
-    @if (!string.IsNullOrEmpty(SpecificUser.Company.Name))
-    {
-        <li>
-            <strong>Company Name:</strong>
-            <Input type="text" value="@SpecificUser.Company.Name" size="@SpecificUser.Company.Name?.Length ?? 1" />
-        </li>
-    }
-    <br />
-</ul>
- *@
 @code {
     [Parameter]
-    public User SpecificUser { set; get; }
+    public User SpecificUser { set; get; } = new();
     [Parameter]
-    public List<User> Users { get; set; }
+    public List<User> Users { get; set; } = new();
     [Parameter]
     public EventCallback<bool> IfEditUserChanged { get; set; }
     public bool IfEditUser = true;
     private string Message = "";
-
-
-
-
 
     private async Task HandleValidSubmit()
     {
