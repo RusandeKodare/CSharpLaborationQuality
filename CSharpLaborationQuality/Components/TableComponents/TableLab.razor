@@ -10,20 +10,8 @@
     </NavLink>
    
     <div style="padding-bottom:2rem; display:flex; justify-content:center; align-items: center;" class="button-container">
-        @if (!_ifShowAllUsers && !_saveToList && Users.Count > 5 && !Searching)
-        {
-           @*  <button @onclick="IncreaseAmountOfUsers">Show more</button>
- *@
-            @if (Users.Count > 5)
-            {
-                <button @onclick="ShowAllUsers">Show all</button>
-            }
-        }
-        @if ((_ifShowAllUsers || FilteredUsers.Count > 5) && !Searching && !_ifRemoveUser)
-        {
-            <button @onclick="ShowOnlyFiveUsers">Show less</button>
-        }
 
+                <button @onclick="ShowAllUsers">@_buttonName</button>
     </div>
     <table class="table table-hover">
         <thead class="thead-dark">
@@ -141,6 +129,7 @@
 
     private List<User> _copyOfList { get; set; } = new();
     private string _messageWhenSaved = "";
+    private string _buttonName = "Show more";
     private int _usersLeftToShow { get; set; }
 
     public User? SpecificUser { get; set; } = new();
@@ -181,10 +170,19 @@
 
     private void ShowAllUsers()
     {
-        _ifShowAllUsers = true;
-        AmountOfUsers = Users.Count();
-        FilteredUsers = Users.Take(AmountOfUsers).ToList();
-        _usersLeftToShow = 0;
+        if (_buttonName=="Show more")
+        {
+            _ifShowAllUsers = true;
+            AmountOfUsers = Users.Count();
+            FilteredUsers = Users.Take(AmountOfUsers).ToList();
+            _usersLeftToShow = 0;
+            _buttonName = "Show less";
+        }
+        else
+        {
+            ShowOnlyFiveUsers();
+            _buttonName = "Show more";
+        }
     }
 
     private void ShowOnlyFiveUsers()
@@ -231,8 +229,6 @@
         _saveToList = false;
         
             _usersLeftToShow = Users.Count-FilteredUsers.Count;
-        
-        
         _ifRemoveUser = false;
     }
 
