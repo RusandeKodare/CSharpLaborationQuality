@@ -9,19 +9,13 @@ using BlazorClassLibrary.Collections.Interfaces;
 
 namespace BlazorClassLibrary.Collections
 {
-    public class ApiCollection : ICollections , IGetUsersAsync
+    public class ApiCollection : IGetUsersAsync
     {
-		public List<User> Users { get; set; } = [];
 		public HttpClient _httpClient = new();
 
 		public async Task<List<User>> GetUsers()
 		{
-			Users = await _httpClient.GetFromJsonAsync<List<User>>("https://jsonplaceholder.typicode.com/users")?? [];
-			if (Users != null)
-			{
-				return Users;
-			}
-			return [];
+			return await _httpClient.GetFromJsonAsync<List<User>>("https://jsonplaceholder.typicode.com/users")?? [];
 		}
     }
 }
