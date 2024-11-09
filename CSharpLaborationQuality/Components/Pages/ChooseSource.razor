@@ -1,10 +1,15 @@
 ﻿@page "/ChooseSource"
 @rendermode InteractiveServer
-<div style="">
-<h3>Choose what source you want to use to fill up your list</h3>
-
-<button>From file</button>
-<button>From Api</button>
+<div style="display: flex; flex-direction: column; justify-content: center; align-items: center; height: 95vh;">
+    <h3 style="font-size: 24px; color: #333; margin-bottom: 20px;">Choose what source you want to use to fill up your list</h3>
+    <div style="display: flex; gap: 20px;">
+        <NavLink href="/ShowUsersFromFile" style="text-decoration: none;">
+            <button class="btn btn-primary" style="padding: 10px 20px; font-size: 16px; cursor: pointer;">From file</button>
+        </NavLink>
+        <NavLink href="/showusers" style="text-decoration: none;">
+            <button class="btn btn-primary" style="padding: 10px 20px; font-size: 16px; cursor: pointer;">From Api</button>
+        </NavLink>
+    </div>
 </div>
 @code {
 

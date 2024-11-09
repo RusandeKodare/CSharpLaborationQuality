@@ -6,11 +6,11 @@
 
 @if (_loading)
 {
- <Show_users_razor/>
+ <Loading/>
 }
 else
-{ 
-    <@TableLab FromApi="FromApi" FilteredUsers="FilteredUsers" Users="Users" FromSavedFile="FromSavedFile"/>
+{
+    <CSharpLaborationQuality.Components.TableComponents.TableLab FromApi="FromApi" FilteredUsers="FilteredUsers" Users="Users" FromSavedFile="FromSavedFile" />
 }
 @code {
 
@@ -29,7 +29,7 @@ else
     }
     private async Task LoadData()
     {
-        await Task.Delay(6000);
+        await Task.Delay(3000);
         _loading = false;
         StateHasChanged();
     }

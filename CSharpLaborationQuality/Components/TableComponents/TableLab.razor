@@ -5,6 +5,26 @@
 @rendermode InteractiveServer
 @if (!IfShowToDoList && !IfEditUser)
 {
+    <NavLink class="nav-link" href="ChooseSource">
+        <button class="btn btn-primary">Choose new source</button>
+    </NavLink>
+   
+    <div style="padding-bottom:2rem; display:flex; justify-content:center; align-items: center;" class="button-container">
+        @if (!_ifShowAllUsers && !_saveToList && Users.Count > 5 && !Searching)
+        {
+           @*  <button @onclick="IncreaseAmountOfUsers">Show more</button>
+ *@
+            @if (Users.Count > 5)
+            {
+                <button @onclick="ShowAllUsers">Show all</button>
+            }
+        }
+        @if ((_ifShowAllUsers || FilteredUsers.Count > 5) && !Searching && !_ifRemoveUser)
+        {
+            <button @onclick="ShowOnlyFiveUsers">Show less</button>
+        }
+
+    </div>
     <table class="table table-hover">
         <thead class="thead-dark">
             <tr>
@@ -79,22 +99,7 @@
             @_messageWhenSaved
         </span>
     }
-    <div class="button-container">
-        @if (!_ifShowAllUsers && !_saveToList && Users.Count > 5 && !Searching)
-        {
-            <button @onclick="IncreaseAmountOfUsers">Show more users</button>
-
-            @if (Users.Count > AmountOfUsers + 5)
-            {
-                <button @onclick="ShowAllUsers">Show all users</button>
-            }
-        }
-        @if ((_ifShowAllUsers || FilteredUsers.Count > 5) && !Searching && !_ifRemoveUser)
-        {
-            <button @onclick="ShowOnlyFiveUsers">Show only five users</button>
-        }
-       
-    </div>
+    
 } 
 @if (_usersLeftToShow!=0&&!IfShowToDoList && !IfEditUser&&!Searching)
 {
