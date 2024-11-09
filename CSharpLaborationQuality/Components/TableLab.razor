@@ -95,7 +95,7 @@
        
     </div>
 } 
-@if (!IfShowToDoList && !IfEditUser&&!Searching)
+@if (_usersLeftToShow!=0&&!IfShowToDoList && !IfEditUser&&!Searching)
 {
     <h1 class="cool-header">There are @_usersLeftToShow users left to show</h1>
 }
