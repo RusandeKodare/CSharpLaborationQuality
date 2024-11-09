@@ -17,7 +17,7 @@ namespace BlazorClassLibrary
 				users = users.OrderByDescending(user => user.Id).ToList();
 				return users;
 			}
-			users = users.OrderBy(movie => movie.Id).ToList();
+			users = users.OrderBy(user => user.Id).ToList();
 			return users;
 		}
 		public List<User> SortByName(List<User> users)
