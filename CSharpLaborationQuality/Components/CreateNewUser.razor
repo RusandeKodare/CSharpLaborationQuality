@@ -52,10 +52,9 @@
 else
 {
     <p style="font-family: Georgia"> @_submitMessage</p>
-    @* 	<p>Is there anything you would like to change?</p>
-	<button>Change</button>
-	<button>Save</button> *@
-    @_counter
+    <NavLink href="/CreateNewUser" style="text-decoration: none;">
+        <button @onclick="ChangeBoolValue" class="btn btn-primary">Press to create new user</button>
+    </NavLink>
 }
 
 @code {
@@ -76,21 +75,10 @@ else
 
     private async Task HandleValidSubmit()
     {
-
         _user.Id = userCollection.Users.Count + 1;
         AddUserAndSaveList();
         SendMessage();
         _user = new User();
-
-
-        for (int i = 6; i > 0; i--)
-        {
-            _counter = (MarkupString)$"<div style=\"font-family: 'Georgia', Courier, monospace; color: black; font-size: 1.6rem; font-weight:bold;\">Coming back to start in: {i - 1}</div>";
-
-            await Task.Delay(700);
-            StateHasChanged();
-        }
-        _showFields = true;
     }
 
     public void AddUserAndSaveList()
@@ -102,11 +90,19 @@ else
     public void SendMessage()
     {
         ChangeBoolValue();
-        _submitMessage = (MarkupString)$"User {_user.Name} was created with the following information:<br><br> <span style=\"font-weight: bold;\">ID:</span> {_user.Id}<br> <span style=\"font-weight: bold;\">Name</span>: {_user.Name}<br><span style=\"font-weight: bold;\">Age</span>: {_user.Age}<br><span style=\"font-weight: bold;\">Username</span>: {_user.UserName}<br><span style=\"font-weight: bold;\">Email</span>: {_user.Email} <br><span style=\"font-weight: bold;\">City</span>: {_user.Address.City}<br><span style=\"font-weight: bold;\">Company name</span>: {_user.Company.Name}";
+        _submitMessage = (MarkupString)$"User <span style=\"font-weight:bold;\">{_user.Name}</span> was created with the following information:<br><br> <span style=\"font-weight: bold;\">ID:</span> {_user.Id}<br> <span style=\"font-weight: bold;\">Name</span>: {_user.Name}<br><span style=\"font-weight: bold;\">Age</span>: {_user.Age}<br><span style=\"font-weight: bold;\">Username</span>: {_user.UserName}<br><span style=\"font-weight: bold;\">Email</span>: {_user.Email} <br><span style=\"font-weight: bold;\">City</span>: {_user.Address.City}<br><span style=\"font-weight: bold;\">Company name</span>: {_user.Company.Name}";
     }
 
     private void ChangeBoolValue()
     {
-        _showFields = false;
+        if (!_showFields)
+        {
+            _showFields = true;
+        }
+        else
+        {
+            _showFields = false;
+        }
+        
     }
 }
