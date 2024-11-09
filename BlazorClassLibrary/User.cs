@@ -5,10 +5,10 @@ using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations;
-using BlazorClassLibrary.Services;
+using BlazorClassLibrary.Collections;
 namespace BlazorClassLibrary
 {
-	public class User
+    public class User
 	{
 		public int Id { get; set; } = 0;
         [StringLength(20, MinimumLength = 2, ErrorMessage = "Name has to be at least 2 letters long")]

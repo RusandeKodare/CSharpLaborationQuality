@@ -1,6 +1,6 @@
-﻿using BlazorClassLibrary;
+﻿using BlazorClassLibrary.Collections.Interfaces;
 
-namespace BlazorClassLibrary.Services
+namespace BlazorClassLibrary.Collections
 {
     public class TodoService : ITodoService
     {
@@ -9,7 +9,7 @@ namespace BlazorClassLibrary.Services
 
         public TodoService()
         {
-           IncompleteTodoItems = new();
+            IncompleteTodoItems = new();
             CompletedTodoItems = new();
         }
         public void Add(TodoItem item)

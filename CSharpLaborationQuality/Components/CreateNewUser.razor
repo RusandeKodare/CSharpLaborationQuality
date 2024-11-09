@@ -67,8 +67,6 @@ else
     private MarkupString _submitMessage;
     private List<User> _users = new List<User>();
     private bool _showFields = true;
-    private MarkupString _counter;
-
 
     protected override void OnInitialized()
     {
@@ -76,7 +74,7 @@ else
         _users = userCollection.GetUsers();
     }
 
-    private async Task HandleValidSubmit()
+    private void HandleValidSubmit()
     {
         _user.Id = userCollection.Users.Count + 1;
         AddUserAndSaveList();

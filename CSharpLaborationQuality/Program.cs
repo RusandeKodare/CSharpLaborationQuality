@@ -1,9 +1,10 @@
 using CSharpLaborationQuality.Components;
-using BlazorClassLibrary.Services;
+using BlazorClassLibrary.Collections.Interfaces;
+using BlazorClassLibrary.Collections;
 
 namespace CSharpLaborationQuality
 {
-	public class Program
+    public class Program
 	{
 		public static void Main(string[] args)
 		{

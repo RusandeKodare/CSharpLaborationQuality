@@ -1,4 +1,4 @@
-﻿namespace BlazorClassLibrary.Services
+﻿namespace BlazorClassLibrary.Collections.Interfaces
 {
     public interface ITodoService
     {
