@@ -1,6 +1,7 @@
 ﻿@using BlazorClassLibrary
 @using BlazorClassLibrary.Collections
 @using System.Text.Json
+@using BlazorClassLibrary.Collections.Interfaces
 @rendermode InteractiveServer
 @if (!IfShowToDoList && !IfEditUser)
 {
@@ -123,7 +124,7 @@
     public bool FromApi { get; set; }
 
     SortingCollection sortingCollection = new SortingCollection();
-    InternalDBCollection collection = new InternalDBCollection();
+    ILocalDataAccess userCollection = new UserCollection();
 
     public bool Searching { get; set; }
     public bool IfShowToDoList = false;
@@ -251,7 +252,7 @@
         if (FilteredUsers.Count <= 0)
         {
             FromSavedFile = false;
-            Users = collection.GetUsers();
+            Users = userCollection.GetUsersFromInternalDb();
             FilteredUsers = Users.Take(5).ToList();
         }
     }

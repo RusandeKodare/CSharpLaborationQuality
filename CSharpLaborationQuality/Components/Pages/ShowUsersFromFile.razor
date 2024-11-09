@@ -8,7 +8,6 @@
     public List<User> Users = new List<User>();
     public List<User> FilteredUsers = new List<User>();
     UserCollection userCollection = new UserCollection();
-    InternalDBCollection internalDBCollection = new InternalDBCollection();
     public bool FromSavedFile = true;
 
     protected override void OnInitialized()
@@ -17,7 +16,7 @@
 
         if (Users==null||Users.Count<=0)
         {
-            Users = internalDBCollection.GetUsers();
+            Users = userCollection.GetUsersFromInternalDb();
             FromSavedFile = false;
         }
 

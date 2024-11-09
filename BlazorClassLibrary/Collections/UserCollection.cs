@@ -8,7 +8,7 @@ using BlazorClassLibrary.Collections.Interfaces;
 
 namespace BlazorClassLibrary.Collections
 {
-    public class UserCollection : ICollections , IGetUsersSync
+    public class UserCollection : ILocalDataAccess
     {
         public List<User> Users { get; set; } = [];
         public List<User> UsersFromInDb { get; set; } = [];
@@ -43,10 +43,7 @@ namespace BlazorClassLibrary.Collections
         }
         public List<User> GetUsersFromInternalDb()
         {
-
-            InternalDBCollection internalDBCollection = new InternalDBCollection();
-            UsersFromInDb = internalDBCollection.GetUsers();
-            return UsersFromInDb;
+            return JsonSerializer.Deserialize<List<User>>(File.ReadAllText("Internal_Db_List.json")) ?? [];
         }
     }
 }

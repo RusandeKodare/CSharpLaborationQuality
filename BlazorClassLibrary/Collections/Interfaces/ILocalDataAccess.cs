@@ -6,8 +6,12 @@ using System.Threading.Tasks;
 
 namespace BlazorClassLibrary.Collections.Interfaces
 {
-    public interface ICollections
+    public interface ILocalDataAccess
     {
         public List<User> Users { get; set; }
+
+        public List<User> GetUsers();
+
+        public List<User> GetUsersFromInternalDb();
     }
 }

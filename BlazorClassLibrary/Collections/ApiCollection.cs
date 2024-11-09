@@ -9,7 +9,7 @@ using BlazorClassLibrary.Collections.Interfaces;
 
 namespace BlazorClassLibrary.Collections
 {
-    public class ApiCollection : IGetUsersAsync
+    public class ApiCollection : IRemoteDataAccess
     {
 		public HttpClient _httpClient = new();
 

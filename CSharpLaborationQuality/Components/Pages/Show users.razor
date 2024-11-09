@@ -1,5 +1,6 @@
 ﻿@using BlazorClassLibrary
 @using BlazorClassLibrary.Collections
+@using BlazorClassLibrary.Collections.Interfaces
 @page "/showusers"
 @rendermode InteractiveServer
 
@@ -21,8 +22,8 @@ else
 
     protected override async Task OnInitializedAsync()
     {
-        ApiCollection api = new ApiCollection();
-        LoadData();
+        IRemoteDataAccess api = new ApiCollection();
+        _=LoadData();
         Users = await api.GetUsers();
         FilteredUsers.AddRange(Users);
     }

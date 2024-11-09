@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace BlazorClassLibrary.Collections.Interfaces
 {
-    internal interface IGetUsersSync
+    public interface IRemoteDataAccess
     {
-        public List<User> GetUsers();
+        public Task<List<User>> GetUsers();
     }
 }
