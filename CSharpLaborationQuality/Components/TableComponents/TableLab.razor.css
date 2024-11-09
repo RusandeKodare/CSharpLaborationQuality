@@ -45,7 +45,7 @@
     }
 
 .cool-header {
-    font-family: 'Roboto', sans-serif; /* Modern sans-serif font */
+    font-family: 'Roboto', sans-serif;
     font-weight: 700;
     font-size: 2.5rem;
     text-align: left;
@@ -67,3 +67,45 @@
         font-size: 2rem;
     }
 }
+
+.styled-button {
+    padding: 10px 20px;
+    font-size: 13px;
+    font-weight: bold;
+    color: #fff;
+    background: linear-gradient(135deg, #6200ea, #03dac5);
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+    outline: none;
+    position: relative;
+    overflow: hidden;
+}
+
+    /* Styling for the hover effect */
+    .styled-button::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -75%;
+        width: 150%;
+        height: 100%;
+        background: rgba(255, 255, 255, 0.15);
+        transform: skewX(-45deg);
+        transition: left 0.5s;
+    }
+
+    .styled-button:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 8px 15px rgba(98, 0, 234, 0.3);
+    }
+
+        .styled-button:hover::after {
+            left: 100%;
+        }
+
+    .styled-button:active {
+        transform: translateY(1px);
+        box-shadow: 0 5px 10px rgba(98, 0, 234, 0.2);
+    }

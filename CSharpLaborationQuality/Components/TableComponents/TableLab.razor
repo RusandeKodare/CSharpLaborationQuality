@@ -5,33 +5,44 @@
 @rendermode InteractiveServer
 @if (!IfShowToDoList && !IfEditUser)
 {
-    <NavLink class="nav-link" href="ChooseSource">
-        <button class="btn btn-primary">Choose new source</button>
-    </NavLink>
-   
-    <div style="padding-bottom:2rem; display:flex; justify-content:center; align-items: center;" class="button-container">
-
-                <button @onclick="ShowAllUsers">@_buttonName</button>
+    <div style="padding-bottom: 1rem; display: flex; justify-content:center; align-items: center;" class="button-container">
+        <NavLink href="ChooseSource">
+            <button style="font-size: 3rem;" class="styled-button">Choose new source</button>
+        </NavLink>
     </div>
+    <div style=" padding-bottom: 1rem; display: flex; justify-content:center; align-items: center;">
+        <button class="styled-button" @onclick="ShowAllUsers">@_buttonName</button>
+        
+    </div>
+    <div style="display: flex; justify-content:center; align-items: center;">
+        <SearchInputAndMessage UsersLeftToShowChanged="(usersLeft) => _usersLeftToShow = usersLeft"
+                               SearchingChanged="(search) => Searching = search"
+                               AmountOfUsers="AmountOfUsers"
+                               SearchTermChanged="(term) => SearchTerm = term"
+                               TextMessageChanged="(message) => TextMessage = message"
+                               Users="@Users"
+                               FilteredUsersChanged="(users) => FilteredUsers = users" />
+    </div>
+
     <table class="table table-hover">
         <thead class="thead-dark">
             <tr>
-                <th class="clickable-header" style="cursor: pointer; font-weight: 500; background-color: aliceblue; width: 100px;" @onclick="() => FilteredUsers = sortingCollection.SortByID(FilteredUsers)">
+                <th class="clickable-header" style="cursor: pointer; font-weight: 500; background-color: aliceblue; width: 100px;" @onclick="() => FilteredUsers = SortByProperty(FilteredUsers, user => user.Id)">
                     Id <img style="width: 20px; height: 20px; margin-left: 10px;" src="Images\ArrowUpAndDown.png" />
                 </th>
-                <th class="clickable-header" style="cursor: pointer; transition: background-color 0.3s ease; font-weight: 500;background-color: aliceblue; " @onclick="()=> FilteredUsers = sortingCollection.SortByName(FilteredUsers)">
+                <th class="clickable-header" style="cursor: pointer; transition: background-color 0.3s ease; font-weight: 500;background-color: aliceblue; " @onclick="()=> FilteredUsers = SortByProperty(FilteredUsers, user => user.Name)">
                     Name <img style="width: 20px; height: 20px; margin-left: 50px;" src="Images\ArrowUpAndDown.png" />
                 </th>
-                <th class="clickable-header" style="cursor: pointer; transition: background-color 0.3s ease; font-weight: 500;background-color:aliceblue; " @onclick="()=> FilteredUsers = sortingCollection.SortByUserName(FilteredUsers)">
+                <th class="clickable-header" style="cursor: pointer; transition: background-color 0.3s ease; font-weight: 500;background-color:aliceblue; " @onclick="()=> FilteredUsers = SortByProperty(FilteredUsers, user => user.UserName)">
                     Username <img style="width: 20px; height: 20px; margin-left: 50px;" src="Images\ArrowUpAndDown.png" />
                 </th>
-                <th class="clickable-header" style="cursor: pointer; transition: background-color 0.3s ease; font-weight: 500;background-color:aliceblue; " @onclick="()=> FilteredUsers = sortingCollection.SortByEmail(FilteredUsers)">
+                <th class="clickable-header" style="cursor: pointer; transition: background-color 0.3s ease; font-weight: 500;background-color:aliceblue; " @onclick="()=> FilteredUsers = SortByProperty(FilteredUsers, user => user.Email)">
                     Email <img style="width: 20px; height: 20px; margin-left: 50px;" src="Images\ArrowUpAndDown.png" />
                 </th>
-                <th class="clickable-header" style="cursor: pointer; transition: background-color 0.3s ease; font-weight: 500;background-color:aliceblue; " @onclick="()=> FilteredUsers = sortingCollection.SortByCity(FilteredUsers)">
+                <th class="clickable-header" style="cursor: pointer; transition: background-color 0.3s ease; font-weight: 500;background-color:aliceblue; " @onclick="()=> FilteredUsers = SortByProperty(FilteredUsers, user => user.Address.City)">
                     City <img style="width: 20px; height: 20px; margin-left: 50px;" src="Images\ArrowUpAndDown.png" />
                 </th>
-                <th class="clickable-header" style="cursor: pointer; transition: background-color 0.3s ease; font-weight: 500;background-color:aliceblue; " @onclick="()=> FilteredUsers = sortingCollection.SortByCompanyName(FilteredUsers)">
+                <th class="clickable-header" style="cursor: pointer; transition: background-color 0.3s ease; font-weight: 500;background-color:aliceblue; " @onclick="()=> FilteredUsers = SortByProperty(FilteredUsers, user => user.Company.Name)">
                     Company Name <img style="width: 20px; height: 20px; margin-left: 50px;" src="Images\ArrowUpAndDown.png" />
                 </th>
             </tr>
@@ -73,12 +84,7 @@
         </tbody>
     </table>
 
-    <SearchInputAndMessage UsersLeftToShowChanged="(usersLeft)=>_usersLeftToShow=usersLeft" SearchingChanged="(search)=> Searching = search "
-                           AmountOfUsers="AmountOfUsers"
-                           SearchTermChanged="(term) => SearchTerm = term"
-                           TextMessageChanged="(message) => TextMessage = message"
-                           Users="@Users"
-                           FilteredUsersChanged="(x) => FilteredUsers = x" />
+    
     @if (_saveToList)
     {
         <button @onclick="SaveChanges" style="background-color: #007bff; color: white; border: none; padding: 10px 20px; cursor: pointer; transition: background-color 0.3s ease; font-weight: 500; border-radius: 5px;">Save changes</button>
@@ -147,7 +153,15 @@
         FilteredUsers = Users.Take(AmountOfUsers).ToList();
         _copyOfList.AddRange(Users);
     }
-
+    public List<User> SortByProperty<T>(List<User> users, Func<User, T> propertySelector)
+    {
+        var usersAscending = users.OrderBy(propertySelector).ToList();
+        if (users.SequenceEqual(usersAscending))
+        {
+            return users.OrderByDescending(propertySelector).ToList();
+        }
+        return usersAscending;
+    }
     private void IncreaseAmountOfUsers()
     {
         if (Users.Count > AmountOfUsers + 5)
