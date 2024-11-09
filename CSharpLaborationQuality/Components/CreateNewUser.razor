@@ -4,7 +4,8 @@
 
 @if (_showFields)
 {
-    <EditForm Model="@_user" OnValidSubmit="@HandleValidSubmit" FormName="createUserForm">
+    <div style="display: flex; justify-content:center; align-items: center; height: 95vh;">
+    <EditForm Model="@_user" OnValidSubmit="@HandleValidSubmit" FormName="createUserForm" style="background-color: #eff; border: 1ox solid #eff; width:25rem; padding: 2rem;">
         <DataAnnotationsValidator />
         <br /><br />
         <div style="font-family: Georgia; font-weight:bold; " class=" accordion-flush">
@@ -38,11 +39,15 @@
             <InputText id="compyName" @bind-Value="@_user.Company.Name" class="form-control" />
         </div><br />
         <br />
+
+            <div style="display:flex; justify-content: center; align-items:center;">
         <button class="btn btn-primary, cool-button">
             Submit
         </button>
+            </div>
 
     </EditForm>
+    </div>
 }
 else
 {
