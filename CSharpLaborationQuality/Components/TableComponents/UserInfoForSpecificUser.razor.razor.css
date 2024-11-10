@@ -15,3 +15,19 @@
         transform: scale(1.1);
         box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2);
     }
+
+
+
+.slide-in {
+    animation: slideIn 1s ease-out forwards;
+}
+@keyframes slideIn {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(1);
+    }
+}

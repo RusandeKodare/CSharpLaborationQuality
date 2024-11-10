@@ -109,3 +109,20 @@
         transform: translateY(1px);
         box-shadow: 0 5px 10px rgba(98, 0, 234, 0.2);
     }
+
+
+@keyframes rollDown {
+    from {
+        max-height: 0;
+        opacity: 0;
+    }
+
+    to {
+        max-height: 500px; 
+        opacity: 1;
+    }
+}
+.roll-down {
+    overflow: hidden;
+    animation: rollDown 0.5s ease-out forwards;
+}

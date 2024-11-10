@@ -13,20 +13,25 @@
 	[Parameter]
 	public EventCallback<string> TextMessageChanged { get; set; }
 	[Parameter]
-	public List<User> Users { get; set; } = [];
-	[Parameter]
-	public EventCallback<List<User>> FilteredUsersChanged { get; set; }
-	[Parameter]
-	public int AmountOfUsers { get; set; }
-	[Parameter]
 	public EventCallback<bool> SearchingChanged { get; set; }
 	[Parameter]
 	public EventCallback<int> UsersLeftToShowChanged { get; set; }
+	[Parameter]
+	public EventCallback<List<User>> FilteredUsersChanged { get; set; }
+
+
+	[Parameter]
+	public List<User> Users { get; set; } = [];
+	[Parameter]
+	public int AmountOfUsers { get; set; }
+	
+	public List<User>? FilteredUsers;
+
 	public int UsersLeftToShow;
 
 	public bool Searching;
+
 	public string? SearchTerm;
-	public List<User>? FilteredUsers;
 	public string? TextMessage;
 
 	private void SearchForUser(ChangeEventArgs e)
@@ -35,6 +40,7 @@
 		SearchingChanged.InvokeAsync(Searching);
 		SearchTerm = e.Value?.ToString() ?? "";
 		SearchTermChanged.InvokeAsync(SearchTerm);
+
 		if (!Users.Any())
 		{
 			TextMessage = "Nothing found!";

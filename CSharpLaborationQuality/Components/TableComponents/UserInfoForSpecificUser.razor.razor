@@ -7,10 +7,12 @@
     {
         if (!string.IsNullOrEmpty(item.Value.ToString()) && !(item.Value.ToString() == "0"))
         {
-            <p style="font-size: 0.8rem; font-family: Georgia; color: black; background-color: white;"> <span style="font-weight: bold;">@item.Key</span> : @item.Value</p>
-
+            <p class="slide-in" style="font-size: 0.8rem; font-family: Georgia; color: black; background-color: white;">
+                <span style="font-weight: bold;">@item.Key</span> : @item.Value
+            </p>
         }
     }
+
     @if(!FromApi&&FromSavedFile)
     {
         <button @onclick="ShowUsersTodoList" class="cool-looking-button">

@@ -74,7 +74,7 @@
                 {
                     <tr>
                         <td colspan="6">
-                            <div style="background-color: #f8f9fa; padding: 10px; border: 1px solid #ddd;">
+                            <div class="roll-down" style="background-color: #f8f9fa; padding: 10px; border: 1px solid #ddd;">
                                 <UserInfoForSpecificUser IfEditUserChanged="(editUserShow)=>IfEditUser=editUserShow" FromSavedFile="FromSavedFile" FromApi="FromApi" IfShowToDoListChanged="(todoListShow)=>IfShowToDoList = todoListShow" SpecificUser="@SpecificUser" />
                             </div>
                         </td>
@@ -125,24 +125,30 @@
     SortingCollection sortingCollection = new SortingCollection();
     ILocalDataAccess userCollection = new UserCollection();
 
+    private bool _saveToList = false;
+
     public bool Searching { get; set; }
     public bool IfShowToDoList = false;
     public bool IfEditUser = false;
-
-    private bool _saveToList = false;
-    private bool _ifShowAllUsers = false;
-    private bool _ifRemoveUser;
-
-    private List<User> _copyOfList { get; set; } = new();
-    private string _messageWhenSaved = "";
-    private string _buttonName = "Show more";
+   
     private int _usersLeftToShow { get; set; }
 
-    public User? SpecificUser { get; set; } = new();
+    public int AmountOfUsers = 5;
+
+    private List<User> _copyOfList { get; set; } = new();
+
+    private string _messageWhenSaved = "";
+    private string _buttonName = "Show more";
 
     public string? TextMessage { get; set; } = String.Empty;
     public string? SearchTerm { get; set; } = String.Empty;
-    public int AmountOfUsers = 5;
+
+    
+
+    public User? SpecificUser { get; set; } = new();
+
+    
+
 
     protected override void OnInitialized()
     {
