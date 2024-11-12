@@ -5,15 +5,6 @@
 @rendermode InteractiveServer
 @if (!IfShowToDoList && !IfEditUser)
 {
-    <div style="padding-bottom: 1rem; display: flex; justify-content:center; align-items: center;" class="button-container">
-        <NavLink href="ChooseSource">
-            <button style="font-size: 1rem;" class="styled-button">Choose new source</button>
-        </NavLink>
-    </div>
-    <div style=" padding-bottom: 1rem; display: flex; justify-content:center; align-items: center;">
-        <button class="styled-button" @onclick="ShowAllUsers">@_buttonName</button>
-        
-    </div>
     <div style="display: flex; justify-content:center; align-items: center;">
         <SearchInputAndMessage UsersLeftToShowChanged="(usersLeft) => _usersLeftToShow = usersLeft"
                                SearchingChanged="(search) => Searching = search"
@@ -23,6 +14,16 @@
                                Users="@Users"
                                FilteredUsersChanged="(users) => FilteredUsers = users" />
     </div>
+    <div style="padding-bottom: 1rem; display: flex; justify-content:center; align-items: center;" class="button-container">
+        <NavLink href="ChooseSource">
+            <button style="font-size: 1rem;" class="styled-button">Choose new source</button>
+        </NavLink>
+    </div>
+    <div style=" padding-bottom: 1rem; display: flex; justify-content:center; align-items: center;">
+        <button class="styled-button" @onclick="ShowAllUsers">@_buttonName</button>
+        
+    </div>
+   
 
     <table class="table table-hover">
         <thead class="thead-dark">
