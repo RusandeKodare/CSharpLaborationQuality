@@ -126,6 +126,8 @@
     ILocalDataAccess userCollection = new UserCollection();
 
     private bool _saveToList = false;
+    private bool _ifShowAllUsers { get; set; }
+    private bool _ifRemoveUser { get; set; }
 
     public bool Searching { get; set; }
     public bool IfShowToDoList = false;
