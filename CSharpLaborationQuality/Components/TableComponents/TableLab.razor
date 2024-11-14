@@ -104,9 +104,10 @@
         <button @onclick="SaveChanges" style="background-color: #007bff; color: white; border: none; padding: 10px 20px; cursor: pointer; transition: background-color 0.3s ease; font-weight: 500; border-radius: 5px;">Save changes</button>
         <button @onclick="GoBack" style="background-color: #007bff; color: white; border: none; padding: 10px 20px; cursor: pointer; transition: background-color 0.3s ease; font-weight: 500; border-radius: 5px;">Discard changes</button>
         <span style="color: #007bff; font-weight: bold;">
-            @_messageWhenSaved
+           
         </span>
     }
+    @_messageWhenSaved
 } 
 @if (_usersLeftToShow!=0&&!IfShowToDoList && !IfEditUser&&!Searching)
 {
@@ -199,7 +200,7 @@
                 FromSavedFile = true;
                 Message = "";
             }
-            
+
             FilteredUsers = Users.Take(AmountOfUsers).ToList();
             FromApi = false;
         }
@@ -226,7 +227,7 @@
         }
     }
 
-   
+
     public List<User> SortByProperty<T>(List<User> users, Func<User, T> propertySelector)
     {
         var usersAscending = users.OrderBy(propertySelector).ToList();
@@ -278,16 +279,7 @@
         FilteredUsers = Users.Take(5).ToList();
         _ifShowAllUsers = false;
         AmountOfUsers = 5;
-
-        if (Users.Count - AmountOfUsers < 0)
-        {
-            _usersLeftToShow = 0;
-        }
-        else
-        {
-            _usersLeftToShow = Users.Count - AmountOfUsers;
-        }
-       
+        CheckUsersLeftToShow();
     }
 
     public void RemoveUser(User user)
@@ -302,15 +294,22 @@
 
     public async Task SaveChanges()
     {
-        Users.Clear();
-        Users.AddRange(FilteredUsers);
+        ReplaceUsersListWithFilteredUsers();
         SaveAsJson();
+        _saveToList = false;
+        _ifRemoveUser = false;
+        await MessageChanged();
+        CheckIfListIsEmpty();
+        CheckUsersLeftToShow();
+       
+        
+    }
+
+    private async Task MessageChanged()
+    {
         _messageWhenSaved = "Changes saved!";
         await Task.Delay(2000);
         _messageWhenSaved = "";
-        _saveToList = false;
-        CheckIfListIsEmpty();
-        _ifRemoveUser = false;
     }
 
     public void GoBack()
@@ -347,4 +346,11 @@
             FilteredUsers = Users.Take(5).ToList();
         }
     }
+
+    public void ReplaceUsersListWithFilteredUsers()
+    {
+        Users.Clear();
+        Users.AddRange(FilteredUsers);
+    }
+
 }
