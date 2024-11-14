@@ -294,15 +294,10 @@
     {
         int number = user.Id;
         _ifRemoveUser = true;
-        Users.Remove(user);
-        FilteredUsers = Users.Take(AmountOfUsers).ToList();
+        FilteredUsers.Remove(user);
         UpdateIndexValueOfUsers();
-
         _saveToList = true;
-        if (_usersLeftToShow>0)
-        {
-            _usersLeftToShow -= 1;
-        }
+        CheckUsersLeftToShow();
     }
 
     public async Task SaveChanges()
@@ -320,12 +315,10 @@
 
     public void GoBack()
     {
-        Users = _copyOfList.Take(_copyOfList.Count).ToList();
         FilteredUsers = Users.Take(AmountOfUsers).ToList();
         UpdateIndexValueOfUsers();
         _saveToList = false;
-        
-            _usersLeftToShow = Users.Count-FilteredUsers.Count;
+         CheckUsersLeftToShow();
         _ifRemoveUser = false;
     }
 
