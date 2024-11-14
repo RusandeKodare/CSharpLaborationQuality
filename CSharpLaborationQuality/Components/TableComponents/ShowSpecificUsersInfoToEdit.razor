@@ -64,14 +64,13 @@
     public bool IfEditUser = true;
     private string Message = "";
 
-    private async Task HandleValidSubmit()
+    private void HandleValidSubmit()
     {
         Message = "Changes were saved!";
         var json = JsonSerializer.Serialize<List<User>>(Users, new JsonSerializerOptions { WriteIndented = true });
         File.WriteAllText("List_Of_People_Save.json", json);
-        await Task.Delay(2000);
-        Message = string.Empty;
-        StateHasChanged();
+        IfEditUser = false;
+        IfEditUserChanged.InvokeAsync(IfEditUser);
     }
 
     private void GoBackToTable()

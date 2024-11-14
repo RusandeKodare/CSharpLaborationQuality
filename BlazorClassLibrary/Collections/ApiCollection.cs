@@ -15,7 +15,15 @@ namespace BlazorClassLibrary.Collections
 
 		public async Task<List<User>> GetUsers()
 		{
-			return await _httpClient.GetFromJsonAsync<List<User>>("https://jsonplaceholder.typicode.com/users")?? [];
+			try
+			{
+                return await _httpClient.GetFromJsonAsync<List<User>>("https://jsonplaceholder.typicode.com/users") ?? [];
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("An error occurred while fetching users.", ex);
+            }
+			
 		}
     }
 }

@@ -1,18 +1,117 @@
 ﻿@page "/ChooseSource"
+@using BlazorClassLibrary
+@using BlazorClassLibrary.Collections
+@using BlazorClassLibrary.Collections.Interfaces
 @rendermode InteractiveServer
-<div style="display: flex; flex-direction: column; justify-content: center; align-items: center; height: 95vh;">
-    <h3 style="font-size: 24px; color: #333; margin-bottom: 20px;">Choose what source you want to use to fill up your list</h3>
-    <div style="display: flex; gap: 20px;">
-        <NavLink href="/ShowUsersFromFile" style="text-decoration: none;">
-            <button class="btn btn-primary" style="padding: 10px 20px; font-size: 16px; cursor: pointer;">From file</button>
-        </NavLink>
-        <NavLink href="/showusers" style="text-decoration: none;">
-            <button class="btn btn-primary" style="padding: 10px 20px; font-size: 16px; cursor: pointer;">From Api</button>
-        </NavLink>
-    </div>
+
+<div style="display:flex; align-items: center; justify-content: center; height: 2vh;">
+
+    <select @onchange="FetchUsers">
+        @foreach (SourceType source in Enum.GetValues(typeof(SourceType)))
+        {
+            <option value="@source">@source</option>
+        }
+    </select>
+
 </div>
 
+<CSharpLaborationQuality.Components.TableComponents.TableLab Users="Users" FilteredUsers="FilteredUsers" FromApi="FromApi" FromSavedFile="FromSavedFile" AmountOfUsers="AmountOfUsers" />
 
 @code {
+    private SourceType selectedSource = SourceType.MockUsers;
 
+    public List<User> Users = new List<User>();
+    public List<User> FilteredUsers = new List<User>();
+    UserCollection userCollection = new UserCollection();
+    public bool FromSavedFile = true;
+    public bool FromApi = false;
+    public int AmountOfUsers = 5;
+
+    private enum SourceType
+    {
+        MockUsers,
+        ApiUsers
+    }
+    private async Task FetchUsers(ChangeEventArgs e)
+    {
+        if (e.Value.ToString() == SourceType.MockUsers.ToString())
+        {
+            Users = userCollection.GetUsers();
+
+            if (Users == null || Users.Count <= 0)
+            {
+                Users = userCollection.GetUsersFromInternalDb();
+                FilteredUsers = Users.Take(5).ToList();
+                FromSavedFile = false;
+                StateHasChanged();
+            }
+
+            else
+            {
+                FromSavedFile = true;
+                FilteredUsers = Users.Take(5).ToList();
+                StateHasChanged();
+            }
+
+            FromSavedFile = true;
+            FromApi = false;
+        }
+
+        else if (e.Value.ToString() == SourceType.ApiUsers.ToString())
+        {
+            IRemoteDataAccess api = new ApiCollection();
+
+            Users = await api.GetUsers();
+            FilteredUsers = Users.Take(5).ToList();
+            StateHasChanged();
+        }
+
+        else
+        {
+            Console.WriteLine("Error, fuck you");
+            StateHasChanged();
+        }
+        FromSavedFile = false;
+        FromApi = true;
+
+    }
+    protected override async Task OnInitializedAsync()
+    {
+
+        if (selectedSource == SourceType.MockUsers)
+        {
+            Users = userCollection.GetUsers();
+
+            if (Users == null || Users.Count <= 0)
+            {
+                Users = userCollection.GetUsersFromInternalDb();
+                FromSavedFile = false;
+            }
+
+            else
+            {
+                FromSavedFile = true;
+                FilteredUsers.AddRange(Users);
+            }
+        }
+
+        else if (selectedSource == SourceType.ApiUsers)
+        {
+            IRemoteDataAccess api = new ApiCollection();
+
+            Users = await api.GetUsers();
+            FilteredUsers.AddRange(Users);
+            FromSavedFile = false;
+            FromApi = true;
+
+            StateHasChanged();
+        }
+
+        else
+        {
+            Console.WriteLine("Error, fuck you");
+        }
+
+
+    }
 }
