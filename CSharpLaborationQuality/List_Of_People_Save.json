@@ -1,1 +1,51 @@
-[]
+[
+  {
+    "Id": 1,
+    "Name": "Oscar",
+    "Age": 44,
+    "UserName": "Orrelion",
+    "Email": "orrelion@outlook.com",
+    "Phone": "",
+    "Website": "",
+    "Address": {
+      "Street": "",
+      "Suite": "",
+      "City": "",
+      "ZipCode": "",
+      "Geo": {
+        "Lat": "",
+        "Lng": ""
+      }
+    },
+    "Company": {
+      "Name": "",
+      "CatchPhrase": "",
+      "BS": ""
+    },
+    "TodoService": {
+      "IncompleteTodoItems": [
+        {
+          "Text": "awdawd",
+          "Completed": false
+        },
+        {
+          "Text": "awdf",
+          "Completed": false
+        },
+        {
+          "Text": "awf",
+          "Completed": false
+        },
+        {
+          "Text": "awf",
+          "Completed": false
+        },
+        {
+          "Text": "awf",
+          "Completed": false
+        }
+      ],
+      "CompletedTodoItems": []
+    }
+  }
+]

@@ -6,7 +6,7 @@
 @rendermode InteractiveServer
 @if (!IfShowToDoList && !IfEditUser)
 {
-    <div class="cool-message">@Message</div>
+    <div class="cool-message">@_message</div>
 
    <br />
     <div style="display: flex; align-items: center; justify-content: center; margin:0.3rem;">
@@ -23,16 +23,19 @@
     <div style="padding-bottom: 1rem; display: flex; justify-content:center; align-items: center;" class="button-container">
        
     </div>
-
-        <div style=" padding-bottom: 1rem; display: flex; justify-content:center; align-items: center;">
+    @if(Users.Count>5)
+        {
+             <div style=" padding-bottom: 1rem; display: flex; justify-content:center; align-items: center;">
             <button class="styled-button" @onclick="ShowAllUsers">@_buttonName</button>
 
         </div>
+        }
+       
 
     <div style="display: flex; justify-content:center; align-items: center;">
         <SearchInputAndMessage UsersLeftToShowChanged="(usersLeft) => _usersLeftToShow = usersLeft"
                                SearchingChanged="(search) => Searching = search"
-                               AmountOfUsers="AmountOfUsers"
+                               AmountOfUsers="_amountOfUsers"
                                SearchTermChanged="(term) => SearchTerm = term"
                                TextMessageChanged="(message) => TextMessage = message"
                                Users="@Users"
@@ -71,7 +74,7 @@
                     <td style=" transition: background-color 0.3s ease; font-weight: 500; background-color:aliceblue;">
                         <span style="display: flex; align-items: center;">
                             <img @onclick="() => SpecificUser = (SpecificUser == user ? null : user)" style="padding-right:1rem; cursor: pointer; block-size: 20px; display: flex; align-items: center;" src="Images/PlusSign.png" />
-                            @if (FromSavedFile)
+                            @if (_fromSavedFile)
                             {
                                 <img @onclick="()=>RemoveUser(user)" style="padding-right:1rem; cursor: pointer; block-size: 20px; display: flex; align-items: center;" src="Images/MinusSign.png" />
                             }
@@ -90,7 +93,7 @@
                     <tr>
                         <td colspan="6">
                             <div class="roll-down" style="background-color: #f8f9fa; padding: 10px; border: 1px solid #ddd;">
-                                <UserInfoForSpecificUser IfEditUserChanged="(editUserShow)=>IfEditUser=editUserShow" FromSavedFile="FromSavedFile" FromApi="FromApi" IfShowToDoListChanged="(todoListShow)=>IfShowToDoList = todoListShow" SpecificUser="@SpecificUser" />
+                                <UserInfoForSpecificUser IfEditUserChanged="(editUserShow)=>IfEditUser=editUserShow" FromSavedFile="_fromSavedFile" FromApi="_fromApi" IfShowToDoListChanged="(todoListShow)=>IfShowToDoList = todoListShow" SpecificUser="@SpecificUser" />
                             </div>
                         </td>
                     </tr>
@@ -129,36 +132,14 @@
     public List<User> Users { get; set; } = new();
     public List<User> FilteredUsers { get; set; } = new List<User>();
 
+    ILocalDataAccess UserCollection = new UserCollection();
+    IRemoteDataAccess Api = new ApiCollection();
 
-
-    ILocalDataAccess userCollection = new UserCollection();
-    IRemoteDataAccess api = new ApiCollection();
-
-    private bool FromSavedFile = true;
-    private bool FromApi = false;
+    private bool _fromSavedFile = true;
+    private bool _fromApi = false;
     private bool _saveToList = false;
     private bool _ifShowAllUsers { get; set; }
     private bool _ifRemoveUser { get; set; }
-
-    public bool Searching { get; set; }
-    public bool IfShowToDoList = false;
-    public bool IfEditUser = false;
-
-    public int AmountOfUsers = 5;
-    private int _usersLeftToShow { get; set; }
-
-    private List<User> _copyOfList { get; set; } = new();
-
-    private string _messageWhenSaved = "";
-    private string _buttonName = "Show more";
-    private string Message = "";
-
-    public string? TextMessage { get; set; } = String.Empty;
-    public string? SearchTerm { get; set; } = String.Empty;
-
-
-
-    public User? SpecificUser { get; set; } = new();
 
     private enum SourceType
     {
@@ -166,20 +147,37 @@
         ApiUsers
     }
 
-    protected override async Task OnInitializedAsync()
+    private int _amountOfUsers = 5;
+    private int _usersLeftToShow { get; set; }
+
+    private List<User> _copyOfList { get; set; } = new();
+
+    private string _messageWhenSaved = "";
+    private string _buttonName = "Show more";
+    private string _message = "";
+
+    public bool Searching { get; set; }
+    public bool IfShowToDoList = false;
+    public bool IfEditUser = false;
+
+    public string? TextMessage { get; set; } = String.Empty;
+    public string? SearchTerm { get; set; } = String.Empty;
+
+    public User? SpecificUser { get; set; } = new();
+
+    protected override void OnInitialized()
     {
-        if (userCollection.GetUsers().Count == 0)
+        if (UserCollection.GetUsers().Count == 0)
         {
-            Users = userCollection.GetUsersFromInternalDb();
-            FromSavedFile = false;
-            Message = "No created users found, fetching from an already established list";
+            Users = UserCollection.GetUsersFromInternalDb();
+            _fromSavedFile = false;
+            _message = "No created users found, fetching from an already established list";
         }
         else
         {
-            Users = userCollection.GetUsers();
-            Message = "";
+            Users = UserCollection.GetUsers();
+            _message = "";
         }
-
         FilteredUsers = Users.Take(5).ToList();
         CheckUsersLeftToShow();
     }
@@ -187,48 +185,48 @@
     {
         if (e.Value.ToString() == SourceType.MockUsers.ToString())
         {
-            if (userCollection.GetUsers().Count == 0)
+            if (UserCollection.GetUsers().Count == 0)
             {
-                Users = userCollection.GetUsersFromInternalDb();
-                FromSavedFile = false;
-                Message = "No created users found, fetching from an already established list";
+                Users = UserCollection.GetUsersFromInternalDb();
+                _fromSavedFile = false;
+                _message = "No created users found, fetching from an already established list";
             }
 
             else
             {
-                Users = userCollection.GetUsers();
-                FromSavedFile = true;
-                Message = "";
+                Users = UserCollection.GetUsers();
+                _fromSavedFile = true;
+                _message = "";
             }
 
-            FilteredUsers = Users.Take(AmountOfUsers).ToList();
-            FromApi = false;
+            FilteredUsers = Users.Take(_amountOfUsers).ToList();
+            _fromApi = false;
         }
 
         else if (e.Value.ToString() == SourceType.ApiUsers.ToString())
         {
-            Users = await api.GetUsers();
-            FilteredUsers = Users.Take(AmountOfUsers).ToList();
-            FromSavedFile = false;
-            FromApi = true;
-            Message = "";
+            Users = await Api.GetUsers();
+            FilteredUsers = Users.Take(_amountOfUsers).ToList();
+            _fromSavedFile = false;
+            _fromApi = true;
+            _message = "";
         }
         CheckUsersLeftToShow();
     }
+
     private void CheckUsersLeftToShow()
     {
-        if (Users.Count - AmountOfUsers < 0)
+        if (Users.Count - _amountOfUsers < 0)
         {
             _usersLeftToShow = 0;
         }
         else
         {
-            _usersLeftToShow = Users.Count - AmountOfUsers;
+            _usersLeftToShow = Users.Count - _amountOfUsers;
         }
     }
 
-
-    public List<User> SortByProperty<T>(List<User> users, Func<User, T> propertySelector)
+    public List<T> SortByProperty<T>(List<T> users, Func<T, object> propertySelector)
     {
         var usersAscending = users.OrderBy(propertySelector).ToList();
         if (users.SequenceEqual(usersAscending))
@@ -237,33 +235,14 @@
         }
         return usersAscending;
     }
-    // private void IncreaseAmountOfUsers()
-    // {
-    //     if (Users.Count > AmountOfUsers + 5)
-    //     {
-    //         AmountOfUsers += 5;
-    //         FilteredUsers = Users.Take(AmountOfUsers).ToList();
-    //         _usersLeftToShow = Users.Count - AmountOfUsers;
-    //     }
-    //     else
-    //     {
-    //         AmountOfUsers = AmountOfUsers + (Users.Count - AmountOfUsers);
-    //         FilteredUsers = Users.Take(AmountOfUsers).ToList();
-    //         _usersLeftToShow = Users.Count - AmountOfUsers;
-    //     }
-    //     if (FilteredUsers.Count == Users.Count)
-    //     {
-    //         _ifShowAllUsers = true;
-    //     }
-    // }
 
     private void ShowAllUsers()
     {
         if (_buttonName=="Show more")
         {
             _ifShowAllUsers = true;
-            AmountOfUsers = Users.Count();
-            FilteredUsers = Users.Take(AmountOfUsers).ToList();
+            _amountOfUsers = Users.Count();
+            FilteredUsers = Users.Take(_amountOfUsers).ToList();
             _usersLeftToShow = 0;
             _buttonName = "Show less";
         }
@@ -278,7 +257,7 @@
     {
         FilteredUsers = Users.Take(5).ToList();
         _ifShowAllUsers = false;
-        AmountOfUsers = 5;
+        _amountOfUsers = 5;
         CheckUsersLeftToShow();
     }
 
@@ -301,8 +280,6 @@
         await MessageChanged();
         CheckIfListIsEmpty();
         CheckUsersLeftToShow();
-       
-        
     }
 
     private async Task MessageChanged()
@@ -314,7 +291,7 @@
 
     public void GoBack()
     {
-        FilteredUsers = Users.Take(AmountOfUsers).ToList();
+        FilteredUsers = Users.Take(_amountOfUsers).ToList();
         UpdateIndexValueOfUsers();
         _saveToList = false;
          CheckUsersLeftToShow();
@@ -341,8 +318,8 @@
     {
         if (FilteredUsers.Count <= 0)
         {
-            FromSavedFile = false;
-            Users = userCollection.GetUsersFromInternalDb();
+            _fromSavedFile = false;
+            Users = UserCollection.GetUsersFromInternalDb();
             FilteredUsers = Users.Take(5).ToList();
         }
     }
@@ -352,5 +329,4 @@
         Users.Clear();
         Users.AddRange(FilteredUsers);
     }
-
 }

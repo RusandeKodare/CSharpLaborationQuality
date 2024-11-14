@@ -3,8 +3,8 @@
 @rendermode InteractiveServer
 
 <div class="input-container">
-	<input style="font-family: Georgia; width:20rem;" @bind-value="SearchTerm" @oninput="SearchForUser" placeholder="Search for a user's name" class="styled-input" />
-<p style="font-family: Georgia; font-weight: 500;">@TextMessage</p>
+	<input style="font-family: Georgia; width:20rem;" @bind-value="_searchTerm" @oninput="SearchForUser" placeholder="Search for a user's name" class="styled-input" />
+<p style="font-family: Georgia; font-weight: 500;">@_textMessage</p>
 </div>
 
 @code {
@@ -25,40 +25,40 @@
 	[Parameter]
 	public int AmountOfUsers { get; set; }
 	
-	public List<User>? FilteredUsers;
+	private List<User>? _filteredUsers;
 
-	public int UsersLeftToShow;
+	private int _usersLeftToShow;
 
-	public bool Searching;
+	private bool _searching;
 
-	public string? SearchTerm;
-	public string? TextMessage;
+	private string? _searchTerm;
+	private string? _textMessage;
 
 	private void SearchForUser(ChangeEventArgs e)
 	{
-		Searching = true;
-		SearchingChanged.InvokeAsync(Searching);
-		SearchTerm = e.Value?.ToString() ?? "";
-		SearchTermChanged.InvokeAsync(SearchTerm);
+		_searching = true;
+		SearchingChanged.InvokeAsync(_searching);
+		_searchTerm = e.Value?.ToString() ?? "";
+		SearchTermChanged.InvokeAsync(_searchTerm);
 
 		if (!Users.Any())
 		{
-			TextMessage = "Nothing found!";
-			TextMessageChanged.InvokeAsync(TextMessage);
+			_textMessage = "Nothing found!";
+			TextMessageChanged.InvokeAsync(_textMessage);
 		}
-		else if (SearchTerm==string.Empty)
+		else if (_searchTerm==string.Empty)
 		{
-			Searching = false;
-			SearchingChanged.InvokeAsync(Searching);
+			_searching = false;
+			SearchingChanged.InvokeAsync(_searching);
 
-			FilteredUsers = Users.Take(AmountOfUsers).ToList();
-			FilteredUsersChanged.InvokeAsync(FilteredUsers);
+			_filteredUsers = Users.Take(AmountOfUsers).ToList();
+			FilteredUsersChanged.InvokeAsync(_filteredUsers);
 
-			UsersLeftToShow = Users.Count - FilteredUsers.Count;
-			UsersLeftToShowChanged.InvokeAsync(UsersLeftToShow);
+			_usersLeftToShow = Users.Count - _filteredUsers.Count;
+			UsersLeftToShowChanged.InvokeAsync(_usersLeftToShow);
 			
-			TextMessage = $"";
-			TextMessageChanged.InvokeAsync(TextMessage);
+			_textMessage = $"";
+			TextMessageChanged.InvokeAsync(_textMessage);
 		}
 		else
 		{
@@ -67,38 +67,38 @@
 	}
 	public void FoundUser()
 	{
-		if (!string.IsNullOrEmpty(SearchTerm))
+		if (!string.IsNullOrEmpty(_searchTerm))
 		{
-			FilteredUsers = Users.Where(item => item.Name.Contains(SearchTerm, StringComparison.OrdinalIgnoreCase)).ToList();
-			FilteredUsersChanged.InvokeAsync(FilteredUsers);
-			UsersLeftToShow = Users.Count - FilteredUsers.Count;
-			UsersLeftToShowChanged.InvokeAsync(UsersLeftToShow);
+			_filteredUsers = Users.Where(item => item.Name.Contains(_searchTerm, StringComparison.OrdinalIgnoreCase)).ToList();
+			FilteredUsersChanged.InvokeAsync(_filteredUsers);
+			_usersLeftToShow = Users.Count - _filteredUsers.Count;
+			UsersLeftToShowChanged.InvokeAsync(_usersLeftToShow);
 		}
 		
-		if (FilteredUsers != null)
+		if (_filteredUsers != null)
 		{
-			if (FilteredUsers.Count > 0)
+			if (_filteredUsers.Count > 0)
 			{
 				ListBiggerThanZero();
 			}
 			else
 			{
-				TextMessage = $"No users found with the term '{SearchTerm}'";
-				TextMessageChanged.InvokeAsync(TextMessage);
+				_textMessage = $"No users found with the term '{_searchTerm}'";
+				TextMessageChanged.InvokeAsync(_textMessage);
 			}
 		}
 	}
 	public void ListBiggerThanZero()
 	{
-		if (SearchTerm == String.Empty)
+		if (_searchTerm == String.Empty)
 		{
-			TextMessage = "";
-			TextMessageChanged.InvokeAsync(TextMessage);
+			_textMessage = "";
+			TextMessageChanged.InvokeAsync(_textMessage);
 		}
 		else
 		{
-			TextMessage = $"Following users found with the term '{SearchTerm}'";
-			TextMessageChanged.InvokeAsync(TextMessage);
+			_textMessage = $"Following users found with the term '{_searchTerm}'";
+			TextMessageChanged.InvokeAsync(_textMessage);
 		}
 	}
 }
